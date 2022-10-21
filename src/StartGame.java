@@ -14,7 +14,7 @@ class StartGame {
 
         System.out.println();
         System.out.println("Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard " +
-                "and save the king.\nThe player needs to explore different rooms, collect items until it reach the evil wizard.");
+                "and save the king in order to win.\nThe player needs to explore different rooms in the castle, collect items until it reach the evil wizard.");
         System.out.println();
 
     }
