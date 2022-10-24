@@ -1,0 +1,39 @@
+{
+  "locations": [
+    {
+      "name": "Church",
+      "directions": {
+        "north": "Outside of the Castle",
+        "south": "Courtyard"
+      },
+      "description": "You are in a church filled with wooden pews and an altar and nothing else. The window you entered by is to the north. There is a wooden door to the south.",
+      "items": [
+        "stick"
+      ]
+    },
+    {
+      "name": "Courtyard",
+      "directions": {
+        "north": "Church",
+        "south": "Armory",
+        "west" : "Great Hall"
+      },
+      "description": "The courtyard is an open area surrounded by tall stone walls. To the north is a door that leads to the church. To the south is a door to a tall watchtower. To the west are grand doors leading to the great hall.",
+      "items" : [
+        "none"
+      ]
+    },
+    {
+      "name": "Armory",
+      "directions": {
+        "north": "Courtyard"
+      },
+      "description": "You enter a big room with a table that has important items for you to enter the next level of this game. You also have a spare guard Uniform",
+      "items": [
+        "sword",
+        "uniform",
+        "password"
+      ]
+    }
+  ]
+}
