@@ -3,6 +3,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import com.google.gson.Gson;
@@ -71,10 +72,20 @@ class Game {
 
             System.out.println("");
             System.out.println("Which direction do you walk?");
-            String userInput = inputScanner.nextLine();
-            String locationInput = currentLocation.directions.get(userInput);
-
-            currentLocation = obj.getPickedLocation(locationInput);
+            String userInput = inputScanner.nextLine().trim().toLowerCase();
+            String[] parseInput = userInput.split(" ");
+            if(parseInput.length == 2) {
+                if(parseInput[0].equals("go") || parseInput[0].equals("move")) {
+                    String locationInput = currentLocation.directions.get(parseInput[1]);
+                    currentLocation = obj.getPickedLocation(locationInput);
+                }
+                else {
+                    System.out.println("I do not understand " + userInput + ". Format command as 'VERB NOUN'");
+                }
+            }
+            else {
+                System.out.println("I do not understand " + userInput + ". Format command as 'VERB NOUN'");
+            }
         }
     }
 }
