@@ -41,6 +41,9 @@ class Game implements Verbs{
         System.out.println("Do you want to start the game? yes/no");
         start = inputScanner.nextLine().trim().toLowerCase();
         if (start.equals("yes") || start.equals("y")) {
+            String os = System.getProperty("os.name");
+            System.out.println(os);
+            ClearConsole.clearConsole();
             //System.out.println("You have started the game");
             chooseLocation();
         } else if (start.equals("no") || start.equals("n")) {
@@ -98,8 +101,8 @@ class Game implements Verbs{
             String inputNoun = parseInput[1];
 
             if(parseInput.length == 2) {
-                if (currentLocation.directions.get(parseInput[1]) == null){
-                    System.out.println("\n\u001B[31m" + parseInput[1].toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
+                if (currentLocation.directions.get(inputNoun) == null){
+                    System.out.println("\n\u001B[31m" + inputNoun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
                 }
 
                 else if (Verbs.getMoveActions().contains(inputVerb)){
