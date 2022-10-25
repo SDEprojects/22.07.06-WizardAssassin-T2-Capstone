@@ -52,6 +52,7 @@ class Game {
             beginGame();
         }
     }
+
     private void quitGame() throws IOException {
         String quit;
 
@@ -70,6 +71,7 @@ class Game {
             chooseLocation();
         }
     }
+
 
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
