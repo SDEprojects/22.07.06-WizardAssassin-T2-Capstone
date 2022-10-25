@@ -53,6 +53,26 @@ class Game {
         }
     }
 
+    private void quitGame() throws IOException {
+        String quit;
+
+        System.out.println("If you want to exit the game type 'quit'");
+        quit = inputScanner.nextLine().trim().toLowerCase();
+        if (quit.equals("quit")) {
+            System.out.println("Are you sure you want to quit? yes/no");
+            String doubleChecking = inputScanner.nextLine().trim().toLowerCase();
+            if (doubleChecking.equals("yes")) {
+                System.out.println("Thank you for playing");
+                System.exit(0);
+            }else {
+                chooseLocation();
+            }
+        }else {
+            chooseLocation();
+        }
+    }
+
+
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("22.07.06-WizardAssassin//src/Location.json"));
