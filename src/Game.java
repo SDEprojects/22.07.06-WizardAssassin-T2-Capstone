@@ -2,13 +2,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
+
 import com.google.gson.Gson;
 
-class Game {
+class Game implements Verbs{
 
     public Scanner inputScanner = new Scanner(System.in);
 
@@ -73,6 +71,7 @@ class Game {
     }
 
 
+
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("22.07.06-WizardAssassin//src/Location.json"));
@@ -94,17 +93,30 @@ class Game {
             System.out.println("Which direction do you walk?");
             String userInput = inputScanner.nextLine().trim().toLowerCase();
             String[] parseInput = userInput.split(" ");
+            String inputVerb = parseInput[0];
+            String inputNoun = parseInput[1];
+
             if(parseInput.length == 2) {
-                if(parseInput[0].equals("go") || parseInput[0].equals("move")) {
-                    String locationInput = currentLocation.directions.get(parseInput[1]);
+                if(Verbs.getMoveActions().contains(inputVerb)) {
+                // if(parseInput[0].equals("go") || parseInput[0].equals("move")) {
+                    String locationInput = currentLocation.directions.get(inputNoun);
                     currentLocation = obj.getPickedLocation(locationInput);
                 }
+                else if(Verbs.getItemActions().contains(inputVerb)) {
+                    System.out.println("This VERB is for an item action");
+                }
+                else if(Verbs.getCharacterActions().contains(inputVerb)) {
+                    System.out.println("This VERB is for a character interaction");
+                }
+                else if(Verbs.getAreaActions().contains(inputVerb)) {
+                    System.out.println("This VERB is for area interactions");
+                }
                 else {
-                    System.out.println("I do not understand " + userInput + ". Format command as 'VERB NOUN'");
+                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN'");
                 }
             }
             else {
-                System.out.println("I do not understand " + userInput + ". Format command as 'VERB NOUN'");
+                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN'");
             }
         }
     }
