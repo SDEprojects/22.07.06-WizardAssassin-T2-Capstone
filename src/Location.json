@@ -15,11 +15,7 @@
       "name": "Courtyard",
       "directions": {
         "north": "Church",
-
         "south": "Watchtower",
-
-        "south": "Armory",
-
         "west" : "Great Hall"
       },
       "description": "The courtyard is an open area surrounded by tall stone walls. To the north is a door that leads to the church. To the south is a door to a tall watchtower. To the west are grand doors leading to the great hall.",
