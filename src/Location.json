@@ -40,7 +40,7 @@
     {
       "name": "Armory",
       "directions": {
-        "down": "Watchtower",
+        "down": "watchtower",
         "north": "Courtyard"
       },
       "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard. There is also a spare TUNIC that the guards wear. It has the INSIGNIA of the king.",
