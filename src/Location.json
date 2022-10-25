@@ -1,0 +1,163 @@
+{
+  "locations": [
+    {
+      "name": "Church",
+      "directions": {
+        "north": "Outside of the Castle",
+        "south": "Courtyard"
+      },
+      "description": "You are in a church filled with wooden pews and an altar and nothing else. The window you entered by is to the north. There is a wooden door to the south.",
+      "items": [
+        "stick"
+      ]
+    },
+    {
+      "name": "Courtyard",
+      "directions": {
+        "north": "Church",
+        "south": "Watchtower",
+        "west" : "Great Hall"
+      },
+      "description": "The courtyard is an open area surrounded by tall stone walls. To the north is a door that leads to the church. To the south is a door to a tall watchtower. To the west are grand doors leading to the great hall.",
+      "items" : [
+        "none"
+      ]
+    },
+    {
+
+      "name": "WatchTower",
+      "directions": {
+        "north": "Courtyard",
+        "up": "Armory",
+        "down": "Dungeon"
+      },
+      "description": "The WatchTower is a small room with a table, a chair, and a guard asleep slumped over the table. A KEY rests on the table next to his right hand. To your north is the door that leads to the courtyard. There is a NOTE on the table as well. There are narrow stairs that lead up to armory and stairs that lead down to a dungeon.",
+      "items": [
+        "key",
+        "note"
+      ]
+    },
+    {
+      "name": "Armory",
+      "directions": {
+        "down": "watchtower",
+        "north": "Courtyard"
+      },
+      "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard. There is also a spare TUNIC that the guards wear. It has the INSIGNIA of the king.",
+      "items": [
+        "sword",
+        "tunic"
+      ]
+    },
+    {
+      "name": "Dungeon",
+      "directions": {
+        "up": "watchtower",
+        "north": "Courtyard"
+      },
+      "description": "The Dungeon is gloomy, cold and dripping water.  Shackles dangle from the walls. In one of the cells huddles a bloodied PRISONER.",
+      "items": [
+        "password"
+      ]
+    },
+    {
+      "name": "Great Hall",
+      "directions": {
+
+        "north": "Wizard's Tower",
+        "south": "Kitchen",
+        "east": "Courtyard",
+        "west": "King’s Chambers"
+      },
+      "description": "The Great Hall ceiling is 20 feet high. Light pours in from big windows on each side of the room. To the north is a door leading to the wizard’s tower. However, explore the other rooms since you need important items to defeat the evil wizard.",
+      "items": [
+        "key",
+        "note"
+      ]
+    },
+    {
+      "name": "Kitchen",
+      "directions": {
+
+        "north": "Great Hall"
+      },
+      "description": "The Kitchen has a few servants scrub pots, dishes, and the floor. The light from the large open hearth partially illuminates the room. On a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
+      "items": [
+        "knife",
+        "poison"
+      ]
+    },
+    {
+      "name": "Royal Lounge",
+      "directions": {
+
+        "east": "Great Hall",
+        "south": "Royal Library",
+        "west": "King’s Bedchamber"
+      },
+      "description": "The Royal Lounge has a few couches, a table surrounded with chairs. This room is usually used for important meetings with the king. In this room you will find a key that open the door to the Wizard’s Tower.",
+      "items": [
+        "key"
+      ]
+    },
+    {
+      "name": "Library",
+      "directions": {
+
+        "north": "Royal Lounge"
+      },
+      "description": "The Library has shelves of books cover the walls from floor to ceiling. There are cushioned chairs and a table near the center of the room. At this table sits a tall gangly figure with a long white beard is seated in a chair, engrossed in a giant magical tome",
+      "items": [
+        "robes"
+      ]
+    },
+    {
+      "name": "King’s Chambers",
+      "directions": {
+
+        "east": "Royal Lounge"
+      },
+      "description": "The King’s Chambers is off limits.",
+      "items": [
+        "none"
+      ]
+    },
+    {
+      "name": "Wizards Foyer",
+      "directions": {
+
+        "north": "Wizards Room",
+        "south": "Great Hall",
+        "west": " Laboratory"
+      },
+      "description": "The Wizards Foyer is a wide large dimly lit room. As you enter you hear strange snorts and snarls. It’s a 10-foot, dragon-scaled, lion-headed chimera with what looks to be bat wings sprawling what must be 30 feet across, claws as sharp as daggers, a tail with the head of a serpent and venom dripping from its vampire fangs. A truly grotesque twisting of the natural world by the dark forces lurking nearby. Luckily, this thing appears to be sleeping.",
+      "items": [
+        "none"
+      ]
+    },
+    {
+      "name": "Wizard’s Bedroom",
+      "directions": {
+
+        "south": "Wizards Foyer"
+      },
+      "description": "The Wizards Bedroom has a 4-post bed covered by a dark quilt. You see a table and chair. Sitting on the chair, looking at you, is the WIZARD.",
+      "items": [
+        "none"
+      ]
+    },
+    {
+      "name": "Laboratory",
+      "directions": {
+
+        "east": "Wizards Foyer"
+      },
+      "description": "The Laboratory is full of tables crammed with beakers and vials filled with colorful, bubbling and smoking liquids. You see a jug of MEAD on one of the tables. There is a NOTE next to the MEAD.",
+      "items": [
+        "mead",
+        "meal",
+        "jewels"
+      ]
+    }
+  ]
+}
