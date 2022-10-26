@@ -44,7 +44,6 @@ class Game implements Verbs {
             String os = System.getProperty("os.name");
             System.out.println(os);
             ClearConsole.clearConsole();
-            //System.out.println("You have started the game");
             chooseLocation();
         } else if (start.equals("no") || start.equals("n")) {
             System.out.println("Thank you for playing");
@@ -63,15 +62,8 @@ class Game implements Verbs {
         if (quit.equals("yes")) {
             System.out.println("Thank you for playing");
             System.exit(0);
-//            System.out.println("Are you sure you want to quit? yes/no");
-//            String doubleChecking = inputScanner.nextLine().trim().toLowerCase();
-//            if (doubleChecking.equals("yes") || (doubleChecking.equals("y"))){
-//                System.out.println("Thank you for playing");
-//                System.exit(0);
-//            }else {
-//                chooseLocation();
-//            }
-        } else {
+        }
+        else {
             chooseLocation();
         }
     }
@@ -96,36 +88,48 @@ class Game implements Verbs {
                 System.out.println("     " + direction.getKey() + ": " + direction.getValue());
 
             System.out.println("");
-            System.out.println("What would you like to do now?");
+            System.out.println("What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'help' for list of valid commands.");
             String userInput = inputScanner.nextLine().trim().toLowerCase();
-            if (userInput.equals("quit")) {
+
+            String[] parseInput = userInput.split(" ");
+
+            if(userInput.equals("quit")) {
                 quitGame();
-            } else {
-                String[] parseInput = userInput.split(" ");
+            }
+            else if(userInput.equals("help")) {
+                System.out.println("All commands must be in this format 'VERB<space>NOUN'\nOr 'quit' to exit game");
+                HelpMenu.printMenuHeader();
+                HelpMenu.buildMenu().forEach(HelpMenu::printMenu);
+            }
+            else if(parseInput.length == 2) {
                 String inputVerb = parseInput[0];
                 String inputNoun = parseInput[1];
 
-                if (parseInput.length == 2) {
-                    if (currentLocation.directions.get(inputNoun) == null) {
-                        System.out.println("\n\u001B[31m" + inputNoun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
-                    } else if (Verbs.getMoveActions().contains(inputVerb)) {
+                if (currentLocation.directions.get(inputNoun) == null) {
+                    System.out.println("\n\u001B[31m" + inputNoun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
+                }
+                else if (Verbs.getMoveActions().contains(inputVerb)) {
 
                         String locationInput = currentLocation.directions.get(inputNoun);
-
                         currentLocation = obj.getPickedLocation(locationInput);
-                    } else if (Verbs.getItemActions().contains(inputVerb)) {
-                        System.out.println("This VERB is for an item action");
-                    } else if (Verbs.getCharacterActions().contains(inputVerb)) {
-                        System.out.println("This VERB is for a character interaction");
-                    } else if (Verbs.getAreaActions().contains(inputVerb)) {
-                        System.out.println("This VERB is for area interactions");
-                    } else {
-                        System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN'");
-                    }
-                } else {
-                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN'");
                 }
+                else if (Verbs.getItemActions().contains(inputVerb)) {
+                        System.out.println("This VERB is for an item action");
+                }
+                else if (Verbs.getCharacterActions().contains(inputVerb)) {
+                    System.out.println("This VERB is for a character interaction");
+                }
+                else if (Verbs.getAreaActions().contains(inputVerb)) {
+                    System.out.println("This VERB is for area interactions");
+                }
+                else {
+                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
+                }
+            }
+            else {
+                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
             }
         }
     }
 }
+

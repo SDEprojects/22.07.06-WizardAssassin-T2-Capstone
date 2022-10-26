@@ -1,8 +1,6 @@
 public enum MoveVerbs {
     MOVE("move"),
-    GO("go"),
-    WALK("walk"),
-    TRAVEL("travel");
+    GO("go");
 
     private String moveVerb;
 
