@@ -1,9 +1,7 @@
 public enum ItemVerbs {
     PICKUP("pickup"),
     USE("use"),
-    EQUIP("equip"),
-    DROP("drop"),
-    COMBINE("combine");
+    DROP("drop");
 
     private String itemVerb;
 
