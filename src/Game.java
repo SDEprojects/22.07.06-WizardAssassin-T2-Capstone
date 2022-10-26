@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -12,6 +14,7 @@ class Game implements Verbs {
 
     public void execute() throws IOException {
         title();
+        gameObjective();
         beginGame();
 
     }
@@ -19,26 +22,27 @@ class Game implements Verbs {
     private void title() throws IOException {
 
         System.out.println();
-//        System.out.println("" + Files.readString(Path.of("22.07.06-WizardAssassin\\resources/welcome.txt")) + "\033[0m");
-        System.out.println("╔╗╔╗╔╗╔═══╗╔╗   ╔═══╗╔═══╗╔═╗╔═╗╔═══╗    ╔════╗╔═══╗    ╔╗╔╗╔╗╔══╗╔════╗╔═══╗╔═══╗╔═══╗    ╔═══╗╔═══╗╔═══╗╔═══╗╔═══╗╔═══╗╔══╗╔═╗ ╔╗\n" +
-                "║║║║║║║╔══╝║║   ║╔═╗║║╔═╗║║║╚╝║║║╔══╝    ║╔╗╔╗║║╔═╗║    ║║║║║║╚╣╠╝╚══╗ ║║╔═╗║║╔═╗║╚╗╔╗║    ║╔═╗║║╔═╗║║╔═╗║║╔═╗║║╔═╗║║╔═╗║╚╣╠╝║║╚╗║║\n" +
-                "║║║║║║║╚══╗║║   ║║ ╚╝║║ ║║║╔╗╔╗║║╚══╗    ╚╝║║╚╝║║ ║║    ║║║║║║ ║║   ╔╝╔╝║║ ║║║╚═╝║ ║║║║    ║║ ║║║╚══╗║╚══╗║║ ║║║╚══╗║╚══╗ ║║ ║╔╗╚╝║\n" +
-                "║╚╝╚╝║║╔══╝║║ ╔╗║║ ╔╗║║ ║║║║║║║║║╔══╝      ║║  ║║ ║║    ║╚╝╚╝║ ║║  ╔╝╔╝ ║╚═╝║║╔╗╔╝ ║║║║    ║╚═╝║╚══╗║╚══╗║║╚═╝║╚══╗║╚══╗║ ║║ ║║╚╗║║\n" +
-                "╚╗╔╗╔╝║╚══╗║╚═╝║║╚═╝║║╚═╝║║║║║║║║╚══╗     ╔╝╚╗ ║╚═╝║    ╚╗╔╗╔╝╔╣╠╗╔╝ ╚═╗║╔═╗║║║║╚╗╔╝╚╝║    ║╔═╗║║╚═╝║║╚═╝║║╔═╗║║╚═╝║║╚═╝║╔╣╠╗║║ ║║║\n" +
-                " ╚╝╚╝ ╚═══╝╚═══╝╚═══╝╚═══╝╚╝╚╝╚╝╚═══╝     ╚══╝ ╚═══╝     ╚╝╚╝ ╚══╝╚════╝╚╝ ╚╝╚╝╚═╝╚═══╝    ╚╝ ╚╝╚═══╝╚═══╝╚╝ ╚╝╚═══╝╚═══╝╚══╝╚╝ ╚═╝");
+        System.out.println("\033[35m" + Files.readString(Path.of("./resources/welcome.txt")) + "\033[0m");
 
         System.out.println();
-        System.out.println("Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard " +
-                "and save the king in order to win.\nThe player needs to explore different rooms in the castle, collect items until it reach the evil wizard.");
-        System.out.println();
-        System.out.println();
 
+    }
+    private void gameObjective() throws IOException {
+        Gson gson = new Gson();
+        Reader reader = Files.newBufferedReader(Paths.get("./resources/introduction.json"));
+
+        Introduction obj = gson.fromJson(reader, (Type) Introduction.class);
+        String gameIntro = obj.getIntroduction();
+        String gameObj = obj.getObjective();
+        String gameWin = obj.getWin();
+        System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
+        System.out.println();
     }
 
     private void beginGame() throws IOException {
         String start;
 
-        System.out.println("Do you want to start the game? yes/no");
+        System.out.println("\033[35m" + "Do you want to start the game? yes | no" + "\033[0m");
         start = inputScanner.nextLine().trim().toLowerCase();
         if (start.equals("yes") || start.equals("y")) {
             String os = System.getProperty("os.name");
@@ -57,7 +61,7 @@ class Game implements Verbs {
     private void quitGame() throws IOException {
         String quit;
 
-        System.out.println("Are you sure you want to 'quit'? yes/no");
+        System.out.println("Are you sure you want to 'quit'? yes| no");
         quit = inputScanner.nextLine().trim().toLowerCase();
         if (quit.equals("yes")) {
             System.out.println("Thank you for playing");
@@ -71,14 +75,14 @@ class Game implements Verbs {
 
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("22.07.06-WizardAssassin//src/Location.json"));
-        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
+        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
+
         Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
 
-        //while loop
-        while (true) {
-            System.out.println("\n                                            *********  You are in the " + currentLocation.getName() + ". *********\n\n");
+        boolean condition = true;
+        while (condition) {
+            System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
 
@@ -132,4 +136,3 @@ class Game implements Verbs {
         }
     }
 }
-

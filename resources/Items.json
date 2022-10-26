@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "name": "Stick",
+      "description": "It's brown, and thicker than most sticks. More like a branch.",
+      "attribute": "smash rat",
+      "location": "church"
+    },
+
+    {
+      "name": "Brass Key",
+      "description": "A brass key",
+      "attribute": "unlocks prisoner",
+      "location": "Watchtower"
+    },
+    {
+      "name": "Note",
+      "description": "A small piece of paper with writing on it.",
+      "attribute": "clue",
+      "location": "Watchtower"
+    },
+    {
+      "name": "Sword",
+      "description": "Shiny, sharp, sleek, set to seperate souls from bodies.",
+      "attribute": "fight monsters",
+      "location": "Armory"
+    },
+    {
+      "name": "password or item",
+      "description": "Shiny, sharp, ",
+      "attribute": "allows you to identify the good wizard",
+      "location": "Armory"
+    },
+    {
+      "name": "Knife",
+      "description": "Great for dicing vegetables or carving a turkey.",
+      "attribute": "fight monsters",
+      "location": "Kitchen"
+    },
+    {
+      "name": "Poison",
+      "description": "The purple concoction boils and broths. A wisp of smoke snakes upwards from the vial.",
+      "attribute": "poison item",
+      "location": "Kitchen"
+    },
+    {
+      "name": "Silver Key",
+      "description": "A long-shanked silver key.",
+      "attribute": "unlocks wizard tower",
+      "location": "Royal Lounge"
+    },
+    {
+      "name": "Wizard Robes",
+      "description": "They are purple and dotted with little stars.",
+      "attribute": "fight monsters",
+      "location": "Royal Library"
+    },
+    {
+      "name": "Mead",
+      "description": "A frothy and refreshing pint.",
+      "attribute": "to poison the wizard",
+      "location": "Laboratory"
+    },
+    {
+      "name": "Jewels",
+      "description": "These belonged to someone's family.",
+      "attribute": "treasure",
+      "location": "Laboratory"
+    }
+
+  ]
+}
