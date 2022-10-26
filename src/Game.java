@@ -86,7 +86,7 @@ class Game implements Verbs {
 
         //while loop
         while (true) {
-            System.out.println("\n                                            *********  You are in the " + currentLocation.getName() + ". *********\n\n");
+            System.out.println("\n\u001B[35m                                            *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
 
