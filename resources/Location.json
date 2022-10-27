@@ -3,7 +3,6 @@
     {
       "name": "Church",
       "directions": {
-        "north": "Outside of the Castle",
         "south": "Courtyard"
       },
       "description": "You are in a church filled with wooden pews and an altar and nothing else. The window you entered by is to the north. There is a wooden door to the south.",

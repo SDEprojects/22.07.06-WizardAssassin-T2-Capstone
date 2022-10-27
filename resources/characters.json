@@ -1,0 +1,70 @@
+{
+  "characters": [
+    {
+      "type": "NPC",
+      "name": "Guard1",
+      "room": "Courtyard",
+      "quote": "The food today taste great. You should go to the Kitchen and have some."
+    },
+    {
+      "type": "NPC",
+      "name": "Guard2",
+      "room": "Courtyard",
+      "quote": "However you can't pass unless you have the proper guard uniform."
+    },
+    {
+      "type": "NPC",
+      "name": "Guard3",
+      "room": "Watchtower",
+      "quote": "Zzz"
+    },
+    {
+      "type": "NPC",
+      "name": "Prisoner",
+      "room": "Dungeon",
+      "quote": "Please set me free!!!"
+    },
+    {
+      "type": "NPC",
+      "name": "Cook",
+      "room": "Kitchen",
+      "quote": "I just finished mixing the ingredients for the poison. Take the bottle."
+    },
+    {
+      "type": "NPC",
+      "name": "Servant",
+      "room": "Kitchen",
+      "quote": "Take the knife. You will need it."
+    },
+    {
+      "type": "NPC",
+      "name": "Guard4",
+      "room": "Great Hall",
+      "quote": "At least we get so see outside from the big windows."
+    },
+    {
+      "type": "NPC",
+      "name": "Guard5",
+      "room": "Great Hall",
+      "quote": "This shift feel like is never going to end."
+    },
+    {
+      "type": "NPC",
+      "name": "King's Hand",
+      "room": "Royal Lounge",
+      "quote": "This is the 'key' to the Wizard's Foyer"
+    },
+    {
+      "type": "NPC",
+      "name": "Monster",
+      "room": "Wizard's Foyer",
+      "quote": "Nice!! Looks like my meal is ready. Come get closer."
+    },
+    {
+      "type": "NPC",
+      "name": "Evil Wizard",
+      "room": "Wizard’s Chambers",
+      "quote": "If you don't kill me we can make a deal. I can make you very powerful"
+    }
+  ]
+}
