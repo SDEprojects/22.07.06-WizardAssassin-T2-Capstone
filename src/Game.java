@@ -37,6 +37,8 @@ class Game implements Verbs {
         String gameWin = obj.getWin();
         System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
         System.out.println();
+        System.out.println("\033[35m" + "In order to move between rooms you need to type the word 'go'. For example 'go south'" + "\033[0m");
+        System.out.println();
     }
 
     private void beginGame() throws IOException {
