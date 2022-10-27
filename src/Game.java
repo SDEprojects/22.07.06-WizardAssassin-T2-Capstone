@@ -82,11 +82,19 @@ class Game implements Verbs {
         Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
 
+        Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
+        Characters object = gson.fromJson(read, Characters.class);
+
         boolean condition = true;
         while (condition) {
             System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
+
+            for (ExtraCharacters extraCharacters : object.getCharacters())
+                if ((currentLocation.getName().equals(extraCharacters.getRoom())))
+                    System.out.println(extraCharacters.getName() +  " says : " + extraCharacters.getQuote());
+            System.out.println();
 
             System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
             System.out.println("From the " + currentLocation.getName() + " you can go to the:");

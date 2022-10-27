@@ -2,19 +2,25 @@
   "characters": [
     {
       "type": "NPC",
-      "name": "Guard1",
+      "name": "Rat",
+      "room": "Church",
+      "quote": "squeak"
+    },
+    {
+      "type": "NPC",
+      "name": "Guard",
       "room": "Courtyard",
       "quote": "The food today taste great. You should go to the Kitchen and have some."
     },
     {
       "type": "NPC",
-      "name": "Guard2",
+      "name": "Guard",
       "room": "Courtyard",
       "quote": "However you can't pass unless you have the proper guard uniform."
     },
     {
       "type": "NPC",
-      "name": "Guard3",
+      "name": "Guard",
       "room": "Watchtower",
       "quote": "Zzz"
     },
@@ -38,13 +44,13 @@
     },
     {
       "type": "NPC",
-      "name": "Guard4",
+      "name": "Guard",
       "room": "Great Hall",
       "quote": "At least we get so see outside from the big windows."
     },
     {
       "type": "NPC",
-      "name": "Guard5",
+      "name": "Guard",
       "room": "Great Hall",
       "quote": "This shift feel like is never going to end."
     },

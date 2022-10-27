@@ -8,6 +8,9 @@
       "description": "You are in a church filled with wooden pews and an altar and nothing else. The window you entered by is to the north. There is a wooden door to the south.",
       "items": [
         "Stick"
+      ],
+      "characters": [
+        "Rat"
       ]
     },
     {
@@ -20,6 +23,10 @@
       "description": "The courtyard is an open area surrounded by tall stone walls. To the north is a door that leads to the church. To the south is a door to a tall watchtower. To the west are grand doors leading to the great hall.",
       "items" : [
         "none"
+      ],
+      "characters" : [
+        "Guard",
+        "Guard"
       ]
     },
     {
@@ -34,6 +41,9 @@
       "items": [
         "Brass Key",
         "Note"
+      ],
+      "characters": [
+        "Guard"
       ]
     },
     {
@@ -46,6 +56,9 @@
       "items": [
         "Sword",
         "Tunic"
+      ],
+      "characters": [
+        "none"
       ]
     },
     {
@@ -57,6 +70,9 @@
       "description": "The Dungeon is gloomy, cold and dripping water.  Shackles dangle from the walls. In one of the cells huddles a bloodied PRISONER.",
       "items": [
         "Password"
+      ],
+      "characters": [
+        "Prisoner"
       ]
     },
     {
@@ -72,6 +88,10 @@
       "items": [
         "Key",
         "Note"
+      ],
+      "characters": [
+        "Guard",
+        "Guard"
       ]
     },
     {
@@ -84,6 +104,10 @@
       "items": [
         "Knife",
         "Poison"
+      ],
+      "characters": [
+        "Servant",
+        "Cook"
       ]
     },
     {
@@ -97,6 +121,9 @@
       "description": "The Royal Lounge has a few couches, a table surrounded with chairs. This room is usually used for important meetings with the king. In this room you will find a key that open the door to the Wizard’s Tower.",
       "items": [
         "Silver Key"
+      ],
+      "characters": [
+        "King's Hand"
       ]
     },
     {
@@ -108,6 +135,9 @@
       "description": "The Library has shelves of books cover the walls from floor to ceiling. There are cushioned chairs and a table near the center of the room. At this table sits a tall gangly figure with a long white beard is seated in a chair, engrossed in a giant magical tome",
       "items": [
         "Wizard Robes"
+      ],
+      "characters": [
+        "none"
       ]
     },
     {
@@ -118,6 +148,9 @@
       },
       "description": "The King’s Chambers is off limits.",
       "items": [
+        "none"
+      ],
+      "characters": [
         "none"
       ]
     },
@@ -132,6 +165,9 @@
       "description": "The Wizards Foyer is a wide large dimly lit room. As you enter you hear strange snorts and snarls. It’s a 10-foot, dragon-scaled, lion-headed chimera with what looks to be bat wings sprawling what must be 30 feet across, claws as sharp as daggers, a tail with the head of a serpent and venom dripping from its vampire fangs. A truly grotesque twisting of the natural world by the dark forces lurking nearby. Luckily, this thing appears to be sleeping.",
       "items": [
         "none"
+      ],
+      "characters": [
+        "none"
       ]
     },
     {
@@ -143,6 +179,9 @@
       "description": "The Wizards Bedroom has a 4-post bed covered by a dark quilt. You see a table and chair. Sitting on the chair, looking at you, is the WIZARD.",
       "items": [
         "none"
+      ],
+      "characters": [
+        "Evil Wizard"
       ]
     },
     {
@@ -156,6 +195,9 @@
         "Mead",
         "hunk of meat",
         "Jewels"
+      ],
+      "characters": [
+        "Monster"
       ]
     },
     {
@@ -164,7 +206,10 @@
       "description": "All of your stuff",
       "items": [
         "none"
-      ]
+      ],
+      "characters": [
+          "none"
+        ]
     }
   ]
 }
