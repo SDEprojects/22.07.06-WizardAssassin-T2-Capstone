@@ -102,7 +102,7 @@ class Game implements Verbs {
                 System.out.println("     " + direction.getKey() + ": " + direction.getValue());
 
             System.out.println("");
-            System.out.println("What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'help' for list of valid commands.");
+            System.out.println("What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'view' to see the map.\nEnter 'help' for list of valid commands.");
             String userInput = inputScanner.nextLine().trim().toLowerCase();
 
             String[] parseInput = userInput.split(" ");
@@ -114,6 +114,10 @@ class Game implements Verbs {
                 System.out.println("All commands must be in this format 'VERB<space>NOUN'\nOr 'quit' to exit game");
                 HelpMenu.printMenuHeader();
                 HelpMenu.buildMenu().forEach(HelpMenu::printMenu);
+            }
+            else if(userInput.equals("view")) {
+                KingdomMap.printMapHeader();
+                KingdomMap.showKingdomMap().forEach(KingdomMap::printMap);
             }
             else if(parseInput.length == 2) {
                 String inputVerb = parseInput[0];
