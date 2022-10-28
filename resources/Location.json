@@ -51,6 +51,7 @@
     },
     {
       "name": "Dungeon",
+      "NPC": "prisoner",
       "directions": {
         "up": "Watchtower",
         "north": "Courtyard"
@@ -164,7 +165,7 @@
       "directions": {"None": "None"},
       "description": "All of your stuff",
       "items": [
-        "none"
+
       ]
     }
   ]

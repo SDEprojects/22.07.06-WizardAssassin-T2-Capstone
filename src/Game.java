@@ -7,9 +7,25 @@ import java.util.*;
 
 import com.google.gson.Gson;
 
-class Game implements Verbs {
+class Game implements Verbs  {
+
+    Game() throws IOException {
+    }
+
+    public Data makeObj() throws IOException {
+        Gson gson = new Gson();
+        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
+        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
+        Data obj = gson.fromJson(reader, Data.class);
+        return obj;
+    }
+
+    Data obj = makeObj();
+
 
     public Scanner inputScanner = new Scanner(System.in);
+
+
 
     public void execute() throws IOException {
         title();
@@ -73,11 +89,17 @@ class Game implements Verbs {
 
 
     public void chooseLocation() throws IOException {
-        Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
-        Data obj = gson.fromJson(reader, Data.class);
+//        Gson gson = new Gson();
+//        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
+//        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
+//        Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
+
+        //readJSON obj = new readJSON();
+        Location currentLocation2 = obj.getLocations().get(0);
+
+
+
 
         //while loop
         while (true) {
