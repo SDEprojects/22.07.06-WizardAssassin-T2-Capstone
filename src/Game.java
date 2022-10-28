@@ -108,16 +108,19 @@ class Game implements Verbs  {
 
             for (ExtraCharacters extraCharacters : object.getCharacters())
                 if ((currentLocation.getName().equals(extraCharacters.getRoom())))
-                    System.out.println(extraCharacters.getName() +  " says : " + extraCharacters.getQuote());
+                    System.out.println(String.format("You \033[31m %s \033[0m says: %s", extraCharacters.getName(), extraCharacters.getQuote()));
+//                    System.out.println(extraCharacters.getName() +  " says : " + extraCharacters.getQuote());
             System.out.println();
 
-            System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
+            System.out.println(String.format("You see these items: \033[32m %s \033[0m", Arrays.deepToString(currentLocation.getItem())));
+//            System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
             System.out.println("From the " + currentLocation.getName() + " you can go to the:");
             for (Map.Entry<String, String> direction : currentLocation.getDirections().entrySet())
-                System.out.println("     " + direction.getKey() + ": " + direction.getValue());
+                System.out.println(String.format("       \033[31m %s: %s \033[0m", direction.getKey(), direction.getValue()));
+//                System.out.println("     " + direction.getKey() + ": " + direction.getValue());
 
             System.out.println("");
-            System.out.println("What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'view' to see the map.\nEnter 'help' for list of valid commands.");
+            System.out.println("\033[36m What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'view' to see the map.\nEnter 'help' for list of valid commands. \033[0m");
             String userInput = inputScanner.nextLine().trim().toLowerCase();
 
             String[] parseInput = userInput.split(" ");
@@ -157,11 +160,11 @@ class Game implements Verbs  {
                     System.out.println("This VERB is for area interactions");
                 }
                 else {
-                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
+                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help'");
                 }
             }
             else {
-                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
+                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help'");
             }
         }
     }
