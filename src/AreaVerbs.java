@@ -1,8 +1,6 @@
 public enum AreaVerbs {
     EXAMINE("examine"),
-    EXA("exa"),
-    LOOK("look"),
-    TOUCH("touch");
+    EXA("exa");
 
     private String areaVerb;
 

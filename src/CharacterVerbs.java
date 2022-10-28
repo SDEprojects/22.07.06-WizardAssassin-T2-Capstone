@@ -1,10 +1,6 @@
 public enum CharacterVerbs {
     TALK("talk"),
-    SPEAK("speak"),
-    ASK("ask"),
-    EXPLAIN("explain"),
-    TELL("tell"),
-    DISCUSS("discuss");
+    FIGHT("fight");
 
     private String characterVerb;
 
