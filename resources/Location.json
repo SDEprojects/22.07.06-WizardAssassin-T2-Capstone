@@ -7,7 +7,7 @@
       },
       "description": "You are in a church filled with wooden pews and an altar and nothing else. The window you entered by is to the north. There is a wooden door to the south.",
       "items": [
-        "Stick"
+        "stick"
       ],
       "characters": [
         "Rat"
@@ -40,7 +40,7 @@
       "description": "The WatchTower is a small room with a table, a chair, and a guard asleep slumped over the table. A KEY rests on the table next to his right hand. To your north is the door that leads to the courtyard. There is a NOTE on the table as well. There are narrow stairs that lead up to armory and stairs that lead down to a dungeon.",
       "items": [
         "Brass Key",
-        "Note"
+        "note"
       ],
       "characters": [
         "Guard"
@@ -103,7 +103,7 @@
       "description": "The Kitchen has a few servants scrub pots, dishes, and the floor. The light from the large open hearth partially illuminates the room. On a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
       "items": [
         "Knife",
-        "Poison"
+        "poison"
       ],
       "characters": [
         "Servant",
