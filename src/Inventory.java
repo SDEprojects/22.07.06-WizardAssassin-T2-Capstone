@@ -13,8 +13,9 @@ class Inventory {
     public void add(Data masterObj) throws IOException {
 
         String getItem = "Stick";
-
         Location currentLocation = masterObj.getLocations().get(0);
+
+
         System.out.println(currentLocation.getDescription() + "\n");
         System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
         //Location Inventory = masterObj.getLocations().get(13);
