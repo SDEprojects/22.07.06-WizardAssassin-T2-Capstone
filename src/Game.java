@@ -103,15 +103,6 @@ class Game implements Verbs  {
         boolean condition = true;
         while (condition) {
             System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
-        //readJSON obj = new readJSON();
-        Location currentLocation2 = obj.getLocations().get(0);
-
-
-
-
-        //while loop
-        while (true) {
-            System.out.println("\n\u001B[35m                                            *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
 
@@ -132,6 +123,7 @@ class Game implements Verbs  {
             String[] parseInput = userInput.split(" ");
 
             if(userInput.equals("quit")) {
+                condition = false;
                 quitGame();
             }
             else if(userInput.equals("help")) {
