@@ -37,6 +37,8 @@ class Game implements Verbs {
         String gameWin = obj.getWin();
         System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
         System.out.println();
+        System.out.println("\033[35m" + "In order to move between rooms you need to type the word 'go'. For example 'go south'" + "\033[0m");
+        System.out.println();
     }
 
     private void beginGame() throws IOException {
@@ -80,11 +82,19 @@ class Game implements Verbs {
         Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
 
+        Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
+        Characters object = gson.fromJson(read, Characters.class);
+
         boolean condition = true;
         while (condition) {
             System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
+
+            for (ExtraCharacters extraCharacters : object.getCharacters())
+                if ((currentLocation.getName().equals(extraCharacters.getRoom())))
+                    System.out.println(extraCharacters.getName() +  " says : " + extraCharacters.getQuote());
+            System.out.println();
 
             System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
             System.out.println("From the " + currentLocation.getName() + " you can go to the:");
