@@ -8,7 +8,21 @@ import java.util.*;
 
 import com.google.gson.Gson;
 
-class Game implements Verbs {
+class Game implements Verbs  {
+
+    Game() throws IOException {
+    }
+
+    public Data makeObj() throws IOException {
+        Gson gson = new Gson();
+        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
+        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
+        Data obj = gson.fromJson(reader, Data.class);
+        return obj;
+    }
+
+    Data obj = makeObj();
+
 
     public Scanner inputScanner = new Scanner(System.in);
 
@@ -50,6 +64,7 @@ class Game implements Verbs {
             String os = System.getProperty("os.name");
             System.out.println(os);
             ClearConsole.clearConsole();
+            //System.out.println("You have started the game");
             chooseLocation();
         } else if (start.equals("no") || start.equals("n")) {
             System.out.println("Thank you for playing");
@@ -77,9 +92,9 @@ class Game implements Verbs {
 
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-
-        Data obj = gson.fromJson(reader, Data.class);
+//        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
+//        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
+//        Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
 
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
@@ -88,6 +103,15 @@ class Game implements Verbs {
         boolean condition = true;
         while (condition) {
             System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
+        //readJSON obj = new readJSON();
+        Location currentLocation2 = obj.getLocations().get(0);
+
+
+
+
+        //while loop
+        while (true) {
+            System.out.println("\n\u001B[35m                                            *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
             System.out.println(currentLocation.getDescription() + "\n");
 
