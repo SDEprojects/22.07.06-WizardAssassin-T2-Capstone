@@ -97,8 +97,8 @@ class Game implements Verbs  {
 //        Location currentLocation = obj.getLocations().get(0);
 
 
-        System.out.println(currentLocation.getDescription() + "\n");
-        System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
+//        System.out.println(currentLocation.getDescription() + "\n");
+//        System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
         //Location Inventory = masterObj.getLocations().get(13);
 
 
@@ -106,7 +106,7 @@ class Game implements Verbs  {
 //        for (Map.Entry<String, String> direction : currentLocation.getDirections().entrySet())
 //            System.out.println("     " + direction.getKey() + ": " + direction.getValue());
 
-        System.out.println("You  see these items: " + Arrays.toString(currentLocation.getItem()));
+//        System.out.println("You  see these items: " + Arrays.toString(currentLocation.getItem()));
         List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
 
         // Add items to room "drop", use later if we add DROP feature
@@ -123,30 +123,33 @@ class Game implements Verbs  {
         String[] toInventory = new String[inventoryItems.size()];
         toInventory = inventoryItems.toArray(toInventory);
         inventory.setItem(toInventory);
-        System.out.println("You picked up the " + getItem + " and added it to inventory. You see : " + roomItems);
+        System.out.println("You picked up the " + getItem + " and added it to inventory.");
 
 
         // INVENTORY PRINT OUT
-        System.out.println("\n");
-        System.out.println(inventory.getName());
+//        System.out.println("\n");
+//        System.out.println(inventory.getName());
         //System.out.println(inventory.getDescription() );
-        System.out.println(Arrays.toString(inventory.getItem()));
-        System.out.println("end of inventory");
-        System.out.println("You have acquired a " + Arrays.toString(inventory.getItem()) + ".");
+//        System.out.println(Arrays.toString(inventory.getItem()));
+//        System.out.println("end of inventory");
+//        System.out.println("You have acquired a " + Arrays.toString(inventory.getItem()) + ".");
         // END of INVENTORY
 
 
         // NOTE convert roomItems List to array. Update masterObj with changes
         String[] updatedRoomItems = roomItems.toArray(new String[0]);
         currentLocation.setItem(updatedRoomItems);
+
         System.out.println("In the room these items remain: " + Arrays.toString(currentLocation.getItem()));
         //System.out.println("The room now has: " + Arrays.toString(currentLocation.getItem()));
     }
 
     public void checkInventory() {
-        Location inventory = obj.getLocations().get(13);
+       // Location inventory = obj.getLocations().get(13).getItem();
+
         System.out.println("*** Inventory ***");
-        System.out.println(inventory);
+        System.out.println(Arrays.toString(inventory.getItem()));
+        //System.out.println(inventory);
     }
 
 
