@@ -107,7 +107,6 @@ class Game implements Verbs  {
     }
 
     public void checkInventory() {
-//        Location inventoryArr = obj.getLocations().get(13);
         System.out.println();
         System.out.println("*** Inventory ***");
         System.out.printf("\033[92m%s\033[0m", inventoryItems);
