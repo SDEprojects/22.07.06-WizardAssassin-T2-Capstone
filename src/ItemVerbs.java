@@ -1,5 +1,5 @@
 public enum ItemVerbs {
-    PICKUP("pickup"),
+    GET("get"),
     USE("use"),
     DROP("drop");
 

@@ -5,10 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-
 import com.google.gson.Gson;
 
 class Game implements Verbs  {
+
+    private Data obj = makeObj();
+    private Location inventory = obj.getLocations().get(13);
+    private List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
+    private Scanner inputScanner = new Scanner(System.in);
 
     Game() throws IOException {
     }
@@ -16,33 +20,22 @@ class Game implements Verbs  {
     public Data makeObj() throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
         Data obj = gson.fromJson(reader, Data.class);
         return obj;
     }
-
-    Data obj = makeObj();
-    Location inventory = obj.getLocations().get(13);
-    List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
-
-
-    public Scanner inputScanner = new Scanner(System.in);
 
     public void execute() throws IOException {
         title();
         gameObjective();
         beginGame();
-
     }
 
     private void title() throws IOException {
-
         System.out.println();
         System.out.println("\033[35m" + Files.readString(Path.of("./resources/welcome.txt")) + "\033[0m");
-
         System.out.println();
-
     }
+
     private void gameObjective() throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("./resources/introduction.json"));
@@ -53,8 +46,6 @@ class Game implements Verbs  {
         String gameWin = obj.getWin();
         System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
         System.out.println();
-        System.out.println("\033[35m" + "In order to move between rooms you need to type the word 'go'. For example 'go south'" + "\033[0m");
-        System.out.println();
     }
 
     private void beginGame() throws IOException {
@@ -63,10 +54,8 @@ class Game implements Verbs  {
         System.out.println("\033[35m" + "Do you want to start the game? yes | no" + "\033[0m");
         start = inputScanner.nextLine().trim().toLowerCase();
         if (start.equals("yes") || start.equals("y")) {
-//            String os = System.getProperty("os.name");
-//            System.out.println(os);
+
             ClearConsole.clearConsole();
-            //System.out.println("You have started the game");
             chooseLocation();
         } else if (start.equals("no") || start.equals("n")) {
             System.out.println("Thank you for playing");
@@ -93,113 +82,78 @@ class Game implements Verbs  {
 
     public void getItem(String itemInput, Location currentLocation) throws IOException {
 
-        String getItem = itemInput;
-//        Location currentLocation = obj.getLocations().get(0);
-
-
-//        System.out.println(currentLocation.getDescription() + "\n");
-//        System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
-        //Location Inventory = masterObj.getLocations().get(13);
-
-
-//        System.out.println("From the " + currentLocation.getName() + " you can go to the: ");
-//        for (Map.Entry<String, String> direction : currentLocation.getDirections().entrySet())
-//            System.out.println("     " + direction.getKey() + ": " + direction.getValue());
-
-//        System.out.println("You  see these items: " + Arrays.toString(currentLocation.getItem()));
         List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
 
         // Add items to room "drop", use later if we add DROP feature
 //        roomItems.add("stones");
 //        roomItems.add("pebbles");
         // Pick up item step 1, remove from room items
-        roomItems.remove(getItem);
-//        Location inventory = obj.getLocations().get(13);
-        // TODO removed from here List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
-        // List of strings
-        inventoryItems.add(getItem);
+        roomItems.remove(itemInput);
+        inventoryItems.add(itemInput);
 
         // Pick up item step 2, Put item in inventory
         String[] toInventory = new String[inventoryItems.size()];
         toInventory = inventoryItems.toArray(toInventory);
         inventory.setItem(toInventory);
-        System.out.println("You picked up the " + getItem + " and added it to inventory.");
-
 
         // INVENTORY PRINT OUT
-//        System.out.println("\n");
-//        System.out.println(inventory.getName());
-        //System.out.println(inventory.getDescription() );
-//        System.out.println(Arrays.toString(inventory.getItem()));
-//        System.out.println("end of inventory");
-//        System.out.println("You have acquired a " + Arrays.toString(inventory.getItem()) + ".");
+        System.out.println("\n");
+        System.out.printf("You picked up a \033[32m%s\033[0m and added it to your inventory.\n", itemInput);
         // END of INVENTORY
-
 
         // NOTE convert roomItems List to array. Update masterObj with changes
         String[] updatedRoomItems = roomItems.toArray(new String[0]);
         currentLocation.setItem(updatedRoomItems);
-
-        System.out.println("In the room these items remain: " + Arrays.toString(currentLocation.getItem()));
-        //System.out.println("The room now has: " + Arrays.toString(currentLocation.getItem()));
     }
 
     public void checkInventory() {
-       // Location inventory = obj.getLocations().get(13).getItem();
-
+        System.out.println();
         System.out.println("*** Inventory ***");
-        System.out.println(Arrays.toString(inventory.getItem()));
-        //System.out.println(inventory);
+        System.out.printf("\033[92m%s\033[0m", inventoryItems);
+        System.out.println();
     }
 
 
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
-//        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-//        // https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
-//        Data obj = gson.fromJson(reader, Data.class);
         Location currentLocation = obj.getLocations().get(0);
+        String oldLocation = "";
 
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
         Characters object = gson.fromJson(read, Characters.class);
-        List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
 
-
-        boolean condition = true;
-        while (condition) {
-            // TODO
-            inventoryItems.forEach(System.out::println);
-
-
+        while (true) {
 
             if (currentLocation.getName().equals("Laboratory") && (inventoryItems.contains("poison")))
             {
                 System.out.println("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
-                condition = false;
+                break;
             }
-            System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
+            if(!oldLocation.equals(currentLocation.getName())) {
+                System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
 
-            System.out.println(currentLocation.getDescription() + "\n");
+                System.out.println(currentLocation.getDescription() + "\n");
 
-            for (ExtraCharacters extraCharacters : object.getCharacters())
-                if ((currentLocation.getName().equals(extraCharacters.getRoom())))
-                    System.out.println(extraCharacters.getName() +  " says : " + extraCharacters.getQuote());
-            System.out.println();
+                for (ExtraCharacters extraCharacters : object.getCharacters())
+                    if ((currentLocation.getName().equals(extraCharacters.getRoom())))
+                        System.out.printf("You see a \u001B[93m %s \u001B[0m. It says: %s%n", extraCharacters.getName(), extraCharacters.getQuote());
+                System.out.println();
 
-            System.out.println("You see these items: " + Arrays.toString(currentLocation.getItem()));
-            System.out.println("From the " + currentLocation.getName() + " you can go to the:");
-            for (Map.Entry<String, String> direction : currentLocation.getDirections().entrySet())
-                System.out.println("     " + direction.getKey() + ": " + direction.getValue());
+                System.out.printf("You see these items: \u001B[32m %s \u001B[0m%n", Arrays.deepToString(currentLocation.getItem()));
+                System.out.println("From the " + currentLocation.getName() + " you can go to the:");
+                for (Map.Entry<String, String> direction : currentLocation.getDirections().entrySet())
+                    System.out.printf("       \u001B[31m %s: %s \u001B[0m%n", direction.getKey(), direction.getValue());
 
+                oldLocation = currentLocation.getName();
+            }
 
             System.out.println("");
-            System.out.println("What would you like to do now?\nEnter 'quit' to exit game.\nEnter 'view' to see the map.\nEnter 'help' for list of valid commands.\n Enter 'inventory' to list all your items.");
+            System.out.println("\033[36m What would you like to do now?\033[0m\n\033[90mEnter 'quit' to exit game.\nEnter 'view' to see the map.\nEnter 'help' for list of valid commands.\n Enter 'inventory' to list all your items.\033[0m");
             String userInput = inputScanner.nextLine().trim().toLowerCase();
 
             String[] parseInput = userInput.split(" ");
 
             if(userInput.equals("quit")) {
-                condition = false;
                 quitGame();
             }
             else if(userInput.equals("inventory")) {
@@ -214,11 +168,11 @@ class Game implements Verbs  {
             else if(userInput.equals("view")) {
                 KingdomMap.printMapHeader();
                 KingdomMap.showKingdomMap().forEach(KingdomMap::printMap);
+                System.out.println("\n\u001B[35m                                              *********  You are in the " + currentLocation.getName() + ". *********\u001B[0m\n\n");
             }
             else if(parseInput.length == 2) {
                 String inputVerb = parseInput[0];
                 String inputNoun = parseInput[1];
-
 
                 if (Verbs.getMoveActions().contains(inputVerb)) {
 
@@ -227,11 +181,10 @@ class Game implements Verbs  {
                             currentLocation = obj.getPickedLocation(locationInput);
                         }
                         else {
-                        System.out.println("\n\u001B[31m" + inputNoun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
-                }
+                            System.out.println("\n\u001B[31m" + inputNoun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
+                        }
                 }
                 else if (Verbs.getItemActions().contains(inputVerb)) {
-                        System.out.println("This VERB is for an item action");
                         if (Arrays.toString(currentLocation.getItem()).contains(inputNoun)){
                             getItem(inputNoun, currentLocation);
                         }
@@ -244,11 +197,11 @@ class Game implements Verbs  {
                     System.out.println("This VERB is for area interactions");
                 }
                 else {
-                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
+                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
                 }
             }
             else {
-                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'help'");
+                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
             }
         }
     }
