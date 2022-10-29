@@ -16,15 +16,15 @@ class KingdomMap {
     }
 
     public static void printMapHeader() {
-        System.out.println("                         *********************************************");
-        System.out.println("                                             MAP                       ");
-        System.out.println("                         *********************************************");
+        System.out.println("\033[30m                         *********************************************\033[0m");
+        System.out.println("\033[33m                                             MAP                       \033[0m");
+        System.out.println("\033[30m                         *********************************************\033[0m");
     }
 
     public void printMap() {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 15; j++) {
-                System.out.printf("%2s", this.getKingdomMap()[i][j]);
+                System.out.printf("\033[33m%2s\033[0m", this.getKingdomMap()[i][j]);
             }
             System.out.println();
         }
