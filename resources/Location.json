@@ -39,7 +39,7 @@
       },
       "description": "The WatchTower is a small room with a table, a chair, and a guard asleep slumped over the table. A KEY rests on the table next to his right hand. To your north is the door that leads to the courtyard. There is a NOTE on the table as well. There are narrow stairs that lead up to armory and stairs that lead down to a dungeon.",
       "items": [
-        "Brass Key",
+        "brass key",
         "note"
       ],
       "characters": [
@@ -54,8 +54,8 @@
       },
       "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard. There is also a spare TUNIC that the guards wear. It has the INSIGNIA of the king.",
       "items": [
-        "Sword",
-        "Tunic"
+        "sword",
+        "tunic"
       ],
       "characters": [
         "none"
@@ -69,7 +69,7 @@
       },
       "description": "The Dungeon is gloomy, cold and dripping water.  Shackles dangle from the walls. In one of the cells huddles a bloodied PRISONER.",
       "items": [
-        "Password"
+        "password"
       ],
       "characters": [
         "Prisoner"
@@ -82,12 +82,12 @@
         "north": "Wizard's Foyer",
         "south": "Kitchen",
         "east": "Courtyard",
-        "west": "King’s Chambers"
+        "west": "Royal Lounge"
       },
       "description": "The Great Hall ceiling is 20 feet high. Light pours in from big windows on each side of the room. To the north is a door leading to the wizard’s tower. However, explore the other rooms since you need important items to defeat the evil wizard.",
       "items": [
-        "Key",
-        "Note"
+        "key",
+        "note"
       ],
       "characters": [
         "Guard",
@@ -102,7 +102,7 @@
       },
       "description": "The Kitchen has a few servants scrub pots, dishes, and the floor. The light from the large open hearth partially illuminates the room. On a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
       "items": [
-        "Knife",
+        "knife",
         "poison"
       ],
       "characters": [
@@ -116,11 +116,11 @@
 
         "east": "Great Hall",
         "south": "Royal Library",
-        "west": "King’s Bedchamber"
+        "west": "King’s Chambers"
       },
       "description": "The Royal Lounge has a few couches, a table surrounded with chairs. This room is usually used for important meetings with the king. In this room you will find a key that open the door to the Wizard’s Tower.",
       "items": [
-        "Silver Key"
+        "diamond key"
       ],
       "characters": [
         "King's Hand"
@@ -134,7 +134,7 @@
       },
       "description": "The Library has shelves of books cover the walls from floor to ceiling. There are cushioned chairs and a table near the center of the room. At this table sits a tall gangly figure with a long white beard is seated in a chair, engrossed in a giant magical tome",
       "items": [
-        "Wizard Robes"
+        "wizard robes"
       ],
       "characters": [
         "none"
@@ -192,9 +192,9 @@
       },
       "description": "The Laboratory is full of tables crammed with beakers and vials filled with colorful, bubbling and smoking liquids. You see a jug of MEAD on one of the tables. There is a NOTE next to the MEAD.",
       "items": [
-        "Mead",
+        "mead",
         "hunk of meat",
-        "Jewels"
+        "jewels"
       ],
       "characters": [
         "Monster"
