@@ -1,3 +1,5 @@
+package com.WizardAssassin;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -7,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import com.google.gson.Gson;
 
-class Game implements Verbs  {
+public class Game implements Verbs  {
 
     private Data obj = makeObj();
     private Location inventory = obj.getLocations().get(13);
@@ -18,7 +20,7 @@ class Game implements Verbs  {
     private String oldLocation = "";
     List<String> npcNames = new ArrayList<>();
 
-    Game() throws IOException {
+    public Game() throws IOException {
     }
 
     public Data makeObj() throws IOException {

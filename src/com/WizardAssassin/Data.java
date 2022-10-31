@@ -1,3 +1,5 @@
+package com.WizardAssassin;
+
 import java.util.*;
 
 class Data {

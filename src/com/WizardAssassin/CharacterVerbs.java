@@ -1,3 +1,5 @@
+package com.WizardAssassin;
+
 public enum CharacterVerbs {
     TALK("talk"),
     FIGHT("fight");

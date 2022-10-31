@@ -1,3 +1,7 @@
+package com.WizardAssassin.app;
+
+import com.WizardAssassin.Game;
+
 import java.io.IOException;
 
 class Main {
