@@ -17,7 +17,7 @@ class KingdomMap {
 
     public static void printMapHeader() {
         System.out.println("\033[30m                         *********************************************\033[0m");
-        System.out.println("\033[33m                                             MAP                       \033[0m");
+        System.out.println("\033[33m                                  MAP OF KINGDOM TO THE SOUTH                       \033[0m");
         System.out.println("\033[30m                         *********************************************\033[0m");
     }
 
