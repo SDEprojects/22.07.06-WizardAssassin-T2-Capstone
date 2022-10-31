@@ -50,11 +50,11 @@ class HelpMenu implements Verbs{
     }
 
     public static void printMenuHeader() {
-        System.out.println(String.format("%25s %10s %20s %10s %15s %10s %10s", "Purpose", "|", "Possible VERBs", "|", "NOUN", "|", "Example"));
+        System.out.println(String.format("\033[91m%25s %10s %20s %10s %15s %10s %10s\033[0m", "Purpose", "|", "Possible VERBs", "|", "NOUN", "|", "Example"));
         System.out.println(String.format("%s", "----------------------------------------------------------------------------------------------------------------"));
     }
     public void printMenu() {
-        System.out.println(String.format("%25s %10s %20s %10s %15s %10s %10s", this.getPurpose(), "|", this.getVerbs(), "|", this.getNoun(), "|", this.getExample()));
+        System.out.println(String.format("\033[34m%25s %10s %20s %10s %15s %10s %10s\033[0m", this.getPurpose(), "|", this.getVerbs(), "|", this.getNoun(), "|", this.getExample()));
     }
 
     public static List<HelpMenu> buildMenu() {

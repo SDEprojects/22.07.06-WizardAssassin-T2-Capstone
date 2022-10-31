@@ -1,6 +1,5 @@
 import java.util.*;
 
-// https://stackoverflow.com/questions/19169754/parsing-nested-json-data-using-gson
 class Data {
     List<Location> locations;
 
