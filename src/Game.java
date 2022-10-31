@@ -133,12 +133,12 @@ class Game implements Verbs  {
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
 
-        inventoryItems.add("password");
-        inventoryItems.add("diamond key");
-        inventoryItems.add("sword");
-        inventoryItems.add("tunic");
-        inventoryItems.add("wizard robes");
-        inventoryItems.add("knife");
+//        inventoryItems.add("password");
+//        inventoryItems.add("diamond key");
+//        inventoryItems.add("sword");
+//        inventoryItems.add("tunic");
+//        inventoryItems.add("wizard robes");
+//        inventoryItems.add("knife");
 
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
         Characters object = gson.fromJson(read, Characters.class);
