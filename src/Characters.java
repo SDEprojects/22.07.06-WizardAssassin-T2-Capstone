@@ -39,5 +39,12 @@ class ExtraCharacters{
 
     public String getQuote() {
         return quote;
+        // Queen's quote to add later
+        // this will be used when implementing talking to the spy to progress game
+        // "One more thing, if you talk to a man that says, 'The Mocking Birds around here sing quite beautifully,'
+//        then you'll know this man to be our spy.
+//        The code he is waiting for is 'Yes, too bad they're dying out'.
+//        This phrase will prompt him to give you what you need to complete your mission.
+//                He'll recognize you with this *Queen gives you a PENDANT, it has a Mocking Bird carved in it*."
     }
 }
