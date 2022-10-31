@@ -133,13 +133,6 @@ class Game implements Verbs  {
     public void chooseLocation() throws IOException {
         Gson gson = new Gson();
 
-//        inventoryItems.add("password");
-//        inventoryItems.add("diamond key");
-//        inventoryItems.add("sword");
-//        inventoryItems.add("tunic");
-//        inventoryItems.add("wizard robes");
-//        inventoryItems.add("knife");
-
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
         Characters object = gson.fromJson(read, Characters.class);
         Map<String, String> characterQuotes = new HashMap<>();
@@ -150,7 +143,7 @@ class Game implements Verbs  {
 
             if (currentLocation.getName().equals("Laboratory") && (inventoryItems.contains("poison")))
             {
-                System.out.println("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
+                System.out.println("\033[36mYou have poisoned the wizard. You return home as a hero who saved your kingdom\033[0m.");
                 break;
             }
 
@@ -164,8 +157,10 @@ class Game implements Verbs  {
                     if ((currentLocation.getName().equals(extraCharacters.getRoom()))) {
                         System.out.printf("             \u001B[93m%s\u001B[0m%n", extraCharacters.getName().toUpperCase());
                         npcNames.add(extraCharacters.getName().toLowerCase());
+                        characterQuotes.put(extraCharacters.getName(), extraCharacters.getQuote());
                     }
                 }
+
                 System.out.println();
                 if(currentLocation.getName().equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")){
                     System.out.println("\033[91mThe monster bites your head off and you die!\033[0m");
@@ -349,6 +344,7 @@ class Game implements Verbs  {
                                     System.out.println("Should've listened to the Queen and not gone on that killing spree... You lose");
                                     System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
                                     break;
+
                                 }
                             }
                             else if(inventoryItems.contains("stick") && inputNoun.equals("rat")) {
