@@ -1,4 +1,4 @@
-package com.WizardAssassin;
+package com.wizard_assassin;
 
 class Introduction {
 

@@ -1,4 +1,4 @@
-package com.WizardAssassin;
+package com.wizard_assassin;
 
 import java.io.IOException;
 import java.util.ArrayList;

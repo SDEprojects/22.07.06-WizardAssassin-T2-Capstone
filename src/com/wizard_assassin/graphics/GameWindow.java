@@ -1,4 +1,4 @@
-package com.WizardAssassin.graphics;
+package com.wizard_assassin.graphics;
 
 import javax.swing.*;
 
