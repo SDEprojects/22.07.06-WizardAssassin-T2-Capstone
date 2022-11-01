@@ -7,6 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
+import com.WizardAssassin.graphics.GamePanel;
+import com.WizardAssassin.graphics.GameWindow;
 import com.google.gson.Gson;
 
 public class Game implements Verbs  {
@@ -19,8 +22,14 @@ public class Game implements Verbs  {
     private Location currentLocation = obj.getLocations().get(14);
     private String oldLocation = "";
     List<String> npcNames = new ArrayList<>();
+    //KKASH
+    //private GamePanel gamePanel;
+    //private GameWindow gameWindow;
 
     public Game() throws IOException {
+        //KKASH
+        //gamePanel = new GamePanel();
+        //gameWindow = new GameWindow(gamePanel);
     }
 
     public Data makeObj() throws IOException {

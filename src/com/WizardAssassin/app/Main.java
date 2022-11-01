@@ -1,6 +1,7 @@
 package com.WizardAssassin.app;
 
 import com.WizardAssassin.Game;
+import com.WizardAssassin.graphics.GameWindow;
 
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ class Main {
 
         Game app = new Game();
         app.execute();
+
 
 
 //        readJSON jsonOBJ = new readJSON();
