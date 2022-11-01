@@ -1,3 +1,5 @@
+package com.WizardAssassin;
+
 class Introduction {
 
     public String introduction;

@@ -1,3 +1,5 @@
+package com.WizardAssassin;
+
 public enum MoveVerbs {
     MOVE("move"),
     GO("go");
