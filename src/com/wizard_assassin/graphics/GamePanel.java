@@ -1,8 +1,13 @@
 package com.wizard_assassin.graphics;
 
+import com.wizard_assassin.inputs.KeyboardInputs;
+import com.wizard_assassin.inputs.MouseInputs;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,19 +16,31 @@ public class GamePanel extends JPanel {
 
 
     private BufferedImage titleImg;
+    private KeyboardInputs keyboardInputs;
+    private MouseInputs mouseInputs; // Mouse input class object created.
 
     // CONSTRUCTOR
     public GamePanel() {
+        keyboardInputs = new KeyboardInputs(this);
+
+        // Game panel mouse function
+        mouseInputs = new MouseInputs(this); // MouseInput('this') is mouse input for 'this' gamePanel
+        addMouseListener(mouseInputs);
+
         setPanelSize();
         importImg();
-        new SplashPanel();
         startButton();
+
+
     }
 
     private void startButton() {
         JButton start = new JButton("START");
         start.setBounds(200, 600, 100, 100);
         add(start);
+        start.addActionListener(e -> {
+            System.out.println("I was clicked");
+        });
     }
     private void setPanelSize() {
         Dimension size = new Dimension(1280,800);
