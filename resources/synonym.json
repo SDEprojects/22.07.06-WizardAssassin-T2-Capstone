@@ -1,0 +1,23 @@
+{
+    "run" :  "go",
+    "move" : "go",
+    "inspect" : "search",
+    "examine": "search",
+    "talk": "speak",
+    "take": "get",
+    "attack" : "fight",
+    "kill" : "fight",
+    "cross" : "crucifix",
+    "rifle" : "musket",
+    "food" : "feed",
+    "water": "well",
+    "child" : "children",
+    "villager" : "villagers",
+    "gem" : "stone",
+    "hand" : "king's hand",
+    "evil" : "evil wizard",
+    "robes": "wizard robes",
+    "silver" : "silver key",
+    "brass" : "brass key"
+
+}

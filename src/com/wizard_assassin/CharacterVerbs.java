@@ -1,7 +1,7 @@
 package com.wizard_assassin;
 
 public enum CharacterVerbs {
-    TALK("talk"),
+    SPEAK("speak"),
     FIGHT("fight");
 
     private String characterVerb;
