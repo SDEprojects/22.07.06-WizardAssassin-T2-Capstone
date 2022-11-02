@@ -1,13 +1,15 @@
 package com.wizard_assassin;
 
+import java.util.List;
+
 public class ExtraCharacters {
 
     String type;
     String name;
     String room;
-    String quote;
+    List<String> quote;
 
-    public ExtraCharacters(String type, String name, String room, String quote) {
+    public ExtraCharacters(String type, String name, String room, List<String> quote) {
         this.type = type;
         this.name = name;
         this.room = room;
@@ -26,7 +28,7 @@ public class ExtraCharacters {
         return room;
     }
 
-    public String getQuote() {
+    public List<String> getQuote() {
         return quote;
 
     }
