@@ -8,13 +8,13 @@
       "description": "You are in a church filled with wooden pews and an altar and nothing else.\n The window you entered by is to the north.\n There is a wooden door to the south.",
       "items": ["stick"],
       "characters": ["rat"],
-      "actions": ["search", "rest", "go", "take"]
+      "actions": ["use","go", "get", "fight", "drop"]
 
     }
   },
   {
-    "Center Courtyard": {
-      "name": "Center Courtyard",
+    "Courtyard": {
+      "name": "Courtyard",
       "directions": {
         "north": "Church",
         "south": "Watchtower",
@@ -22,7 +22,7 @@
       "description": "The courtyard is an open area surrounded by tall stone walls.\n To the north is a door that leads to the church.\n To the south is a door to a tall watchtower.\n To the west are grand doors leading to the great hall.",
       "items" : [],
       "characters" : ["guard", "guard"],
-      "actions": ["speak", "go"]
+      "actions": ["speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -36,7 +36,7 @@
       "description": "The WatchTower is a small room with a table, a chair, and a guard asleep slumped over the table.\n A KEY rests on the table next to his right hand.\n To your north is the door that leads to the courtyard.\n There is a NOTE on the table as well.\n There are narrow stairs that lead up to armory and stairs that lead down to a dungeon.",
       "items": ["brass key", "note"],
       "characters": ["guard"],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -49,7 +49,7 @@
       "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard.\n There is also a spare TUNIC that the guards wear.\n It has the INSIGNIA of the king.",
       "items": ["sword", "tunic"],
       "characters": ["none"],
-      "actions": ["go"]
+      "actions": ["use","go", "get", "fight", "drop"]
     }
   },
 
@@ -73,7 +73,7 @@
       "characters": [
         "prisoner"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -96,7 +96,7 @@
         "guard",
         "guard"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -116,7 +116,7 @@
         "servant",
         "cook"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -136,7 +136,7 @@
       "characters": [
         "king's hand"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -154,7 +154,7 @@
       "characters": [
         "old man"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -172,7 +172,7 @@
       "characters": [
         "none"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -192,7 +192,7 @@
       "characters": [
         "none"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -210,7 +210,7 @@
       "characters": [
         "evil wizard"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -230,7 +230,7 @@
       "characters": [
         "monster"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   },
 
@@ -243,7 +243,7 @@
       "characters": [
         "queen"
       ],
-      "actions": ["search", "leave", "speak", "go"]
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
     }
   }
 ]
