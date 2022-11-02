@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
 
     private int gameCondition = 0;
 
-    // GRAPHIC OBJECTS
+    //  GRAPHIC OBJECTS
     JPanel  splashPanel;
     JButton startButton = new JButton("START");
     JPanel  namePanel;

@@ -6,7 +6,7 @@ import java.awt.*;
 public class GameWindow {
 
     private JFrame jFrame;
-    //CONSTRUCTOR
+    // CONSTRUCTOR
 
     public GameWindow(GamePanel gamePanel) {
         initialize(gamePanel);
