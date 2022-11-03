@@ -21,5 +21,6 @@ public class GameWindow {
         jFrame.pack();
         jFrame.setVisible(true);
         jFrame.setTitle("Wizard Assassin");
+        jFrame.setLayout(null);
     }
 }
