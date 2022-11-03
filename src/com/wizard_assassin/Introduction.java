@@ -6,6 +6,9 @@ class Introduction {
     public String objective;
     public String win;
 
+    public Introduction() {
+    }
+
     public Introduction(String introduction, String objective, String win) {
         this.introduction = introduction;
         this.objective = objective;
