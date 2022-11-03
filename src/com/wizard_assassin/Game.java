@@ -2,16 +2,18 @@ package com.wizard_assassin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-public class Game implements Verbs  {
+public class Game implements Verbs {
 
     private static Data obj;
 
@@ -22,6 +24,7 @@ public class Game implements Verbs  {
             e.printStackTrace();
         }
     }
+
     private static Location inventory = obj.getLocations().get(13);
     private static List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
     private static Scanner inputScanner = new Scanner(System.in);
@@ -41,36 +44,37 @@ public class Game implements Verbs  {
     public Game() throws IOException {
     }
 
-
     public static Data makeObj() throws IOException {
         Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-        Data obj = gson.fromJson(reader, Data.class);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream locationRecFile = classLoader.getResourceAsStream("Location.json");
+            obj = mapper.readValue(locationRecFile, Data.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return obj;
     }
-
 
 
     public static void getAnItem(String itemInput, Location currentLocation, String verb) throws IOException {
 
         List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
 
-        if(verb.equals("get") && !inventoryItems.contains(itemInput)) {
+        if (verb.equals("get") && !inventoryItems.contains(itemInput)) {
             roomItems.remove(itemInput);
             inventoryItems.add(itemInput);
             System.out.println("\n");
             System.out.printf("You picked up a \033[32m%s\033[0m and added it to your inventory.\n", itemInput);
-        }
-        else if(verb.equals("get") && inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("get") && inventoryItems.contains(itemInput)) {
             System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + itemInput.toUpperCase() + "\u001B[0m. It's already in your inventory. Choose again...");
-        }
-        else if(verb.equals("drop") && inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("drop") && inventoryItems.contains(itemInput)) {
             inventoryItems.remove(itemInput);
             roomItems.add(itemInput);
             System.out.println("\n");
             System.out.printf("You dropped the \033[32m%s\033[0m and removed it from your inventory.\n", itemInput);
-        }
-        else if(verb.equals("drop") && !inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("drop") && !inventoryItems.contains(itemInput)) {
             System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + itemInput.toUpperCase() + "\u001B[0m. It is not in your inventory. Choose again...");
         }
 
@@ -99,7 +103,7 @@ public class Game implements Verbs  {
     static void gameLoop() throws IOException {
         Gson gson = new Gson();
         //Generate random int value from 0 to 2 for random sayings
-        int num = (int)(Math.random()*(3));
+        int num = (int) (Math.random() * (3));
 
         //Map of characters and quotes
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
@@ -119,8 +123,8 @@ public class Game implements Verbs  {
 
             //new location text prompt()
             prompt(getLocation(), getDescription(), characterQuotes, object);
-                //updates location
-                //oldLocation = locationState.getName();
+            //updates location
+            //oldLocation = locationState.getName();
 
             //User input  userInput()
             userInputPrompt(getLocation());
@@ -143,178 +147,156 @@ public class Game implements Verbs  {
                 //move
                 if (locationState.directions.get(noun) != null) {
                     String locationInput = locationState.directions.get(noun);
-                    if(locationInput.equals("Courtyard") && getLocation().equals("Church")) {
-                        if(npcNames.isEmpty()) {
-                                    locationState = obj.getPickedLocation(locationInput);
-                                    setLocation(locationState.getName());
-                        }
-                        else {
+                    if (locationInput.equals("Courtyard") && getLocation().equals("Church")) {
+                        if (npcNames.isEmpty()) {
+                            locationState = obj.getPickedLocation(locationInput);
+                            setLocation(locationState.getName());
+                        } else {
                             System.out.printf("The \033[31m%s\033[0m blocks your path. You must fight it.\nUse the stick%n", npcNames.get(0).toUpperCase());
                         }
-                    }
-                    else if(locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
-                        if(inventoryItems.contains("password")) {
+                    } else if (locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
+                        if (inventoryItems.contains("password")) {
                             System.out.println("\033[31mGuard:\033[0m That's the right \033[92mPASSWORD\033[0m. Go ahead and pass.");
                             System.out.println();
-                            while(true) {
+                            while (true) {
                                 System.out.println("Hit 'enter' to continue");
                                 String progress = inputScanner.nextLine();
-                                if(progress.equals("")) {
+                                if (progress.equals("")) {
                                     break;
                                 }
                             }
                             count++;
                             locationState = obj.getPickedLocation(locationInput);
-                        }
-                        else {
+                        } else {
                             System.out.println("\033[31mGuard:\033[0m Wrong \033[92mPASSWORD\033[0m! Get outta here, ya scum!");
                         }
-                    }
-                    else if(locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall") && count == 1) {
-                        if(inventoryItems.contains("tunic") && inventoryItems.contains("sword")) {
+                    } else if (locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall") && count == 1) {
+                        if (inventoryItems.contains("tunic") && inventoryItems.contains("sword")) {
                             System.out.println("\033[31mGuard:\033[0m I don't know you... but you have the Kingdom's \033[92mTUNIC\033[0m... and that \033[92mSWORD\033[0m... You must be new... go ahead and pass.");
                             System.out.println();
-                            while(true) {
+                            while (true) {
                                 System.out.println("Hit 'enter' to continue");
                                 String progress = inputScanner.nextLine();
-                                if(progress.equals("")) {
+                                if (progress.equals("")) {
                                     break;
                                 }
                             }
                             count++;
                             locationState = obj.getPickedLocation(locationInput);
-                        }
-                        else {
+                        } else {
                             System.out.println("\033[31mGuard:\033[0m Where do you think you're goin? Only knights can pass through here.\nAnd not just any bloak with a Kingdom's \033[92mTUNIC\033[0m.\nYou need a \033[92mSWORD\033[0m too.");
                         }
-                    }
-                    else if(locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall") && count <= 2) {
-                        if(inventoryItems.contains("diamond key")) {
+                    } else if (locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall") && count <= 2) {
+                        if (inventoryItems.contains("diamond key")) {
                             System.out.println("Maybe I can \033[31mUSE\033[0m that \033[92mDIAMOND KEY\033[0m on this door.");
-                        }
-                        else {
+                        } else {
                             System.out.println("Hmm, it's locked. There's an emblem in the shape of a \033[92mDIAMOND\033[0m on the door");
                             System.out.println("\n\u001B[91m                         *********  You remain in the " + locationState.getName() + ". *********\u001B[0m\n\n");
                         }
-                    }
-                    else {
+                    } else {
                         locationState = obj.getPickedLocation(locationInput);
                     }
-                }
-                else {
+                } else {
                     System.out.println("\n\u001B[31m" + noun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
                 }
             }
             //use items
             else if (Verbs.getItemActions().contains(verb)) {
-                if(verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
+                if (verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
                     System.out.println("That \033[92mDIAMOND KEY\033[0m did the trick. You're in...");
                     System.out.println();
-                    while(true) {
+                    while (true) {
                         System.out.println("Hit 'enter' to continue");
                         String progress = inputScanner.nextLine();
-                        if(progress.equals("")) {
+                        if (progress.equals("")) {
                             break;
                         }
                     }
                     count++;
                     locationState = obj.getPickedLocation("Wizard's Foyer");
-                }
-                else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)){
+                } else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)) {
                     getAnItem(noun, locationState, verb);
-                }
-                else {
+                } else {
                     System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + noun.toUpperCase() + "\u001B[0m. Choose again...");
                 }
             }
             // talk
             else if (Verbs.getCharacterActions().contains(verb)) {
-                if(npcNames.contains(noun)) {
-                    if(verb.equals("speak")) {
-                        if(!noun.equals("queen")) {
+                if (npcNames.contains(noun)) {
+                    if (verb.equals("speak")) {
+                        if (!noun.equals("queen")) {
                             System.out.printf("\u001B[93m%s\u001B[0m: '%s'%n", noun.toUpperCase(), characterQuotes.get(noun));
-                        }
-                        else {
+                        } else {
                             System.out.printf("\u001B[93m%s\u001B[0m: '\033[95m%s\033[0m'%n", noun.toUpperCase(), characterQuotes.get(noun));
-                            while(true) {
+                            while (true) {
                                 System.out.println();
                                 System.out.println("Press Enter to Continue");
                                 String input = inputScanner.nextLine().trim().toLowerCase();
-                                if(input.equals("")) {
+                                if (input.equals("")) {
                                     locationState = obj.getPickedLocation("Church");
                                     break;
                                 }
                             }
                         }
-                    }
-                    else if(verb.equals("fight")) {
-                        if(noun.equals("evil wizard")) {
-                            if(!inventoryItems.contains("knife")) {
-                                    System.out.println("\033[91mThe Wizard suddenly blasts your head off with a thunder bolt... and you die!\033[0m");
-                                    System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
-                                    break;
-                                }
-                                else if(inventoryItems.contains("knife")){
-                                    System.out.println("\033[36mThe Wizard suddenly attacks you with a thunder bolt but you matrix dodge it.\n You shank him with the\033[0m \033[92mKNIFE\033[0m \033[36mand he dies!\033[0m");
-                                    System.out.println("You have shanked the wizard to death. You return home as a hero who saved your kingdom!");
-                                    break;
-                                }
+                    } else if (verb.equals("fight")) {
+                        if (noun.equals("evil wizard")) {
+                            if (!inventoryItems.contains("knife")) {
+                                System.out.println("\033[91mThe Wizard suddenly blasts your head off with a thunder bolt... and you die!\033[0m");
+                                System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
+                                break;
+                            } else if (inventoryItems.contains("knife")) {
+                                System.out.println("\033[36mThe Wizard suddenly attacks you with a thunder bolt but you matrix dodge it.\n You shank him with the\033[0m \033[92mKNIFE\033[0m \033[36mand he dies!\033[0m");
+                                System.out.println("You have shanked the wizard to death. You return home as a hero who saved your kingdom!");
+                                break;
                             }
-                            else if(inventoryItems.contains("sword")){
-                                int characterIndex= npcNames.indexOf(noun);
-                                object.getCharacters().remove(characterIndex);
-                                npcNames.remove(noun);
-                                if(!npcNames.isEmpty() || noun.equals("rat")) {
-                                    System.out.printf("You stab \033[91m%s\033[0m in the heart and they die.\n Miraculously, no one notices.%n", noun.toUpperCase());
-                                }
-                                else {
-                                    System.out.println("You've been found out!");
-                                    System.out.println("Should've listened to the Queen and not gone on that killing spree... You lose");
-                                    System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
-                                    break;
+                        } else if (inventoryItems.contains("sword")) {
+                            int characterIndex = npcNames.indexOf(noun);
+                            object.getCharacters().remove(characterIndex);
+                            npcNames.remove(noun);
+                            if (!npcNames.isEmpty() || noun.equals("rat")) {
+                                System.out.printf("You stab \033[91m%s\033[0m in the heart and they die.\n Miraculously, no one notices.%n", noun.toUpperCase());
+                            } else {
+                                System.out.println("You've been found out!");
+                                System.out.println("Should've listened to the Queen and not gone on that killing spree... You lose");
+                                System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
+                                break;
 
-                                }
                             }
-                            else if(inventoryItems.contains("stick") && noun.equals("rat")) {
-                                System.out.printf("You beat the \033[91m%s\033[0m to death with the \033[92mSTICK\033[0m", noun.toUpperCase());
-                                int characterIndex= npcNames.indexOf(noun);
-                                object.getCharacters().remove(characterIndex);
+                        } else if (inventoryItems.contains("stick") && noun.equals("rat")) {
+                            System.out.printf("You beat the \033[91m%s\033[0m to death with the \033[92mSTICK\033[0m", noun.toUpperCase());
+                            int characterIndex = npcNames.indexOf(noun);
+                            object.getCharacters().remove(characterIndex);
 
-                                npcNames.remove(noun);
-                            }
-                            else {
-                                System.out.println("I'm going to advise against that.");
-                            }
+                            npcNames.remove(noun);
+                        } else {
+                            System.out.println("I'm going to advise against that.");
                         }
                     }
-                    else {
-                        System.out.printf("There is no \u001B[93m%s\u001B[0m here... You must be seeing ghosts.%n", noun.toUpperCase());
-                    }
+                } else {
+                    System.out.printf("There is no \u001B[93m%s\u001B[0m here... You must be seeing ghosts.%n", noun.toUpperCase());
                 }
-                else if (Verbs.getAreaActions().contains(verb)) {
-                    System.out.println("This VERB is for area interactions");
-                }
-                else {
-                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
-                }
+            } else if (Verbs.getAreaActions().contains(verb)) {
+                System.out.println("This VERB is for area interactions");
+            } else {
+                System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
+            }
 
-                //reset location
-                setLocation(locationState.getName());
+            //reset location
+            setLocation(locationState.getName());
 
 
         }
     }
 
     //win condition
-    static void winConditionCheck(){
-        if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison")))
-        {
+    static void winConditionCheck() {
+        if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison"))) {
             System.out.println("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
             setLoopCondition(false);
         }
     }
 
-    static void prompt(String location, String description, Map<String, String> quotes, Characters object){
+    static void prompt(String location, String description, Map<String, String> quotes, Characters object) {
 
         //location
         System.out.println("\n\u001B[35m                                              *********  You are in the " + location + ". *********\u001B[0m\n\n");
@@ -333,19 +315,19 @@ public class Game implements Verbs  {
         System.out.println();
 
         //death condition
-        if(location.equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")){
+        if (location.equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")) {
             System.out.println("\033[91mThe monster bites your head off and you die!\033[0m");
             System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
             setLoopCondition(false);
         }
 
         //Items
-        if(locationState.getItem().length > 0) {
+        if (locationState.getItem().length > 0) {
             System.out.printf("You see these items: \u001B[32m %s \u001B[0m%n", Arrays.deepToString(locationState.getItem()));
         }
 
         //Directions
-        if(!locationState.getDirections().isEmpty()) {
+        if (!locationState.getDirections().isEmpty()) {
             System.out.println("From the " + locationState.getName() + " you can go to the:");
             for (Map.Entry<String, String> direction : locationState.getDirections().entrySet()) {
                 System.out.printf("       \u001B[31m %s: %s \u001B[0m%n", direction.getKey(), direction.getValue());
@@ -421,8 +403,6 @@ public class Game implements Verbs  {
     }
 
 
-
-
     public static String getDescription() {
         return description;
     }
@@ -447,6 +427,7 @@ public class Game implements Verbs  {
     public static void setLoopCondition(boolean loopCondition) {
         Game.loopCondition = loopCondition;
     }
+
     public static ArrayList<String> getVerbNoun() {
         return verbNoun;
     }
