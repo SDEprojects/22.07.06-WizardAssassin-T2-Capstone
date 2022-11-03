@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -21,11 +22,20 @@ public class Engine {
 
 
     public Engine() {
-        gamePanel = new GamePanel();
-        gameWindow = new GameWindow(gamePanel);
+        runGraphics();
         title();
         gameObjective();
         beginGame();
+    }
+
+    void runGraphics() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gamePanel = new GamePanel();
+                gameWindow = new GameWindow(gamePanel);
+            }
+        });
     }
 
     void title() {
