@@ -1,8 +1,5 @@
-import com.google.gson.Gson;
+package com.wizard_assassin;
 
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashSet;
 
 public interface Verbs {

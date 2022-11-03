@@ -4,79 +4,119 @@
       "type": "NPC",
       "name": "rat",
       "room": "Church",
-      "quote": "squeak"
+      "quote": [
+        "squeak",
+        "squeak",
+        "squeak"]
     },
     {
       "type": "NPC",
       "name": "guard1",
       "room": "Courtyard",
-      "quote": "The food today taste great. You should go to the Kitchen and have some... If you have the PASSWORD, of course."
+      "quote": [
+        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?",
+        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?",
+        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?"]
     },
     {
       "type": "NPC",
       "name": "guard2",
       "room": "Courtyard",
-      "quote": "What's the PASSWORD?"
+      "quote": [
+        "What's the PASSWORD?",
+        "What's the PASSWORD?",
+        "What's the PASSWORD?"]
     },
     {
       "type": "NPC",
       "name": "guard",
       "room": "Watchtower",
-      "quote": "Zzz"
+      "quote": [
+        "Zzz",
+        "Zzz",
+        "Zzz"]
     },
     {
       "type": "NPC",
       "name": "prisoner",
       "room": "Dungeon",
-      "quote": "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall."
+      "quote": [
+        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go",
+        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go",
+        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go"]
     },
     {
       "type": "NPC",
       "name": "cook",
       "room": "Kitchen",
-      "quote": "Now where did I put that nightshade? We need that to POISON... err, Hey, there!..."
+      "quote": [
+        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr",
+        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr",
+        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr"]
     },
     {
       "type": "NPC",
       "name": "servant",
       "room": "Kitchen",
-      "quote": "Take the KNIFE. You never know when you might need it."
+      "quote": [
+        "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it.",
+        "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it.",
+        "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it."]
     },
     {
       "type": "NPC",
       "name": "guard1",
       "room": "Great Hall",
-      "quote": "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)"
+      "quote": [
+        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
+        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
+        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)"]
     },
     {
       "type": "NPC",
       "name": "guard2",
       "room": "Great Hall",
-      "quote": "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)"
+      "quote": [
+        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)",
+        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)",
+        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)"]
     },
     {
       "type": "NPC",
       "name": "king's hand",
       "room": "Royal Lounge",
-      "quote": "This is the 'key' to the Wizard's Foyer"
+      "quote": [
+        "This is the 'key' to the Wizard's Foyer. >>singing in a mocking tone<< the 'key' to the Wizard's Foyer.\n its the key tot he WIZARD... ",
+        "This is the 'key' to the Wizard's Foyer. >>singing in a mocking tone<< the 'key' to the Wizard's Foyer.\n its the key tot he WIZARD... ",
+        "This is the 'key' to the Wizard's Foyer. >>singing in a mocking tone<< the 'key' to the Wizard's Foyer.\n its the key tot he WIZARD... "]
     },
     {
       "type": "NPC",
       "name": "monster",
       "room": "Wizard's Foyer",
-      "quote": "The monster dazedly lifts it's head up, blinks it's eyes open, sniffs a bit... and goes back to sleep.\n Those robes must've fooled it."
+      "quote": [
+        "The monster dazedly lifts it's head up, blinks it's eyes open, sniffs a bit... and goes back to sleep.\n Those robes must've fooled it.",
+        "The monster dazedly lifts it's head up, blinks it's eyes open, sniffs a bit... and goes back to sleep.\n Those robes must've fooled it.",
+        "The monster dazedly lifts it's head up, blinks it's eyes open, sniffs a bit... and goes back to sleep.\n Those robes must've fooled it."]
     },
     {
       "type": "NPC",
       "name": "evil wizard",
       "room": "Wizard’s Chambers",
-      "quote": "What do you want, weakling? I suppose you were sent to kill me? *Laughs Maniacally* HAHAHAHAHAHAHA!!"
+      "quote":[
+        "What do you want, weakling? I suppose you were sent to kill me?\n >>Laughs Maniacally<<\n HAHAHAHAHAHAHA!!\n Do you think you can KILL ME?!?!? I will SWALLOW YOU WHOLE BUDDY",
+        "What do you want, weakling? I suppose you were sent to kill me?\n >>Laughs Maniacally<<\n HAHAHAHAHAHAHA!!\n Do you think you can KILL ME?!?!? I will SWALLOW YOU WHOLE BUDDY",
+        "What do you want, weakling? I suppose you were sent to kill me?\n >>Laughs Maniacally<<\n HAHAHAHAHAHAHA!!\n Do you think you can KILL ME?!?!? I will SWALLOW YOU WHOLE BUDDY"]
     },
     {
       "type": "NPC",
       "name": "queen",
       "room": "Queen's Garden",
-      "quote": "Hello [name], I've called you here because I have a special mission for you.\n As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target.\n What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard.\n My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard.\n We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard.\n It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps.\n Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition.\n When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South.\n Are you ready?"
+      "quote":[
+        "Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special....\n As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target.\n What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard.\n My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard.\n We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard.\n It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps.\n Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition.\n When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South.\n Are you ready?",
+        "Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special....\n As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target.\n What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard.\n My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard.\n We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard.\n It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps.\n Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition.\n When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South.\n Are you ready?",
+        "Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special....\n As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target.\n What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard.\n My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard.\n We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard.\n It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps.\n Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition.\n When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South.\n Are you ready?"]
+
     }
   ]
 }

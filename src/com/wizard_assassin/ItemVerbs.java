@@ -1,3 +1,5 @@
+package com.wizard_assassin;
+
 public enum ItemVerbs {
     GET("get"),
     USE("use"),

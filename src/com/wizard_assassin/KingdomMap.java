@@ -1,3 +1,5 @@
+package com.wizard_assassin;
+
 import java.util.*;
 
 class KingdomMap {

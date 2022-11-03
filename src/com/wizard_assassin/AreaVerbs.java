@@ -1,3 +1,5 @@
+package com.wizard_assassin;
+
 public enum AreaVerbs {
     EXAMINE("examine"),
     EXA("exa");

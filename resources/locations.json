@@ -1,0 +1,249 @@
+[
+  {
+    "Church":
+    {
+      "name": "Church",
+      "directions": {
+        "south": "Courtyard"},
+      "description": "You are in a church filled with wooden pews and an altar and nothing else.\n The window you entered by is to the north.\n There is a wooden door to the south.",
+      "items": ["stick"],
+      "characters": ["rat"],
+      "actions": ["use","go", "get", "fight", "drop"]
+
+    }
+  },
+  {
+    "Courtyard": {
+      "name": "Courtyard",
+      "directions": {
+        "north": "Church",
+        "south": "Watchtower",
+        "west" : "Great Hall"},
+      "description": "The courtyard is an open area surrounded by tall stone walls.\n To the north is a door that leads to the church.\n To the south is a door to a tall watchtower.\n To the west are grand doors leading to the great hall.",
+      "items" : [],
+      "characters" : ["guard", "guard"],
+      "actions": ["speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Watchtower": {
+      "name": "Watchtower",
+      "directions": {
+        "north": "Courtyard",
+        "up": "Armory",
+        "down": "Dungeon"},
+      "description": "The WatchTower is a small room with a table, a chair, and a guard asleep slumped over the table.\n A KEY rests on the table next to his right hand.\n To your north is the door that leads to the courtyard.\n There is a NOTE on the table as well.\n There are narrow stairs that lead up to armory and stairs that lead down to a dungeon.",
+      "items": ["brass key", "note"],
+      "characters": ["guard"],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Armory": {
+      "name": "Armory",
+      "directions": {
+        "down": "Watchtower",
+        "north": "Courtyard"},
+      "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard.\n There is also a spare TUNIC that the guards wear.\n It has the INSIGNIA of the king.",
+      "items": ["sword", "tunic"],
+      "characters": ["none"],
+      "actions": ["use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "name": {
+
+    }
+  },
+
+  {
+    "Dungeon": {
+      "name": "Dungeon",
+      "directions": {
+        "up": "Watchtower",
+        "north": "Courtyard"
+      },
+      "description": "The Dungeon is gloomy, cold and dripping water.\n Shackles dangle from the walls.\n In one of the cells huddles a bloodied PRISONER.",
+      "items": [
+        "password"
+      ],
+      "characters": [
+        "prisoner"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Great Hall": {
+      "name": "Great Hall",
+      "directions": {
+
+        "north": "Wizard's Foyer",
+        "south": "Kitchen",
+        "east": "Courtyard",
+        "west": "Royal Lounge"
+      },
+      "description": "The Great Hall ceiling is 20 feet high.\n Light pours in from big windows on each side of the room.\n To the north is a door leading to the wizard’s tower.\n However, explore the other rooms since you need important items to defeat the evil wizard.",
+      "items": [
+        "key",
+        "note"
+      ],
+      "characters": [
+        "guard",
+        "guard"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Kitchen": {
+      "name": "Kitchen",
+      "directions": {
+
+        "north": "Great Hall"
+      },
+      "description": "The Kitchen has a few servants scrub pots, dishes, and the floor.\n The light from the large open hearth partially illuminates the room.\n On a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
+      "items": [
+        "knife",
+        "poison"
+      ],
+      "characters": [
+        "servant",
+        "cook"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Royal Lounge": {
+      "name": "Royal Lounge",
+      "directions": {
+
+        "east": "Great Hall",
+        "south": "Royal Library",
+        "west": "King’s Chambers"
+      },
+      "description": "The Royal Lounge has a few couches, a table surrounded with chairs.\n This room is usually used for important meetings with the king.\n In this room you will find a key that open the door to the Wizard’s Tower.",
+      "items": [
+        "diamond key"
+      ],
+      "characters": [
+        "king's hand"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Royal Library": {
+      "name": "Royal Library",
+      "directions": {
+
+        "north": "Royal Lounge"
+      },
+      "description": "The Library has shelves of books cover the walls from floor to ceiling.\n There are cushioned chairs and a table near the center of the room.\n At this table sits a tall gangly figure with a long white beard is seated in a chair, engrossed in a giant magical tome",
+      "items": [
+        "wizard robes"
+      ],
+      "characters": [
+        "old man"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "King’s Chambers": {
+      "name": "King’s Chambers",
+      "directions": {
+
+        "east": "Royal Lounge"
+      },
+      "description": "The King’s Chambers is off limits.",
+      "items": [
+
+      ],
+      "characters": [
+        "none"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Wizard's Foyer": {
+      "name": "Wizard's Foyer",
+      "directions": {
+
+        "north": "Wizard’s Chambers",
+        "south": "Great Hall",
+        "west": "Laboratory"
+      },
+      "description": "The Wizards Foyer is a wide large dimly lit room.\n As you enter you hear strange snorts and snarls.\n It’s a 10-foot, dragon-scaled, lion-headed chimera with what looks to be bat wings sprawling what must be 30 feet across,\n claws as sharp as daggers, a tail with the head of a serpent and venom dripping from its vampire fangs.\n A truly grotesque twisting of the natural world by the dark forces lurking nearby.\n Luckily, this thing appears to be sleeping.",
+      "items": [
+
+      ],
+      "characters": [
+        "none"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Wizard’s Chambers": {
+      "name": "Wizard’s Chambers",
+      "directions": {
+
+        "south": "Wizard's Foyer"
+      },
+      "description": "The Wizards Bedroom has a 4-post bed covered by a dark quilt.\n You see a table and chair.\n Sitting on the chair, looking at you, is the WIZARD.",
+      "items": [
+
+      ],
+      "characters": [
+        "evil wizard"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Laboratory": {
+      "name": "Laboratory",
+      "directions": {
+
+        "east": "Wizard's Foyer"
+      },
+      "description": "The Laboratory is full of tables crammed with beakers and vials filled with colorful, bubbling and smoking liquids.\n You see a jug of MEAD on one of the tables.\n There is a NOTE next to the MEAD.",
+      "items": [
+        "mead",
+        "hunk of meat",
+        "jewels"
+      ],
+      "characters": [
+        "monster"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  },
+
+  {
+    "Queen's Garden": {
+      "name": "Queen's Garden",
+      "description": "The Queen's Garden is full of luscious greenery, with thousands of wild flowers. \n You received a summons from your Queen to meet her here.\n You should talk to her.",
+      "items": [
+      ],
+      "characters": [
+        "queen"
+      ],
+      "actions": ["search", "leave", "speak", "use","go", "get", "fight", "drop"]
+    }
+  }
+]
