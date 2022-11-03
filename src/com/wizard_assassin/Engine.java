@@ -40,11 +40,8 @@ public class Engine {
 
     void title() {
         System.out.println();
-        try {
-            System.out.println("\033[35m" + Files.readString(Path.of("./resources/welcome.txt")) + "\033[0m");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileReading fileReading = new FileReading();
+        System.out.println("\033[35m" +  fileReading.dataReader("welcome.txt") + "\033[0m");
         System.out.println();
     }
 

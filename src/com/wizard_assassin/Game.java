@@ -2,16 +2,18 @@ package com.wizard_assassin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-public class Game implements Verbs  {
+public class Game implements Verbs {
 
     private static Data obj;
 
@@ -22,6 +24,7 @@ public class Game implements Verbs  {
             e.printStackTrace();
         }
     }
+
     private static Location inventory = obj.getLocations().get(13);
     private static List<String> inventoryItems = new ArrayList<String>(Arrays.asList(inventory.getItem()));
     private static Scanner inputScanner = new Scanner(System.in);
@@ -41,36 +44,37 @@ public class Game implements Verbs  {
     public Game() throws IOException {
     }
 
-
     public static Data makeObj() throws IOException {
         Gson gson = new Gson();
-        Reader reader = Files.newBufferedReader(Paths.get("./resources/Location.json"));
-        Data obj = gson.fromJson(reader, Data.class);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream locationRecFile = classLoader.getResourceAsStream("Location.json");
+            obj = mapper.readValue(locationRecFile, Data.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return obj;
     }
-
 
 
     public static void getAnItem(String itemInput, Location currentLocation, String verb) throws IOException {
 
         List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
 
-        if(verb.equals("get") && !inventoryItems.contains(itemInput)) {
+        if (verb.equals("get") && !inventoryItems.contains(itemInput)) {
             roomItems.remove(itemInput);
             inventoryItems.add(itemInput);
             System.out.println("\n");
             System.out.printf("You picked up a \033[32m%s\033[0m and added it to your inventory.\n", itemInput);
-        }
-        else if(verb.equals("get") && inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("get") && inventoryItems.contains(itemInput)) {
             System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + itemInput.toUpperCase() + "\u001B[0m. It's already in your inventory. Choose again...");
-        }
-        else if(verb.equals("drop") && inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("drop") && inventoryItems.contains(itemInput)) {
             inventoryItems.remove(itemInput);
             roomItems.add(itemInput);
             System.out.println("\n");
             System.out.printf("You dropped the \033[32m%s\033[0m and removed it from your inventory.\n", itemInput);
-        }
-        else if(verb.equals("drop") && !inventoryItems.contains(itemInput)) {
+        } else if (verb.equals("drop") && !inventoryItems.contains(itemInput)) {
             System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + itemInput.toUpperCase() + "\u001B[0m. It is not in your inventory. Choose again...");
         }
 
@@ -99,7 +103,7 @@ public class Game implements Verbs  {
     static void gameLoop() throws IOException {
         Gson gson = new Gson();
         //Generate random int value from 0 to 2 for random sayings
-        int num = (int)(Math.random()*(3));
+        int num = (int) (Math.random() * (3));
 
         //Map of characters and quotes
         Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
@@ -231,10 +235,10 @@ public class Game implements Verbs  {
                 if(inventoryItems.contains("password")) {
                     System.out.println("\033[31mGuard:\033[0m That's the right \033[92mPASSWORD\033[0m. Go ahead and pass.");
                     System.out.println();
-                    while(true) {
+                    while (true) {
                         System.out.println("Hit 'enter' to continue");
                         String progress = inputScanner.nextLine();
-                        if(progress.equals("")) {
+                        if (progress.equals("")) {
                             break;
                         }
                     }
@@ -283,15 +287,14 @@ public class Game implements Verbs  {
     }
 
     //win condition
-    static void winConditionCheck(){
-        if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison")))
-        {
+    static void winConditionCheck() {
+        if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison"))) {
             System.out.println("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
             setLoopCondition(false);
         }
     }
 
-    static void prompt(String location, String description, Map<String, String> quotes, Characters object){
+    static void prompt(String location, String description, Map<String, String> quotes, Characters object) {
 
         //location
         System.out.println("\n\u001B[35m                                              *********  You are in the " + location + ". *********\u001B[0m\n\n");
@@ -310,19 +313,19 @@ public class Game implements Verbs  {
         System.out.println();
 
         //death condition
-        if(location.equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")){
+        if (location.equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")) {
             System.out.println("\033[91mThe monster bites your head off and you die!\033[0m");
             System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
             setLoopCondition(false);
         }
 
         //Items
-        if(locationState.getItem().length > 0) {
+        if (locationState.getItem().length > 0) {
             System.out.printf("You see these items: \u001B[32m %s \u001B[0m%n", Arrays.deepToString(locationState.getItem()));
         }
 
         //Directions
-        if(!locationState.getDirections().isEmpty()) {
+        if (!locationState.getDirections().isEmpty()) {
             System.out.println("From the " + locationState.getName() + " you can go to the:");
             for (Map.Entry<String, String> direction : locationState.getDirections().entrySet()) {
                 System.out.printf("       \u001B[31m %s: %s \u001B[0m%n", direction.getKey(), direction.getValue());
@@ -398,8 +401,6 @@ public class Game implements Verbs  {
     }
 
 
-
-
     public static String getDescription() {
         return description;
     }
@@ -424,6 +425,7 @@ public class Game implements Verbs  {
     public static void setLoopCondition(boolean loopCondition) {
         Game.loopCondition = loopCondition;
     }
+
     public static ArrayList<String> getVerbNoun() {
         return verbNoun;
     }
