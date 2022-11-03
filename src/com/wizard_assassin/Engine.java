@@ -1,11 +1,13 @@
 package com.wizard_assassin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -18,7 +20,6 @@ public class Engine {
     private GamePanel gamePanel;
     private GameWindow gameWindow;
     private Scanner inputScanner = new Scanner(System.in);
-
 
 
     public Engine() {
@@ -41,25 +42,27 @@ public class Engine {
     void title() {
         System.out.println();
         FileReading fileReading = new FileReading();
-        System.out.println("\033[35m" +  fileReading.dataReader("welcome.txt") + "\033[0m");
+        System.out.println("\033[35m" + fileReading.dataReader("welcome.txt") + "\033[0m");
         System.out.println();
     }
 
     void gameObjective() {
         Gson gson = new Gson();
-        Reader reader = null;
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            reader = Files.newBufferedReader(Paths.get("./resources/introduction.json"));
-        } catch (IOException e) {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream locationRecFile = classLoader.getResourceAsStream("introduction.json");
+            Introduction obj = mapper.readValue(locationRecFile, Introduction.class);
+            String gameIntro = obj.getIntroduction();
+            String gameObj = obj.getObjective();
+            String gameWin = obj.getWin();
+            System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
+            System.out.println();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Introduction obj = gson.fromJson(reader, (Type) Introduction.class);
-        String gameIntro = obj.getIntroduction();
-        String gameObj = obj.getObjective();
-        String gameWin = obj.getWin();
-        System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
-        System.out.println();
+
     }
 
     void beginGame() {
