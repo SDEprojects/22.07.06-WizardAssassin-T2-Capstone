@@ -113,14 +113,11 @@ public class Game implements Verbs  {
         //game loop
         while (isLoopCondition()) {
 
-
             //win condition
             winConditionCheck();
 
             //new location text prompt()
             prompt(getLocation(), getDescription(), characterQuotes, object);
-                //updates location
-                //oldLocation = locationState.getName();
 
             //User input  userInput()
             userInputPrompt(getLocation());
@@ -137,78 +134,102 @@ public class Game implements Verbs  {
             System.out.println("character actions: "+Verbs.getCharacterActions());
             */
 
-
             //Actions
             if ("go".equals(verb) && Verbs.getMoveActions().contains(verb)) {
                 //move
-                if (locationState.directions.get(noun) != null) {
-                    String locationInput = locationState.directions.get(noun);
-                    if(locationInput.equals("Courtyard") && getLocation().equals("Church")) {
-                        if(npcNames.isEmpty()) {
-                                    locationState = obj.getPickedLocation(locationInput);
-                                    setLocation(locationState.getName());
-                        }
-                        else {
-                            System.out.printf("The \033[31m%s\033[0m blocks your path. You must fight it.\nUse the stick%n", npcNames.get(0).toUpperCase());
-                        }
-                    }
-                    else if(locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
-                        if(inventoryItems.contains("password")) {
-                            System.out.println("\033[31mGuard:\033[0m That's the right \033[92mPASSWORD\033[0m. Go ahead and pass.");
-                            System.out.println();
-                            while(true) {
-                                System.out.println("Hit 'enter' to continue");
-                                String progress = inputScanner.nextLine();
-                                if(progress.equals("")) {
-                                    break;
-                                }
-                            }
-                            count++;
-                            locationState = obj.getPickedLocation(locationInput);
-                        }
-                        else {
-                            System.out.println("\033[31mGuard:\033[0m Wrong \033[92mPASSWORD\033[0m! Get outta here, ya scum!");
-                        }
-                    }
-                    else if(locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall") && count == 1) {
-                        if(inventoryItems.contains("tunic") && inventoryItems.contains("sword")) {
-                            System.out.println("\033[31mGuard:\033[0m I don't know you... but you have the Kingdom's \033[92mTUNIC\033[0m... and that \033[92mSWORD\033[0m... You must be new... go ahead and pass.");
-                            System.out.println();
-                            while(true) {
-                                System.out.println("Hit 'enter' to continue");
-                                String progress = inputScanner.nextLine();
-                                if(progress.equals("")) {
-                                    break;
-                                }
-                            }
-                            count++;
-                            locationState = obj.getPickedLocation(locationInput);
-                        }
-                        else {
-                            System.out.println("\033[31mGuard:\033[0m Where do you think you're goin? Only knights can pass through here.\nAnd not just any bloak with a Kingdom's \033[92mTUNIC\033[0m.\nYou need a \033[92mSWORD\033[0m too.");
-                        }
-                    }
-                    else if(locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall") && count <= 2) {
-                        if(inventoryItems.contains("diamond key")) {
-                            System.out.println("Maybe I can \033[31mUSE\033[0m that \033[92mDIAMOND KEY\033[0m on this door.");
-                        }
-                        else {
-                            System.out.println("Hmm, it's locked. There's an emblem in the shape of a \033[92mDIAMOND\033[0m on the door");
-                            System.out.println("\n\u001B[91m                         *********  You remain in the " + locationState.getName() + ". *********\u001B[0m\n\n");
-                        }
-                    }
-                    else {
-                        locationState = obj.getPickedLocation(locationInput);
-                    }
-                }
-                else {
-                    System.out.println("\n\u001B[31m" + noun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
-                }
+                action(verb, noun);
             }
             //use items
             else if (Verbs.getItemActions().contains(verb)) {
-                if(verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
-                    System.out.println("That \033[92mDIAMOND KEY\033[0m did the trick. You're in...");
+                useItem(verb, noun);
+            }
+            //character actions
+            else if (Verbs.getCharacterActions().contains(verb)) {
+
+                if (npcNames.contains(noun)) {
+                    if (verb.equals("speak")) {
+                        String characterQuote = characterQuotes.get(noun);
+                        talk(noun, characterQuote);
+                    } else if (verb.equals("fight")) {
+                        Characters.fight(noun, object);
+                    } else {
+                        System.out.printf("There is no \u001B[93m%s\u001B[0m here... You must be seeing ghosts.%n", noun.toUpperCase());
+                    }
+                } else if (Verbs.getAreaActions().contains(verb)) {
+                    System.out.println("This VERB is for area interactions");
+                } else {
+                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
+                }
+
+                //reset location
+                setLocation(locationState.getName());
+
+            }
+        }
+    }
+
+
+
+    private static void talk(String noun, Object characterQuote) {
+        if(!noun.equals("queen")) {
+            System.out.printf("\u001B[93m%s\u001B[0m: '%s'%n", noun.toUpperCase(), characterQuote);
+        }
+        else {
+            System.out.printf("\u001B[93m%s\u001B[0m: '\033[95m%s\033[0m'%n", noun.toUpperCase(), characterQuote);
+            while(true) {
+                System.out.println();
+                System.out.println("Press Enter to Continue");
+                String input = inputScanner.nextLine().trim().toLowerCase();
+                if(input.equals("")) {
+                    locationState = obj.getPickedLocation("Church");
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void useItem(String verb, String noun) {
+        if(verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
+            System.out.println("That \033[92mDIAMOND KEY\033[0m did the trick. You're in...");
+            System.out.println();
+            while(true) {
+                System.out.println("Hit 'enter' to continue");
+                String progress = inputScanner.nextLine();
+                if(progress.equals("")) {
+                    break;
+                }
+            }
+            count++;
+            locationState = obj.getPickedLocation("Wizard's Foyer");
+        }
+        else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)){
+            try {
+                getAnItem(noun, locationState, verb);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + noun.toUpperCase() + "\u001B[0m. Choose again...");
+        }
+    }
+
+    private static void action(String verb, String noun) {
+            //move
+        if (locationState.directions.get(noun) != null) {
+            String locationInput = locationState.directions.get(noun);
+            if(locationInput.equals("Courtyard") && getLocation().equals("Church")) {
+                if(npcNames.isEmpty()) {
+                    locationState = obj.getPickedLocation(locationInput);
+                    setLocation(locationState.getName());
+                }
+                else {
+                    System.out.printf("The \033[31m%s\033[0m blocks your path. You must fight it.\nUse the stick%n", npcNames.get(0).toUpperCase());
+                }
+            }
+            else if(locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
+                if(inventoryItems.contains("password")) {
+                    System.out.println("\033[31mGuard:\033[0m That's the right \033[92mPASSWORD\033[0m. Go ahead and pass.");
                     System.out.println();
                     while(true) {
                         System.out.println("Hit 'enter' to continue");
@@ -218,91 +239,47 @@ public class Game implements Verbs  {
                         }
                     }
                     count++;
-                    locationState = obj.getPickedLocation("Wizard's Foyer");
-                }
-                else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)){
-                    getAnItem(noun, locationState, verb);
+                    locationState = obj.getPickedLocation(locationInput);
                 }
                 else {
-                    System.out.println("\nCan not \033[92m" + verb.toUpperCase() + "\033[0m \u001B[31m" + noun.toUpperCase() + "\u001B[0m. Choose again...");
+                    System.out.println("\033[31mGuard:\033[0m Wrong \033[92mPASSWORD\033[0m! Get outta here, ya scum!");
                 }
             }
-            // talk
-            else if (Verbs.getCharacterActions().contains(verb)) {
-                if(npcNames.contains(noun)) {
-                    if(verb.equals("speak")) {
-                        if(!noun.equals("queen")) {
-                            System.out.printf("\u001B[93m%s\u001B[0m: '%s'%n", noun.toUpperCase(), characterQuotes.get(noun));
-                        }
-                        else {
-                            System.out.printf("\u001B[93m%s\u001B[0m: '\033[95m%s\033[0m'%n", noun.toUpperCase(), characterQuotes.get(noun));
-                            while(true) {
-                                System.out.println();
-                                System.out.println("Press Enter to Continue");
-                                String input = inputScanner.nextLine().trim().toLowerCase();
-                                if(input.equals("")) {
-                                    locationState = obj.getPickedLocation("Church");
-                                    break;
-                                }
-                            }
+            else if(locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall") && count == 1) {
+                if(inventoryItems.contains("tunic") && inventoryItems.contains("sword")) {
+                    System.out.println("\033[31mGuard:\033[0m I don't know you... but you have the Kingdom's \033[92mTUNIC\033[0m... and that \033[92mSWORD\033[0m... You must be new... go ahead and pass.");
+                    System.out.println();
+                    while(true) {
+                        System.out.println("Hit 'enter' to continue");
+                        String progress = inputScanner.nextLine();
+                        if(progress.equals("")) {
+                            break;
                         }
                     }
-                    else if(verb.equals("fight")) {
-                        if(noun.equals("evil wizard")) {
-                            if(!inventoryItems.contains("knife")) {
-                                    System.out.println("\033[91mThe Wizard suddenly blasts your head off with a thunder bolt... and you die!\033[0m");
-                                    System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
-                                    break;
-                                }
-                                else if(inventoryItems.contains("knife")){
-                                    System.out.println("\033[36mThe Wizard suddenly attacks you with a thunder bolt but you matrix dodge it.\n You shank him with the\033[0m \033[92mKNIFE\033[0m \033[36mand he dies!\033[0m");
-                                    System.out.println("You have shanked the wizard to death. You return home as a hero who saved your kingdom!");
-                                    break;
-                                }
-                            }
-                            else if(inventoryItems.contains("sword")){
-                                int characterIndex= npcNames.indexOf(noun);
-                                object.getCharacters().remove(characterIndex);
-                                npcNames.remove(noun);
-                                if(!npcNames.isEmpty() || noun.equals("rat")) {
-                                    System.out.printf("You stab \033[91m%s\033[0m in the heart and they die.\n Miraculously, no one notices.%n", noun.toUpperCase());
-                                }
-                                else {
-                                    System.out.println("You've been found out!");
-                                    System.out.println("Should've listened to the Queen and not gone on that killing spree... You lose");
-                                    System.out.println("\033[91mG\033[0m\033[30mA\033[0m\033[91mM\033[0m\033[30mE\033[0m \033[91mO\033[0m\033[30mV\033[0m\033[91mE\033[0m\033[30mR\033[0m!");
-                                    break;
-
-                                }
-                            }
-                            else if(inventoryItems.contains("stick") && noun.equals("rat")) {
-                                System.out.printf("You beat the \033[91m%s\033[0m to death with the \033[92mSTICK\033[0m", noun.toUpperCase());
-                                int characterIndex= npcNames.indexOf(noun);
-                                object.getCharacters().remove(characterIndex);
-
-                                npcNames.remove(noun);
-                            }
-                            else {
-                                System.out.println("I'm going to advise against that.");
-                            }
-                        }
-                    }
-                    else {
-                        System.out.printf("There is no \u001B[93m%s\u001B[0m here... You must be seeing ghosts.%n", noun.toUpperCase());
-                    }
-                }
-                else if (Verbs.getAreaActions().contains(verb)) {
-                    System.out.println("This VERB is for area interactions");
+                    count++;
+                    locationState = obj.getPickedLocation(locationInput);
                 }
                 else {
-                    System.out.println("I do not understand " + userInput.toUpperCase() + ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
+                    System.out.println("\033[31mGuard:\033[0m Where do you think you're goin? Only knights can pass through here.\nAnd not just any bloak with a Kingdom's \033[92mTUNIC\033[0m.\nYou need a \033[92mSWORD\033[0m too.");
                 }
-
-                //reset location
-                setLocation(locationState.getName());
-
-
+            }
+            else if(locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall") && count <= 2) {
+                if(inventoryItems.contains("diamond key")) {
+                    System.out.println("Maybe I can \033[31mUSE\033[0m that \033[92mDIAMOND KEY\033[0m on this door.");
+                }
+                else {
+                    System.out.println("Hmm, it's locked. There's an emblem in the shape of a \033[92mDIAMOND\033[0m on the door");
+                    System.out.println("\n\u001B[91m                         *********  You remain in the " + locationState.getName() + ". *********\u001B[0m\n\n");
+                }
+            }
+            else {
+                locationState = obj.getPickedLocation(locationInput);
+            }
         }
+        else {
+            System.out.println("\n\u001B[31m" + noun.toUpperCase() + "\u001B[0m is not a valid direction. Choose again...");
+        }
+
     }
 
     //win condition
@@ -461,5 +438,9 @@ public class Game implements Verbs  {
 
     public static void setUserInput(String userInput) {
         Game.userInput = userInput;
+    }
+
+    public static List<String> getInventoryItems() {
+        return inventoryItems;
     }
 }
