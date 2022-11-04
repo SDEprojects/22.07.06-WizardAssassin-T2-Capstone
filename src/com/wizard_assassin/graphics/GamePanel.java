@@ -37,8 +37,6 @@ public class GamePanel extends JPanel {
 
     }
 
-
-
     private void setPanelSize() {
         Dimension size = new Dimension(1280,800);
         setPreferredSize(size);
@@ -69,7 +67,7 @@ public class GamePanel extends JPanel {
             titlePanel.setVisible(false);
             namePanel();
         });
-        importImg(new File("/TitleScreenResources/game_background_1.png"));
+        importImg("TitleScreenResources/game_background_1.png");
     }
 
 
@@ -102,13 +100,13 @@ public class GamePanel extends JPanel {
             namePanel.setVisible(false);
             wireFrame();
         });
-        importImg(new File("/TitleScreenResources/StoneWall.jpeg"));
+        importImg("TitleScreenResources/StoneWall.jpeg");
     }
 
     //----------------------------------------------------------------------------------------------------------
     // WIRE FRAME WINDOW
     public void wireFrame() {
-        importImg(new File("/TitleScreenResources/StoneWall.jpeg"));
+        importImg("TitleScreenResources/StoneWall.jpeg");
         textBox();
         directionBox();
         showHUDBox();
@@ -154,8 +152,8 @@ public class GamePanel extends JPanel {
 
 
     //----------------------------------------------------------------------------------------------------------
-    private BufferedImage importImg(File file) {
-        InputStream is = getClass().getResourceAsStream(String.valueOf(file));
+    private BufferedImage importImg(String file) {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(file);
 
         try {
             backgroundImage = ImageIO.read(is);
