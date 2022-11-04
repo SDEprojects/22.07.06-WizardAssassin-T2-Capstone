@@ -24,17 +24,17 @@ public class GamePanel extends JPanel {
 
     //  GRAPHIC OBJECTS
     JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
-    JButton backButton, nameButton, startButton;
+    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton;
     JLabel titleBlock;
-    JTextField nameField;
+    JTextField nameField, gameTextField;
 
     // CONSTRUCTOR
     public GamePanel() {
        //setBackground(Color.blue);
        setPanelSize();
        setLayout(null);
+       //this.add(new SplashPanel());
        splashPanel();
-
     }
 
     private void setPanelSize() {
@@ -117,18 +117,55 @@ public class GamePanel extends JPanel {
     // TEXT BOX (BOTTOM LEFT)
     public void textBox() {
         textBox = new JPanel();
+
+        gameTextField = new JTextField(60);
+        gameTextField.setBounds(10, 755, 800, 20);
+        gameTextField.setVisible(true);
         textBox.setBounds(10, 630, 800, 150);
         textBox.setBackground(Color.GRAY);
+        textBox.setLayout(null);
         textBox.setVisible(true);
+        this.add(gameTextField);
         add(textBox);
     }
 
     // DIRECTION BOX (BOTTOM RIGHT)
     public void directionBox() {
         directionBox = new JPanel();
+        northButton = new JButton("N");
+        northButton.setBounds(1015, 630, 50, 50);
+        eastButton = new JButton("E");
+        eastButton.setBounds(1070,680, 50, 50);
+        southButton = new JButton("S");
+        southButton.setBounds(1015, 730, 50, 50);
+        westButton = new JButton("W");
+        westButton.setBounds(960, 680,  50, 50);
+        selectButton = new JButton("SELECT");
+        selectButton.setBounds(1010, 675, 60, 60);
         directionBox.setBounds(840, 630, 400, 150);
         directionBox.setBackground(Color.blue);
         directionBox.setVisible(true);
+        eastButton.setVisible(true);
+        this.add(eastButton);
+        this.add(northButton);
+        this.add(southButton);
+        this.add(westButton);
+        this.add(selectButton);
+        northButton.addActionListener(e -> {
+            System.out.println("North");
+        });
+        eastButton.addActionListener(e -> {
+            System.out.println("East");
+        });
+        southButton.addActionListener(e -> {
+            System.out.println("South");
+        });
+        westButton.addActionListener(e -> {
+            System.out.println("West");
+        });
+        selectButton.addActionListener(e -> {
+            System.out.println("Select");
+        });
         add(directionBox);
     }
 
