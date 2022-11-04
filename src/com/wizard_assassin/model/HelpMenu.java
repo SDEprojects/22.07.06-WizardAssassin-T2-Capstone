@@ -1,4 +1,4 @@
-package com.wizard_assassin;
+package com.wizard_assassin.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;

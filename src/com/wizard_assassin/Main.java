@@ -1,7 +1,6 @@
-package com.wizard_assassin.app;
+package com.wizard_assassin;
 
-import com.wizard_assassin.Engine;
-import com.wizard_assassin.Game;
+import com.wizard_assassin.controller.Engine;
 
 import java.io.IOException;
 

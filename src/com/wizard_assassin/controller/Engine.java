@@ -1,18 +1,13 @@
-package com.wizard_assassin;
+package com.wizard_assassin.controller;
 
+import com.apps.util.Console;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
+import com.wizard_assassin.model.Game;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -47,7 +42,7 @@ public class Engine {
     }
 
     void gameObjective() {
-        Gson gson = new Gson();
+
         ObjectMapper mapper = new ObjectMapper();
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -73,12 +68,9 @@ public class Engine {
         start = inputScanner.nextLine().trim().toLowerCase();
         if (start.equals("yes") || start.equals("y")) {
 
-            ClearConsole.clearConsole();
-            try {
-                Game.gameLoop();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Console.clear();
+            new Game();
+
         } else if (start.equals("no") || start.equals("n")) {
             System.out.println("Thank you for playing");
             System.exit(0);
