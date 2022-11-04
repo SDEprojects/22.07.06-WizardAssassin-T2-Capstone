@@ -16,33 +16,29 @@ public class GamePanel extends JPanel {
     GameWindow jFrame;
 
     // ATTRIBUTES
+   // private JPanel mainPanel;
     private GamePanel gamePanel;
-    private JPanel mainPanel;
-    private BufferedImage titleImg;
+    private BufferedImage backgroundImage;
     private KeyboardInputs keyboardInputs;
 
-    private int gameCondition = 0;
 
     //  GRAPHIC OBJECTS
-    JPanel  splashPanel, namePanel, wireFrame;
+    JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton;
     JLabel titleBlock;
+    JTextField nameField;
 
     // CONSTRUCTOR
     public GamePanel() {
-        initialize();
-    }
-
-    private void initialize(){
-        mainPanel = new JPanel();
-        mainPanel.setLayout(null);
-        setPanelSize();
-        splashPanel();
+       //setBackground(Color.blue);
+       setPanelSize();
+       setLayout(null);
+       splashPanel();
 
     }
-    private void setLayout() {
-        setLayout(null);
-    }
+
+
+
     private void setPanelSize() {
         Dimension size = new Dimension(1280,800);
         setPreferredSize(size);
@@ -52,44 +48,49 @@ public class GamePanel extends JPanel {
     //     SPLASH SCREEN
     public void splashPanel(){
         splashPanel = new JPanel();
-        splashPanel.setSize(1280, 800);
         startButton = new JButton("START");
-        startButton.setBounds(0, 0, 100, 100);
-        //setPanelSize();
-        add(startButton);
-        titleBlock = new JLabel("Wizard Assassin");
-        splashPanel.add(startButton);
-        splashPanel.add(titleBlock);
-        startButton.setVisible(true);
+        splashPanel.setLayout(null);
+        splashPanel.setBounds(600,400,200,50);
         splashPanel.setVisible(true);
+        startButton.setSize(200, 50);
+        splashPanel.add(startButton);
+
+        titleBlock = new JLabel("Wizard Assassin");
+        titlePanel = new JPanel();
+        titlePanel.setLayout(null);
+        titlePanel.setBounds(150, 50, 1000, 100);
+        titleBlock.setSize(1000,100);
+        titlePanel.add(titleBlock);
+
         add(splashPanel);
-        JPanel redPanel = new JPanel();
+        add(titlePanel);
         startButton.addActionListener(e -> {
-            startButton.setVisible(false);
             splashPanel.setVisible(false);
+            titlePanel.setVisible(false);
             namePanel();
         });
-
         importImg(new File("/TitleScreenResources/game_background_1.png"));
     }
+
+
     //----------------------------------------------------------------------------------------------------------
     // Enter name screen
     private void namePanel() {
-        importImg(new File("/TitleScreenResources/StoneWall.jpeg"));
         namePanel = new JPanel();
-        add(namePanel);
-        setPanelSize();
+        //namePanel.setLayout();
+        namePanel.setBounds(550,350, 300, 100);
         backButton = new JButton("BACK");
-        nameButton = new JButton("ENTER NAME");
+
+        nameButton = new JButton("ENTER");
+        nameField = new JTextField(20);
+        nameField.setText("Enter name to continue");
+
+        namePanel.add(nameField);
         namePanel.add(backButton);
-        JTextField textField = new JTextField(30);
-        namePanel.add(textField);
         namePanel.add(nameButton);
-        textField.setText("Enter name to continue");
-        textField.setVisible(true);
         namePanel.setVisible(true);
-        backButton.setVisible(true);
-        nameButton.setVisible(true);
+
+        add(namePanel);
         backButton.addActionListener(e -> {
             namePanel.setVisible(false);
             nameButton.setVisible(false);
@@ -97,45 +98,67 @@ public class GamePanel extends JPanel {
             splashPanel();
         });
         nameButton.addActionListener(e -> {
-            System.out.println(textField.getText());
+            System.out.println(nameField.getText());
             namePanel.setVisible(false);
-            scratch.playGame();
+            wireFrame();
         });
+        importImg(new File("/TitleScreenResources/StoneWall.jpeg"));
     }
 
     //----------------------------------------------------------------------------------------------------------
     // WIRE FRAME WINDOW
     public void wireFrame() {
+        importImg(new File("/TitleScreenResources/StoneWall.jpeg"));
+        textBox();
+        directionBox();
+        showHUDBox();
+        showGameVisual();
 
     }
 
     // TEXT BOX (BOTTOM LEFT)
     public void textBox() {
-
+        textBox = new JPanel();
+        textBox.setBounds(10, 630, 800, 150);
+        textBox.setBackground(Color.GRAY);
+        textBox.setVisible(true);
+        add(textBox);
     }
 
     // DIRECTION BOX (BOTTOM RIGHT)
     public void directionBox() {
-
+        directionBox = new JPanel();
+        directionBox.setBounds(840, 630, 400, 150);
+        directionBox.setBackground(Color.blue);
+        directionBox.setVisible(true);
+        add(directionBox);
     }
 
     // HUD BOX (TOP RIGHT)
     public void showHUDBox() {
-
+        showHUDBox = new JPanel();
+        showHUDBox.setBounds(840, 20, 400, 600);
+        showHUDBox.setBackground(Color.red);
+        showHUDBox.setVisible(true);
+        add(showHUDBox);
     }
 
     // GAME VISUAL (TOP LEFT)
     public void showGameVisual() {
-
+        showGameVisual = new JPanel();
+        showGameVisual.setBounds(10, 20, 800, 600);
+        showGameVisual.setBackground(Color.cyan);
+        showGameVisual.setVisible(true);
+        add(showGameVisual);
     }
 
 
     //----------------------------------------------------------------------------------------------------------
-    private void importImg(File file) {
+    private BufferedImage importImg(File file) {
         InputStream is = getClass().getResourceAsStream(String.valueOf(file));
 
         try {
-            titleImg = ImageIO.read(is);
+            backgroundImage = ImageIO.read(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -146,11 +169,12 @@ public class GamePanel extends JPanel {
             }
         }
         repaint();
+        return null;
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(titleImg, 0, 0, 1280, 800, null);
+        g.drawImage(backgroundImage, 0, 0, 1280, 800, null);
     }
 
 }
