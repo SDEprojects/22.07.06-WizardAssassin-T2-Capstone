@@ -51,8 +51,8 @@ public class Engine {
         ObjectMapper mapper = new ObjectMapper();
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream locationRecFile = classLoader.getResourceAsStream("introduction.json");
-            Introduction obj = mapper.readValue(locationRecFile, Introduction.class);
+            InputStream introductionRecFile = classLoader.getResourceAsStream("introduction.json");
+            Introduction obj = mapper.readValue(introductionRecFile, Introduction.class);
             String gameIntro = obj.getIntroduction();
             String gameObj = obj.getObjective();
             String gameWin = obj.getWin();
