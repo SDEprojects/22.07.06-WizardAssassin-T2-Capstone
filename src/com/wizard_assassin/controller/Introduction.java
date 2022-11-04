@@ -1,6 +1,6 @@
-package com.wizard_assassin;
+package com.wizard_assassin.controller;
 
-class Introduction {
+public class Introduction {
 
     public String introduction;
     public String objective;

@@ -1,4 +1,4 @@
-package com.wizard_assassin;
+package com.wizard_assassin.controller;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;

@@ -1,4 +1,4 @@
-package com.wizard_assassin;
+package com.wizard_assassin.model;
 
 
 
@@ -32,19 +32,7 @@ class EventHandler {
         if ("quit".equals(result.get(0))){
             Quit.quitGame();
         }
-        if ("inventory".equals(result.get(0))){
-            Console.clear();
-            Game.checkInventory();
-            System.out.println("\nEnter back to exit");
-            boolean condition = false;
-            while (!condition) {
-                Scanner scanner = new Scanner(System.in);
-                String playerChoice = scanner.nextLine().trim().toLowerCase();
-                if (playerChoice.equals("back")) {
-                    condition = true;
-                }
-            }
-        }
+
 
         if ("view".equals(result.get(0))){
             Console.clear();
