@@ -13,7 +13,8 @@ class Characters {
         return characters;
     }
 
-
+    public Characters() {
+    }
 
     //Character Methods
     static void fight(String noun, Characters object) {
