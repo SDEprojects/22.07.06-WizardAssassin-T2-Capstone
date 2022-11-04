@@ -21,7 +21,9 @@
     "feed",
     "drop",
     "light",
-    "fight"
+    "fight",
+    "view",
+    "inventory"
   ],
   "noun": [
     "north",

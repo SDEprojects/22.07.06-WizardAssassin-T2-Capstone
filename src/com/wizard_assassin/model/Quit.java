@@ -5,12 +5,13 @@ import java.util.Scanner;
 
 public class Quit {
 
-    private static Scanner inputScanner;
+    
 
      static void quitGame() throws IOException {
         String quit;
 
         System.out.println("Are you sure you want to 'quit'? yes| no");
+        Scanner inputScanner = new Scanner(System.in);
         quit = inputScanner.nextLine().trim().toLowerCase();
         if (quit.equals("yes")) {
             System.out.println("Thank you for playing");

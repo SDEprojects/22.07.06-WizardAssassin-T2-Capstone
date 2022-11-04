@@ -3,7 +3,6 @@ package com.wizard_assassin.model;
 import com.apps.util.Console;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,24 +98,21 @@ public class Game implements Verbs {
     }
 
     void gameLoop() {
-        Gson gson = new Gson();
+
         //Generate random int value from 0 to 2 for random sayings
         int num = (int) (Math.random() * (3));
 
         //Map of characters and quotes
-        //Reader read = Files.newBufferedReader(Paths.get("./resources/characters.json"));
-        //Characters object = gson.fromJson(read, Characters.class);
-
         ObjectMapper mapper = new ObjectMapper();
         Characters object = null;
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream charactersRecFile = classLoader.getResourceAsStream("characters.json");
+
         try {
             object = mapper.readValue(charactersRecFile, Characters.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         Map<String, String> characterQuotes = new HashMap<>();
 
