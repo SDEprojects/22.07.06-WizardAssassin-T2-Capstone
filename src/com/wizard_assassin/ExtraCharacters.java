@@ -9,6 +9,9 @@ public class ExtraCharacters {
     String room;
     List<String> quote;
 
+    public ExtraCharacters() {
+    }
+
     public ExtraCharacters(String type, String name, String room, List<String> quote) {
         this.type = type;
         this.name = name;
