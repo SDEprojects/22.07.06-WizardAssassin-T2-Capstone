@@ -4,7 +4,6 @@ import com.apps.util.Console;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
-import com.wizard_assassin.model.Game;
 
 import javax.swing.*;
 import java.io.InputStream;
@@ -19,9 +18,9 @@ public class Engine {
 
     public Engine() {
         runGraphics();
-        title();
-        gameObjective();
-        beginGame();
+        //title();
+        //gameObjective();
+        //beginGame();
     }
 
     void runGraphics() {
@@ -69,7 +68,8 @@ public class Engine {
         if (start.equals("yes") || start.equals("y")) {
 
             Console.clear();
-            new Game();
+
+            //new Game();
 
         } else if (start.equals("no") || start.equals("n")) {
             System.out.println("Thank you for playing");
