@@ -1,8 +1,8 @@
 package com.wizard_assassin.graphics;
 
-import com.apps.util.Console;
-import com.wizard_assassin.Game;
+import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.inputs.KeyboardInputs;
+import com.wizard_assassin.model.Game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,13 +19,16 @@ public class GamePanel extends JPanel {
     private GamePanel gamePanel;
     private BufferedImage backgroundImage;
     private KeyboardInputs keyboardInputs;
+    private Controller controller = new Controller();
 
 
     //  GRAPHIC OBJECTS
     JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
-    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton;
+    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton;
     JLabel titleBlock, inventoryBlock, locationBlock;
     JTextField nameField, gameTextField;
+    JTextArea promptField;
+    JScrollPane scrollPane;
 
     // CONSTRUCTOR
     public GamePanel() {
@@ -140,10 +143,22 @@ public class GamePanel extends JPanel {
 
     }
 
+    //UPDATES WIREFRAME
+    private void updateGame() {
+        inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
+        locationBlock.setText("Location: "+ Game.getViewLocation());
+        promptField.setText(Game.getReturnPrompt());
+        promptField.append(Game.getResponse());
+    }
+
     // TEXT BOX (BOTTOM LEFT)
     public void textBox() {
         textBox = new JPanel();
+        promptField = new JTextArea();
+        scrollPane = new JScrollPane(promptField);
 
+        scrollPane.setBounds(0,0,800, 150);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         gameTextField = new JTextField(60);
         gameTextField.setBounds(10, 755, 800, 20);
         gameTextField.setVisible(true);
@@ -151,7 +166,13 @@ public class GamePanel extends JPanel {
         textBox.setBackground(Color.GRAY);
         textBox.setLayout(null);
         textBox.setVisible(true);
-        this.add(gameTextField);
+        promptField.setBounds(5, 5, 600, 125);
+        promptField.setVisible(true);
+        promptField.setLineWrap(true);
+        promptField.setText(Game.getReturnPrompt());
+
+        textBox.add(scrollPane);
+        //this.add(gameTextField);
         add(textBox);
     }
 
@@ -171,25 +192,44 @@ public class GamePanel extends JPanel {
         directionBox.setBounds(840, 630, 400, 150);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
+        getButton = new JButton("GET");
+        getButton.setBounds(1140, 680, 70, 50);
         this.add(eastButton);
         this.add(northButton);
         this.add(southButton);
         this.add(westButton);
         this.add(selectButton);
+        this.add(getButton);
         northButton.addActionListener(e -> {
             System.out.println("North");
+            controller.input("n");
+            updateGame();
         });
         eastButton.addActionListener(e -> {
             System.out.println("East");
+            controller.input("e");
+            updateGame();
         });
         southButton.addActionListener(e -> {
             System.out.println("South");
+            controller.input("s");
+            updateGame();
         });
         westButton.addActionListener(e -> {
             System.out.println("West");
+            controller.input("w");
+            updateGame();
         });
         selectButton.addActionListener(e -> {
             System.out.println("Select");
+            controller.input("f");
+            updateGame();
+        });
+        getButton.addActionListener(e -> {
+            System.out.println("Get");
+            controller.input("g");
+            updateGame();
+
         });
         add(directionBox);
     }
@@ -204,8 +244,8 @@ public class GamePanel extends JPanel {
         locationBlock.setBounds(940, 20, 400, 100);
         showHUDBox.setBounds(840, 20, 400, 600);
         showHUDBox.setVisible(true);
-        inventoryBlock.setText("Inventory: "+Game.getInventoryItems().toString());
-        locationBlock.setText("Location: "+ Game.getLocation());
+        inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
+        locationBlock.setText("Location: "+ Game.getViewLocation());
         this.add(locationBlock);
         this.add(inventoryBlock);
         add(showHUDBox);

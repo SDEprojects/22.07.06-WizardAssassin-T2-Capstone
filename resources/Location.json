@@ -5,7 +5,7 @@
       "directions": {
         "south": "Courtyard"
       },
-      "description": "You are in a church filled with wooden pews and an altar and nothing else.\n The window you entered by is to the north.\n There is a wooden door to the south.",
+      "description": "You are in a church filled with wooden pews and an altar and nothing else.\n\nThe window you entered by is to the north.\nThere is a wooden door to the south.",
       "items": [
         "stick"
       ],
@@ -20,7 +20,7 @@
         "south": "Watchtower",
         "west" : "Great Hall"
       },
-      "description": "The courtyard is an open area surrounded by tall stone walls.\n To the north is a door that leads to the church.\n To the south is a door to a tall watchtower.\n To the west are grand doors leading to the great hall.",
+      "description": "The courtyard is an open area surrounded by tall stone walls.\n\nTo the north is a door that leads to the church.\nTo the south is a door to a tall watchtower.\n To the west are grand doors leading to the great hall.",
       "items" : [
 
       ],
