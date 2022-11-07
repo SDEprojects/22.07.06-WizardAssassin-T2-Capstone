@@ -1,19 +1,18 @@
 package com.wizard_assassin.graphics;
 
+import com.apps.util.Console;
+import com.wizard_assassin.Game;
 import com.wizard_assassin.inputs.KeyboardInputs;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class GamePanel extends JPanel {
 
-
-    GameWindow jFrame;
 
     // ATTRIBUTES
    // private JPanel mainPanel;
@@ -24,8 +23,8 @@ public class GamePanel extends JPanel {
 
     //  GRAPHIC OBJECTS
     JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
-    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton;
-    JLabel titleBlock;
+    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton;
+    JLabel titleBlock, inventoryBlock, locationBlock;
     JTextField nameField, gameTextField;
 
     // CONSTRUCTOR
@@ -74,9 +73,24 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     // Enter name screen
     private void namePanel() {
+        JLabel introLabel1 = new JLabel("      Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
+        JLabel introLabel2 = new JLabel("      The player needs to explore different rooms in the castle as well as collect all items necessary to defeat the evil wizard.");
+        JLabel introLabel3 = new JLabel("      Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
+        JComponent cont[] = {introLabel1, introLabel2, introLabel3, continueButton};
+        introLabel1.setBounds(300, 150, 800, 50);
+        introLabel2.setBounds(300, 250, 800, 50);
+        introLabel3.setBounds(300, 350, 800, 50);
+        introLabel1.setOpaque(true);
+        introLabel2.setOpaque(true);
+        introLabel3.setOpaque(true);
+        introLabel1.setBackground(Color.lightGray);
+        introLabel2.setBackground(Color.lightGray);
+        introLabel3.setBackground(Color.lightGray);
+        continueButton = new JButton("CONTINUE");
+        continueButton.setBounds(600, 700, 100, 100);
         namePanel = new JPanel();
         //namePanel.setLayout();
-        namePanel.setBounds(550,350, 300, 100);
+        namePanel.setBounds(500, 30, 300, 100);
         backButton = new JButton("BACK");
 
         nameButton = new JButton("ENTER");
@@ -97,6 +111,18 @@ public class GamePanel extends JPanel {
         });
         nameButton.addActionListener(e -> {
             System.out.println(nameField.getText());
+            this.add(introLabel1);
+            this.add(introLabel2);
+            this.add(introLabel3);
+            this.add(continueButton);
+            repaint();
+            //add(namePanel);
+        });
+        continueButton.addActionListener(e -> {
+            introLabel1.setVisible(false);
+            introLabel2.setVisible(false);
+            introLabel3.setVisible(false);
+            continueButton.setVisible(false);
             namePanel.setVisible(false);
             wireFrame();
         });
@@ -143,7 +169,6 @@ public class GamePanel extends JPanel {
         selectButton = new JButton("SELECT");
         selectButton.setBounds(1010, 675, 60, 60);
         directionBox.setBounds(840, 630, 400, 150);
-        directionBox.setBackground(Color.blue);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
         this.add(eastButton);
@@ -172,9 +197,17 @@ public class GamePanel extends JPanel {
     // HUD BOX (TOP RIGHT)
     public void showHUDBox() {
         showHUDBox = new JPanel();
+        inventoryBlock = new JLabel();
+        locationBlock = new JLabel();
+        showHUDBox.setBackground(Color.cyan);
+        inventoryBlock.setBounds(840, 20, 400, 100);
+        locationBlock.setBounds(940, 20, 400, 100);
         showHUDBox.setBounds(840, 20, 400, 600);
-        showHUDBox.setBackground(Color.red);
         showHUDBox.setVisible(true);
+        inventoryBlock.setText("Inventory: "+Game.getInventoryItems().toString());
+        locationBlock.setText("Location: "+ Game.getLocation());
+        this.add(locationBlock);
+        this.add(inventoryBlock);
         add(showHUDBox);
     }
 
