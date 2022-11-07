@@ -98,11 +98,11 @@ public class GamePanel extends JPanel {
         //namePanel.setLayout();
         namePanel.setBounds(500, 30, 300, 100);
         backButton = new JButton("BACK");
-
+        JLabel directions = new JLabel("Enter name below");
         nameButton = new JButton("ENTER");
         nameField = new JTextField(20);
-        nameField.setText("Enter name to continue");
 
+        namePanel.add(directions);
         namePanel.add(nameField);
         namePanel.add(backButton);
         namePanel.add(nameButton);
@@ -116,7 +116,11 @@ public class GamePanel extends JPanel {
             splashPanel();
         });
         nameButton.addActionListener(e -> {
-            setPlayerName(nameField.getText());
+            if(nameField.getText().isEmpty()){
+                setPlayerName("Rennie");
+            } else{
+                setPlayerName(nameField.getText());
+            }
             this.add(introLabel1);
             this.add(introLabel2);
             this.add(introLabel3);
@@ -208,6 +212,17 @@ public class GamePanel extends JPanel {
     // DIRECTION BOX (BOTTOM RIGHT)
     public void directionBox() {
         directionBox = new JPanel();
+        directionBox.setOpaque(false);
+        JButton b1 = new JButton("1");
+        JButton b2 = new JButton("2");
+        JButton b3 = new JButton("3");
+        JButton b4 = new JButton("4");
+        JButton b5 = new JButton("5");
+        b1.setBounds(915, 580, 50, 50);
+        b2.setBounds(965, 580, 50, 50);
+        b3.setBounds(1015, 580, 50, 50);
+        b4.setBounds(1065, 580, 50, 50);
+        b5.setBounds(1115, 580, 50, 50);
         northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
         eastButton = new JButton("E");
@@ -218,11 +233,16 @@ public class GamePanel extends JPanel {
         westButton.setBounds(960, 680,  50, 50);
         selectButton = new JButton("SELECT");
         selectButton.setBounds(1010, 675, 60, 60);
-        directionBox.setBounds(840, 630, 400, 150);
+        directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
         getButton = new JButton("GET");
         getButton.setBounds(1140, 680, 70, 50);
+        this.add(b1);
+        this.add(b2);
+        this.add(b3);
+        this.add(b4);
+        this.add(b5);
         this.add(eastButton);
         this.add(northButton);
         this.add(southButton);
@@ -260,6 +280,22 @@ public class GamePanel extends JPanel {
             updateGame();
 
         });
+        b1.addActionListener(e -> {
+
+        });
+
+        b2.addActionListener(e -> {
+
+        });
+        b3.addActionListener(e -> {
+
+        });
+        b4.addActionListener(e -> {
+
+        });
+        b5.addActionListener(e -> {
+
+        });
         add(directionBox);
     }
 
@@ -271,7 +307,7 @@ public class GamePanel extends JPanel {
         showHUDBox.setBackground(Color.cyan);
         inventoryBlock.setBounds(840, 20, 400, 100);
         locationBlock.setBounds(940, 20, 400, 100);
-        showHUDBox.setBounds(840, 20, 400, 600);
+        showHUDBox.setBounds(840, 20, 400, 450);
         showHUDBox.setVisible(true);
         inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
         locationBlock.setText("Location: "+ Game.getViewLocation());
