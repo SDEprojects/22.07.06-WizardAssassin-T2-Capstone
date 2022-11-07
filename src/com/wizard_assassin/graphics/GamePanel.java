@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
     private BufferedImage backgroundImage;
     private KeyboardInputs keyboardInputs;
     private Controller controller = new Controller();
+    private String playerName;
 
 
     //  GRAPHIC OBJECTS
@@ -57,6 +58,8 @@ public class GamePanel extends JPanel {
 
         titleBlock = new JLabel("Wizard Assassin");
         titlePanel = new JPanel();
+        titleBlock.setOpaque(false);
+        titlePanel.setOpaque(false);
         titlePanel.setLayout(null);
         titlePanel.setBounds(150, 50, 1000, 100);
         titleBlock.setSize(1000,100);
@@ -113,7 +116,7 @@ public class GamePanel extends JPanel {
             splashPanel();
         });
         nameButton.addActionListener(e -> {
-            System.out.println(nameField.getText());
+            setPlayerName(nameField.getText());
             this.add(introLabel1);
             this.add(introLabel2);
             this.add(introLabel3);
@@ -127,9 +130,35 @@ public class GamePanel extends JPanel {
             introLabel3.setVisible(false);
             continueButton.setVisible(false);
             namePanel.setVisible(false);
-            wireFrame();
+            prefacePage();
+            //wireFrame();
         });
         importImg("TitleScreenResources/StoneWall.jpeg");
+    }
+
+    //----------------------------------------------------------------------------------------------------------
+    // Preface Page
+
+    public void prefacePage(){
+        JPanel prefacePanel = new JPanel();
+        prefacePanel.setBounds(450, 200, 500, 500);
+        prefacePanel.setOpaque(false);
+        JTextArea prefaceText = new JTextArea();
+        prefaceText.setBounds(450, 200, 500, 500);
+        JButton nextButton = new JButton("NEXT");
+        prefaceText.setLineWrap(true);
+        prefacePanel.add(prefaceText);
+        prefacePanel.add(nextButton, BorderLayout.SOUTH);
+        prefaceText.setText(getPlayerName() + " is in the " + Game.getViewLocation());
+        prefaceText.append("\n"+getPlayerName()+ " spots the queen roaming about her garden. You decide to speak to her majesty. ");
+        prefacePanel.setVisible(true);
+        add(prefacePanel);
+        nextButton.addActionListener(e -> {
+            prefaceText.setText("The Queen says to you,\"Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special.... As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target. What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard. My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard. We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard. It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps. Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition. When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South. Are you ready?\"");
+            nextButton.addActionListener(e1 -> {
+                prefacePanel.setVisible(false);
+                wireFrame();});
+        });
     }
 
     //----------------------------------------------------------------------------------------------------------
@@ -285,4 +314,14 @@ public class GamePanel extends JPanel {
         g.drawImage(backgroundImage, 0, 0, 1280, 800, null);
     }
 
+    // ACCESSOR METHODS
+
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }
