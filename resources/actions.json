@@ -1,0 +1,136 @@
+{
+  "locations": {
+    "Church": [
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Courtyard": [
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Watchtower": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Armory": [
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Dungeon": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Great Hall": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Kitchen": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Royal Lounge": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Royal Library": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "King’s Chambers": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Wizard's Foyer": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Wizard’s Chambers": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Laboratory": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ],
+    "Queen's Garden": [
+      "search",
+      "leave",
+      "speak",
+      "use",
+      "go",
+      "get",
+      "fight",
+      "drop"
+    ]
+  }
+}
