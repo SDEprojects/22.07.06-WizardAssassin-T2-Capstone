@@ -1,10 +1,13 @@
 package com.wizard_assassin.graphics;
 
+import com.wizard_assassin.Music;
 import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -211,7 +214,7 @@ public class GamePanel extends JPanel {
     public void directionBox() {
         directionBox = new JPanel();
         directionBox.setOpaque(false);
-        JButton b1 = new JButton("1");
+        JButton b1 = new JButton("Music");
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
         JButton b4 = new JButton("4");
@@ -293,7 +296,15 @@ public class GamePanel extends JPanel {
 
         });*/
         b1.addActionListener(e -> {
-
+            try {
+                Music music = new Music();
+            } catch (UnsupportedAudioFileException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
         });
 
         b2.addActionListener(e -> {
