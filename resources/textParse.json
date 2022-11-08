@@ -30,6 +30,8 @@
     "east",
     "west",
     "south",
+    "up",
+    "down",
     "items",
     "amulet",
     "matches",

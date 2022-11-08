@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,7 +25,7 @@ public class GamePanel extends JPanel {
 
     //  GRAPHIC OBJECTS
     JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
-    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton;
+    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
     JLabel titleBlock, inventoryBlock, locationBlock, picLabel;
     JTextField nameField, gameTextField;
     JTextArea promptField;
@@ -218,12 +217,12 @@ public class GamePanel extends JPanel {
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
         JButton b4 = new JButton("4");
-        JButton b5 = new JButton("5");
+        JButton b5 = new JButton("Talk");
         b1.setBounds(915, 580, 50, 50);
         b2.setBounds(965, 580, 50, 50);
         b3.setBounds(1015, 580, 50, 50);
         b4.setBounds(1065, 580, 50, 50);
-        b5.setBounds(1115, 580, 50, 50);
+        b5.setBounds(1140, 630, 70, 50);
         northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
         eastButton = new JButton("E");
@@ -232,8 +231,12 @@ public class GamePanel extends JPanel {
         southButton.setBounds(1015, 730, 50, 50);
         westButton = new JButton("W");
         westButton.setBounds(960, 680,  50, 50);
-        selectButton = new JButton("SELECT");
-        selectButton.setBounds(1010, 675, 60, 60);
+        upButton = new JButton("UP");
+        upButton.setBounds(850, 630, 80, 50);
+        downButton = new JButton("DOWN");
+        downButton.setBounds(850,730, 80, 50);
+        selectButton = new JButton("FIGHT");
+        selectButton.setBounds(1140, 730, 70, 50);
         directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
@@ -248,6 +251,8 @@ public class GamePanel extends JPanel {
         this.add(northButton);
         this.add(southButton);
         this.add(westButton);
+        this.add(upButton);
+        this.add(downButton);
         this.add(selectButton);
         this.add(getButton);
         northButton.addActionListener(e -> {
@@ -268,6 +273,14 @@ public class GamePanel extends JPanel {
         westButton.addActionListener(e -> {
             System.out.println("West");
             controller.input("w");
+            updateGame();
+        });
+        upButton.addActionListener(e -> {
+            controller.input("u");
+            updateGame();
+        });
+        downButton.addActionListener(e -> {
+            controller.input("d");
             updateGame();
         });
         selectButton.addActionListener(e -> {
@@ -295,7 +308,9 @@ public class GamePanel extends JPanel {
 
         });
         b5.addActionListener(e -> {
-
+            System.out.println("Talk");
+            controller.input("t");
+            updateGame();
         });
         add(directionBox);
     }
@@ -354,9 +369,9 @@ public class GamePanel extends JPanel {
         //showGameVisual.setVisible(true);
         //add(showGameVisual);
         JButton quitButton = new JButton("QUIT");
-        quitButton.setBounds(1210, 10, 60, 20);
+        quitButton.setBounds(1180, 10, 70, 20);
         JButton settingsButton = new JButton("SETTINGS");
-        settingsButton.setBounds(1120, 10, 80, 20);
+        settingsButton.setBounds(1050, 10, 100, 20);
         this.add(quitButton);
         this.add(settingsButton);
         quitButton.addActionListener(e -> {
