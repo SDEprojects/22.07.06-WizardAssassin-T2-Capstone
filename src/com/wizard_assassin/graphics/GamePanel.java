@@ -305,9 +305,9 @@ public class GamePanel extends JPanel {
         inventoryBlock = new JLabel();
         locationBlock = new JLabel();
         showHUDBox.setBackground(Color.cyan);
-        inventoryBlock.setBounds(840, 20, 400, 100);
+        inventoryBlock.setBounds(840, 30, 400, 100);
         locationBlock.setBounds(940, 20, 400, 100);
-        showHUDBox.setBounds(840, 20, 400, 450);
+        showHUDBox.setBounds(840, 40, 400, 450);
         showHUDBox.setVisible(true);
         inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
         locationBlock.setText("Location: "+ Game.getViewLocation());
@@ -319,10 +319,22 @@ public class GamePanel extends JPanel {
     // GAME VISUAL (TOP LEFT)
     public void showGameVisual() {
         showGameVisual = new JPanel();
-        showGameVisual.setBounds(10, 20, 800, 600);
+        showGameVisual.setBounds(10, 30, 800, 600);
         showGameVisual.setBackground(Color.cyan);
         showGameVisual.setVisible(true);
         add(showGameVisual);
+        JButton quitButton = new JButton("QUIT");
+        quitButton.setBounds(1210, 10, 60, 20);
+        JButton settingsButton = new JButton("SETTINGS");
+        settingsButton.setBounds(1120, 10, 80, 20);
+        this.add(quitButton);
+        this.add(settingsButton);
+        quitButton.addActionListener(e -> {
+
+        });
+        settingsButton.addActionListener(e -> {
+
+        });
     }
 
 
