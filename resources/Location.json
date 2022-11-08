@@ -63,8 +63,7 @@
     {
       "name": "Dungeon",
       "directions": {
-        "up": "Watchtower",
-        "north": "Courtyard"
+        "up": "Watchtower"
       },
       "description": "The Dungeon is gloomy, cold and dripping water.\nShackles dangle from the walls.\n\nIn one of the cells huddles a bloodied PRISONER.",
       "items": [
@@ -85,7 +84,6 @@
       },
       "description": "The Great Hall ceiling is 20 feet high.\nLight pours in from big windows on each side of the room.\n\nTo the north is a door leading to the wizard’s tower.\nHowever, explore the other rooms since you need important items to defeat the evil wizard.",
       "items": [
-        "key",
         "note"
       ],
       "characters": [
