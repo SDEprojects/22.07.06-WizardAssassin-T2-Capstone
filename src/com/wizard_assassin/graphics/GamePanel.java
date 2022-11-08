@@ -52,6 +52,8 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     //     SPLASH SCREEN
     public void splashPanel(){
+        BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
+        ImageIcon title = new ImageIcon(titlePic);
         splashPanel = new JPanel();
         startButton = new JButton("START");
         splashPanel.setLayout(null);
@@ -59,21 +61,14 @@ public class GamePanel extends JPanel {
         splashPanel.setVisible(true);
         startButton.setSize(200, 50);
         splashPanel.add(startButton);
-
-        titleBlock = new JLabel("Wizard Assassin");
-        titlePanel = new JPanel();
-        titleBlock.setOpaque(false);
-        titlePanel.setOpaque(false);
-        titlePanel.setLayout(null);
-        titlePanel.setBounds(150, 50, 1000, 100);
-        titleBlock.setSize(1000,100);
-        titlePanel.add(titleBlock);
-
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setVisible(true);
+        titleLabel.setBounds(100,30, 1200, 150);
+        this.add(titleLabel);
         add(splashPanel);
-        add(titlePanel);
         startButton.addActionListener(e -> {
             splashPanel.setVisible(false);
-            titlePanel.setVisible(false);
+            titleLabel.setVisible(false);
             namePanel();
         });
         importImg("TitleScreenResources/game_background_1.png");
