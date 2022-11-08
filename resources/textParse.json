@@ -84,6 +84,8 @@
     "hand",
     "monster",
     "evil",
-    "tunic"
+    "tunic",
+    "password",
+    "diamond"
   ]
 }

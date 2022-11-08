@@ -214,7 +214,7 @@ public class GamePanel extends JPanel {
     public void directionBox() {
         directionBox = new JPanel();
         directionBox.setOpaque(false);
-        JButton b1 = new JButton("Music");
+        JButton b1 = new JButton("1");
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
         JButton b4 = new JButton("4");
@@ -296,15 +296,7 @@ public class GamePanel extends JPanel {
 
         });*/
         b1.addActionListener(e -> {
-            try {
-                Music music = new Music();
-            } catch (UnsupportedAudioFileException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (LineUnavailableException ex) {
-                ex.printStackTrace();
-            }
+
         });
 
         b2.addActionListener(e -> {
@@ -314,7 +306,8 @@ public class GamePanel extends JPanel {
 
         });
         b4.addActionListener(e -> {
-
+            controller.input("use diamond key");
+            updateGame();
         });
         b5.addActionListener(e -> {
             System.out.println("Talk");
@@ -482,7 +475,15 @@ public class GamePanel extends JPanel {
             System.exit(0);
         });
         settingsButton.addActionListener(e -> {
-
+            try {
+                Music music = new Music();
+            } catch (UnsupportedAudioFileException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 
