@@ -70,7 +70,7 @@ public class Music {
         Clip clip = AudioSystem.getClip();
         clip.stop();
         clip.close();
-        InputStream music = classLoader.getResourceAsStream("scaryMusic.wav");
+        InputStream music = classLoader.getResourceAsStream("music.wav");
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
         clip.open(audioInputStream);
         Thread thread = new Thread(new Runnable() {
