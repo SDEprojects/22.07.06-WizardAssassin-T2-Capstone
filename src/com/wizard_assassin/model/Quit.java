@@ -1,13 +1,14 @@
 package com.wizard_assassin.model;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Quit {
 
-    
+    public Quit() {
+        quitGame();
+    }
 
-     static void quitGame() throws IOException {
+    void quitGame() {
         String quit;
 
         System.out.println("Are you sure you want to 'quit'? yes| no");

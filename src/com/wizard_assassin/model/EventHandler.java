@@ -1,16 +1,15 @@
 package com.wizard_assassin.model;
 
 
-
 import com.apps.util.Console;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 class EventHandler {
 
-    public static void eventHandler(String input, String location) throws IOException {
+
+    public void eventHandler(String input) {
         TextParser parser= new TextParser();
         ArrayList<String> result =  parser.textParser(input);
 
@@ -30,7 +29,7 @@ class EventHandler {
             }
         }
         if ("quit".equals(result.get(0))){
-            Quit.quitGame();
+            new Quit();
         }
 
 
