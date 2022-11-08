@@ -26,13 +26,25 @@ public class Controller {
         if ("w".equals(action)) {
             game.gameLoop("go west");
         }
+        //up
+        if ("u".equals(action)) {
+            game.gameLoop("go up");
+        }
+        //down
+        if ("d".equals(action)) {
+            game.gameLoop("go down");
+        }
         //fight
         if ("f".equals(action)) {
-            game.gameLoop("fight rat");
+            game.gameLoop("fight");
         }
         //get
         if ("g".equals(action)) {
             game.gameLoop("get stick");
+        }
+        //talk
+        if ("t".equals(action)) {
+            game.gameLoop("speak");
         }
     }
 }

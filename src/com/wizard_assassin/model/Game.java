@@ -74,23 +74,22 @@ public class Game implements Verbs {
         }
         //character actions
         else if (Verbs.getCharacterActions().contains(verb)) {
-
-            if (npcNames.contains(noun)) {
+            // talk
+            if (npcNames.size()>0) {
                 if (verb.equals("speak")) {
                     //Generate random int value from 0 to 2 for random sayings
                     int num = (int) (Math.random() * (3));
-                    String characterQuote = characterQuotes.get(noun).get(num);
-                    talk(noun, characterQuote);
+                    String characterQuote = characterQuotes.get(npcNames.get(0)).get(num);
+                    setResponse("\n" + characterQuote);
                 } else if (verb.equals("fight")) {
-                    fight(noun, object);
+                    fight(npcNames.get(0), object);
                 } else {
-                    setResponse("There is no " + noun.toUpperCase() + " here... You must be seeing ghosts.");
+                    setResponse("\nThere is no one here... You must be seeing ghosts.");
                 }
             } else if (Verbs.getAreaActions().contains(verb)) {
-                setResponse("This VERB is for area interactions");
+                setResponse("\nThis VERB is for area interactions");
             } else {
-                setResponse("I do not understand " + userInput.toUpperCase() +
-                        ". Format command as 'VERB<space>NOUN' or 'quit' or 'view' or 'help' or 'inventory'");
+                setResponse("\nI do not understand " + userInput.toUpperCase());
             }
             //reset location
             setLocation(locationState.getName());
@@ -153,11 +152,6 @@ public class Game implements Verbs {
         currentLocation.setItem(updatedRoomItems);
     }
 
-
-    private void talk(String noun, Object characterQuote) {
-        setResponse(noun.toUpperCase()+ " : " + characterQuote);
-    }
-
     private void useItem(String verb, String noun) {
         if (verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
             setResponse("\nThat DIAMOND KEY did the trick. You're in...");
@@ -185,13 +179,14 @@ public class Game implements Verbs {
                     locationState = obj.getPickedLocation(locationInput);
                     setLocation(locationState.getName());
                 } else {
-                    setResponse("\nThe " + npcNames.get(0).toUpperCase() + "blocks your path. You must fight it. Use the stick");
+                    setResponse("\nThe " + npcNames.get(0).toUpperCase() + " blocks your path. You must fight it. Use the stick");
                 }
             }
             else if (locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
                 if (inventoryItems.contains("password")) {
                     setResponse("\nGuard: That's the right PASSWORD Go ahead and pass.");
                     locationState = obj.getPickedLocation(locationInput);
+                    setLocation(locationState.getName());
                 } else {
                     setResponse("\nGuard: Wrong PASSWORD! Get outta here, ya scum!");
                 }
@@ -202,6 +197,7 @@ public class Game implements Verbs {
                             "\nand that SWORD... You must be new... go ahead and pass.");
                     count++;
                     locationState = obj.getPickedLocation(locationInput);
+                    setLocation(locationState.getName());
                 } else {
                     setResponse("\nGuard: Where do you think you're going? Only knights can pass through here."+
                             "\nAnd not just any bloak with a Kingdom's TUNIC. You need a SWORD too.");
@@ -216,6 +212,7 @@ public class Game implements Verbs {
             }
             else {
                 locationState = obj.getPickedLocation(locationInput);
+                setLocation(locationState.getName());
             }
         }
         else {
@@ -274,12 +271,12 @@ public class Game implements Verbs {
         }
     }
 
-    void prompt(String location, Map<String, List<String>> quotes, Characters object) {
+    void prompt(String currentLocation, Map<String, List<String>> quotes, Characters object) {
 
         //NPCs
         npcNames.clear();
         for (ExtraCharacters extraCharacters : object.getCharacters()) {
-            if ((location.equals(extraCharacters.getRoom()))) {
+            if ((currentLocation.equals(extraCharacters.getRoom()))) {
                 npcNames.add(extraCharacters.getName().toLowerCase());
                 quotes.put(extraCharacters.getName(), extraCharacters.getQuote());
             }
@@ -311,7 +308,7 @@ public class Game implements Verbs {
         }
 
         //location
-        setReturnPrompt(locationState.getDescription() +
+        setReturnPrompt(locationState.getDescription() + "\n" +
                         localNPC+
                         localItems+ "\nYou can go: " + directionList +"\n");
     }
