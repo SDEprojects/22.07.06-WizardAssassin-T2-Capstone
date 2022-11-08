@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,7 +27,7 @@ public class GamePanel extends JPanel {
     //  GRAPHIC OBJECTS
     JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton;
-    JLabel titleBlock, inventoryBlock, locationBlock;
+    JLabel titleBlock, inventoryBlock, locationBlock, picLabel;
     JTextField nameField, gameTextField;
     JTextArea promptField;
     JScrollPane scrollPane;
@@ -173,7 +174,7 @@ public class GamePanel extends JPanel {
         directionBox();
         showHUDBox();
         showGameVisual();
-
+        showPic();
     }
 
     //UPDATES WIREFRAME
@@ -316,13 +317,42 @@ public class GamePanel extends JPanel {
         add(showHUDBox);
     }
 
+    // PICTURE FOR LOCATION
+//    public void displayImage(JPanel panel, String pic) {
+//        this.showGameVisual = panel;
+//        picLabel = new JLabel();
+//        showGameVisual.add(picLabel);
+//        picLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResourceAsStream(pic).toString()));
+//    }
+
+    public void showPic() {
+        String imgFile = Game.getViewLocation();
+        String file;
+        switch(imgFile) {
+            case ("Queen's Garden"):
+                file = "resources/TitleScreenResources/magic_garden.jpg";
+                break;
+            case ("Church"):
+                file = "resources/TitleScreenResources/church.jpg";
+                break;
+            default:
+                file = "resources/TitleScreenResources/placeholder.jpg";
+                break;
+        }
+        ImageIcon img = new ImageIcon(file);
+        JLabel pic = new JLabel(img);
+        pic.setVisible(true);
+        pic.setBounds(10, 30, 800, 550);
+        this.add(pic);
+    }
+
     // GAME VISUAL (TOP LEFT)
     public void showGameVisual() {
         showGameVisual = new JPanel();
         showGameVisual.setBounds(10, 30, 800, 600);
-        showGameVisual.setBackground(Color.cyan);
-        showGameVisual.setVisible(true);
-        add(showGameVisual);
+        //showGameVisual.setOpaque(false);
+        //showGameVisual.setVisible(true);
+        //add(showGameVisual);
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1210, 10, 60, 20);
         JButton settingsButton = new JButton("SETTINGS");
@@ -330,7 +360,7 @@ public class GamePanel extends JPanel {
         this.add(quitButton);
         this.add(settingsButton);
         quitButton.addActionListener(e -> {
-
+            System.exit(0);
         });
         settingsButton.addActionListener(e -> {
 
