@@ -27,6 +27,7 @@ public class Game implements Verbs {
     private static String response;
     private static String viewLocation;
     private static List<String> viewInventory = new ArrayList<>();
+    private static List<String> viewRoomItems = new ArrayList<>();
     private Characters object = null;
     private Map<String, List<String>> characterQuotes = new HashMap<>();
 
@@ -298,6 +299,8 @@ public class Game implements Verbs {
         if (locationState.getItem().length > 0) {
             localItems = "\nYou see these items: " + Arrays.deepToString(locationState.getItem());
         }
+        //set for viewing
+        setViewRoomItems(Arrays.asList(locationState.getItem()));
 
         //Directions
         ArrayList<String> directionList = new ArrayList<>();
@@ -416,5 +419,13 @@ public class Game implements Verbs {
 
     public static void setViewInventory(List<String> viewInventory) {
         Game.viewInventory = viewInventory;
+    }
+
+    public static List<String> getViewRoomItems() {
+        return viewRoomItems;
+    }
+
+    public static void setViewRoomItems(List<String> viewRoomItems) {
+        Game.viewRoomItems = viewRoomItems;
     }
 }

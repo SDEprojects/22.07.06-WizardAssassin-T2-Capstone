@@ -2,6 +2,9 @@ package com.wizard_assassin.controller;
 
 import com.wizard_assassin.model.Game;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Controller {
     private Game game;
 
@@ -10,6 +13,11 @@ public class Controller {
     }
 
     public void input(String action){
+        //get
+        ArrayList<String> strSplit = new ArrayList<>(Arrays.asList(action.split(" ")));
+        if (strSplit.get(0).equals("get")){
+            game.gameLoop(action);
+        }
         //north
         if ("n".equals(action)) {
             game.gameLoop("go north");
@@ -37,10 +45,6 @@ public class Controller {
         //fight
         if ("f".equals(action)) {
             game.gameLoop("fight");
-        }
-        //get
-        if ("g".equals(action)) {
-            game.gameLoop("get stick");
         }
         //talk
         if ("t".equals(action)) {
