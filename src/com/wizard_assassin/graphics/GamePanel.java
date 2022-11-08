@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class GamePanel extends JPanel {
 
@@ -219,7 +220,7 @@ public class GamePanel extends JPanel {
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
         JButton b4 = new JButton("4");
-        JButton b5 = new JButton("Talk");
+        JButton b5 = new JButton("TALK");
         b1.setBounds(915, 580, 50, 50);
         b2.setBounds(965, 580, 50, 50);
         b3.setBounds(1015, 580, 50, 50);
@@ -242,8 +243,8 @@ public class GamePanel extends JPanel {
         directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
-        getButton = new JButton("GET");
-        getButton.setBounds(1140, 680, 70, 50);
+        //getButton = new JButton("GET");
+        //getButton.setBounds(1140, 680, 70, 50);
         this.add(b1);
         this.add(b2);
         this.add(b3);
@@ -256,7 +257,7 @@ public class GamePanel extends JPanel {
         this.add(upButton);
         this.add(downButton);
         this.add(selectButton);
-        this.add(getButton);
+        //this.add(getButton);
         northButton.addActionListener(e -> {
             System.out.println("North");
             controller.input("n");
@@ -290,12 +291,12 @@ public class GamePanel extends JPanel {
             controller.input("f");
             updateGame();
         });
-        getButton.addActionListener(e -> {
+        /*getButton.addActionListener(e -> {
             System.out.println("Get");
             controller.input("g");
             updateGame();
 
-        });
+        });*/
         b1.addActionListener(e -> {
 
         });
@@ -356,10 +357,59 @@ public class GamePanel extends JPanel {
                 break;
         }
         ImageIcon img = new ImageIcon(getLocationImg());
+
         picLabel = new JLabel(img);
         picLabel.setVisible(true);
         picLabel.setBounds(10, 30, 800, 550);
+        roomItems();
         this.add(picLabel);
+    }
+
+    private void roomItems() {
+        List<String> viewRoomItems;
+        viewRoomItems = Game.getViewRoomItems();
+
+        JButton item1 = new JButton();
+        JButton item2 = new JButton();
+        JButton item3 = new JButton();
+        item1.setBounds(340, 470, 80, 50);
+        item2.setBounds(440, 470, 80, 50);
+        item3.setBounds(540, 470, 80, 50);
+
+        switch (viewRoomItems.size()){
+            case (1):
+                item1.setText(viewRoomItems.get(0).toUpperCase());
+                picLabel.add(item1);
+                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
+                    updateGame(); });
+                break;
+            case (2):
+                item1.setText(viewRoomItems.get(0).toUpperCase());
+                item2.setText(viewRoomItems.get(1).toUpperCase());
+                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
+                    updateGame(); });
+                item2.addActionListener(e -> {controller.input("get " + viewRoomItems.get(1));
+                    updateGame(); });
+                picLabel.add(item1);
+                picLabel.add(item2);
+                break;
+            case (3):
+                item1.setText(viewRoomItems.get(0).toUpperCase());
+                item2.setText(viewRoomItems.get(1).toUpperCase());
+                item3.setText(viewRoomItems.get(2).toUpperCase());
+                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
+                    updateGame(); });
+                item2.addActionListener(e -> {controller.input("get " + viewRoomItems.get(1));
+                    updateGame(); });
+                item3.addActionListener(e -> {controller.input("get " + viewRoomItems.get(2));
+                    updateGame(); });
+                picLabel.add(item1);
+                picLabel.add(item2);
+                picLabel.add(item3);
+                break;
+            default:
+                break;
+        }
     }
 
     // GAME VISUAL (TOP LEFT)
