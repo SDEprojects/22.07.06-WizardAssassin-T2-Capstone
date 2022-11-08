@@ -52,6 +52,8 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     //     SPLASH SCREEN
     public void splashPanel(){
+        BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
+        ImageIcon title = new ImageIcon(titlePic);
         splashPanel = new JPanel();
         startButton = new JButton("START");
         splashPanel.setLayout(null);
@@ -59,21 +61,14 @@ public class GamePanel extends JPanel {
         splashPanel.setVisible(true);
         startButton.setSize(200, 50);
         splashPanel.add(startButton);
-
-        titleBlock = new JLabel("Wizard Assassin");
-        titlePanel = new JPanel();
-        titleBlock.setOpaque(false);
-        titlePanel.setOpaque(false);
-        titlePanel.setLayout(null);
-        titlePanel.setBounds(150, 50, 1000, 100);
-        titleBlock.setSize(1000,100);
-        titlePanel.add(titleBlock);
-
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setVisible(true);
+        titleLabel.setBounds(100,30, 1200, 150);
+        this.add(titleLabel);
         add(splashPanel);
-        add(titlePanel);
         startButton.addActionListener(e -> {
             splashPanel.setVisible(false);
-            titlePanel.setVisible(false);
+            titleLabel.setVisible(false);
             namePanel();
         });
         importImg("TitleScreenResources/game_background_1.png");
@@ -219,7 +214,7 @@ public class GamePanel extends JPanel {
     public void directionBox() {
         directionBox = new JPanel();
         directionBox.setOpaque(false);
-        JButton b1 = new JButton("Music");
+        JButton b1 = new JButton("1");
         JButton b2 = new JButton("2");
         JButton b3 = new JButton("3");
         JButton b4 = new JButton("4");
@@ -301,15 +296,7 @@ public class GamePanel extends JPanel {
 
         });*/
         b1.addActionListener(e -> {
-            try {
-                Music music = new Music();
-            } catch (UnsupportedAudioFileException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (LineUnavailableException ex) {
-                ex.printStackTrace();
-            }
+
         });
 
         b2.addActionListener(e -> {
@@ -319,7 +306,8 @@ public class GamePanel extends JPanel {
 
         });
         b4.addActionListener(e -> {
-
+            controller.input("use diamond key");
+            updateGame();
         });
         b5.addActionListener(e -> {
             System.out.println("Talk");
@@ -487,7 +475,15 @@ public class GamePanel extends JPanel {
             System.exit(0);
         });
         settingsButton.addActionListener(e -> {
-
+            try {
+                Music music = new Music();
+            } catch (UnsupportedAudioFileException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (LineUnavailableException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 

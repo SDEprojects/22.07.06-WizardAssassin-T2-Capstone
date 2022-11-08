@@ -154,6 +154,9 @@ public class Game implements Verbs {
     }
 
     private void useItem(String verb, String noun) {
+        if ("diamond".equals(noun)){
+            noun = "diamond key";
+        }
         if (verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
             setResponse("\nThat DIAMOND KEY did the trick. You're in...");
             count++;
