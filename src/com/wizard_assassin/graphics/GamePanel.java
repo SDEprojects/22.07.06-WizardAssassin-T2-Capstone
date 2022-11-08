@@ -18,7 +18,7 @@ public class GamePanel extends JPanel {
     // ATTRIBUTES
    // private JPanel mainPanel;
     private GamePanel gamePanel;
-    private BufferedImage backgroundImage;
+    private BufferedImage backgroundImage, myPicture;
     private KeyboardInputs keyboardInputs;
     private Controller controller = new Controller();
     private String playerName, locationImg;
@@ -343,27 +343,74 @@ public class GamePanel extends JPanel {
 //        picLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResourceAsStream(pic).toString()));
 //    }
 
+    public BufferedImage showPicture(String file) {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(file);
+        try {
+            myPicture = ImageIO.read(is);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return myPicture;
+    }
+
     public void showPic() {
         String imgFile = Game.getViewLocation();
-        switch(imgFile) {
+        BufferedImage currentImg = null;
+        switch (imgFile) {
             case ("Queen's Garden"):
-                setLocationImg("resources/TitleScreenResources/magic_garden.jpg");
+                currentImg = showPicture("TitleScreenResources/magic_garden.jpg");
                 break;
             case ("Church"):
-                setLocationImg("resources/TitleScreenResources/church.jpg");
+                currentImg = showPicture("TitleScreenResources/church.jpg");
+                break;
+            case ("Courtyard"):
+                currentImg = showPicture("TitleScreenResources/courtyard.jpg");
+                break;
+            case ("Watchtower"):
+                currentImg = showPicture("TitleScreenResources/watchtower.jpg");
+                break;
+            case ("Armory"):
+                currentImg = showPicture("TitleScreenResources/armory.jpg");
+                break;
+            case ("Dungeon"):
+                currentImg = showPicture("TitleScreenResources/dungeon.jpg");
+                break;
+            case ("Great Hall"):
+                currentImg = showPicture("TitleScreenResources/great_hall.jpg");
+                break;
+            case ("kitchen"):
+                currentImg = showPicture("TitleScreenResources/kitchen.jpg");
+                break;
+            case ("Royal Lounge"):
+                currentImg = showPicture("TitleScreenResources/royal_lounge.jpg");
+                break;
+            case ("Royal Library"):
+                currentImg = showPicture("TitleScreenResources/library.jpg");
+                break;
+            case ("King's Chambers"):
+                currentImg = showPicture("TitleScreenResources/king_chamber.jpg");
+                break;
+            case ("Wizard's Foyer"):
+                currentImg = showPicture("TitleScreenResources/wizard_foyer.jpg");
+                break;
+            case ("Wizard's Chambers"):
+                currentImg = showPicture("TitleScreenResources/wizard_room.jpg");
+                break;
+            case ("Laboratory"):
+                currentImg = showPicture("TitleScreenResources/lab.jpg");
                 break;
             default:
-                setLocationImg("resources/TitleScreenResources/placeholder.jpg");
+                currentImg = showPicture("TitleScreenResources/placeholder.jpg");
                 break;
         }
-        ImageIcon img = new ImageIcon(getLocationImg());
-
+        ImageIcon img = new ImageIcon(currentImg);
         picLabel = new JLabel(img);
         picLabel.setVisible(true);
         picLabel.setBounds(10, 30, 800, 550);
         roomItems();
         this.add(picLabel);
     }
+
 
     private void roomItems() {
         List<String> viewRoomItems;
