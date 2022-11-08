@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     private BufferedImage backgroundImage;
     private KeyboardInputs keyboardInputs;
     private Controller controller = new Controller();
-    private String playerName;
+    private String playerName, locationImg;
 
 
     //  GRAPHIC OBJECTS
@@ -182,6 +182,8 @@ public class GamePanel extends JPanel {
         locationBlock.setText("Location: "+ Game.getViewLocation());
         promptField.setText(Game.getReturnPrompt());
         promptField.append(Game.getResponse());
+        picLabel.setVisible(false);
+        showPic();
     }
 
     // TEXT BOX (BOTTOM LEFT)
@@ -342,23 +344,22 @@ public class GamePanel extends JPanel {
 
     public void showPic() {
         String imgFile = Game.getViewLocation();
-        String file;
         switch(imgFile) {
             case ("Queen's Garden"):
-                file = "resources/TitleScreenResources/magic_garden.jpg";
+                setLocationImg("resources/TitleScreenResources/magic_garden.jpg");
                 break;
             case ("Church"):
-                file = "resources/TitleScreenResources/church.jpg";
+                setLocationImg("resources/TitleScreenResources/church.jpg");
                 break;
             default:
-                file = "resources/TitleScreenResources/placeholder.jpg";
+                setLocationImg("resources/TitleScreenResources/placeholder.jpg");
                 break;
         }
-        ImageIcon img = new ImageIcon(file);
-        JLabel pic = new JLabel(img);
-        pic.setVisible(true);
-        pic.setBounds(10, 30, 800, 550);
-        this.add(pic);
+        ImageIcon img = new ImageIcon(getLocationImg());
+        picLabel = new JLabel(img);
+        picLabel.setVisible(true);
+        picLabel.setBounds(10, 30, 800, 550);
+        this.add(picLabel);
     }
 
     // GAME VISUAL (TOP LEFT)
@@ -416,5 +417,13 @@ public class GamePanel extends JPanel {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public String getLocationImg() {
+        return locationImg;
+    }
+
+    public void setLocationImg(String locationImg) {
+        this.locationImg = locationImg;
     }
 }
