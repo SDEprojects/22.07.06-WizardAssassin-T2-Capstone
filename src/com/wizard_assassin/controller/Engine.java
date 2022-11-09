@@ -4,8 +4,6 @@ import com.apps.util.Console;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
-import org.junit.Test;
-import org.junit.runners.model.TestClass;
 
 import javax.swing.*;
 import java.io.InputStream;
