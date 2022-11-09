@@ -33,6 +33,7 @@ public class GamePanel extends JPanel {
     JTextField nameField, gameTextField;
     JTextArea promptField;
     JScrollPane scrollPane;
+    GIFPlayer gifPlayer;
 
     // CONSTRUCTOR
     public GamePanel() {
@@ -49,23 +50,36 @@ public class GamePanel extends JPanel {
     }
 
     //----------------------------------------------------------------------------------------------------------
+
     //     SPLASH SCREEN
     public void splashPanel() {
+        gifPlayer = new GIFPlayer();
+        ImageIcon display = new ImageIcon(gifPlayer.gifGetter("TitleScreenResources/sbg.gif"));
+        JLabel bg = new JLabel(display);
+        bg.setSize(1280,800);
+        this.add(bg);
+
         BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
         ImageIcon title = new ImageIcon(titlePic);
+
         splashPanel = new JPanel();
         startButton = new JButton("START");
         splashPanel.setLayout(null);
         splashPanel.setBounds(600, 400, 200, 50);
         splashPanel.setVisible(true);
-        startButton.setSize(200, 50);
+        startButton.setBounds(600, 400, 200, 50);
         splashPanel.add(startButton);
         JLabel titleLabel = new JLabel(title);
         titleLabel.setVisible(true);
         titleLabel.setBounds(100, 30, 1200, 150);
-        this.add(titleLabel);
+        bg.add(titleLabel);
+        bg.add(startButton);
+//        while (titleCondition) {
+//            this.add(titleLabel);
+//        }
         add(splashPanel);
         startButton.addActionListener(e -> {
+            bg.setVisible(false);
             splashPanel.setVisible(false);
             titleLabel.setVisible(false);
             namePanel();
@@ -95,24 +109,16 @@ public class GamePanel extends JPanel {
         namePanel = new JPanel();
         //namePanel.setLayout();
         namePanel.setBounds(500, 30, 300, 100);
-        backButton = new JButton("BACK");
         JLabel directions = new JLabel("Enter name below");
         nameButton = new JButton("ENTER");
         nameField = new JTextField(20);
 
         namePanel.add(directions);
         namePanel.add(nameField);
-        namePanel.add(backButton);
         namePanel.add(nameButton);
         namePanel.setVisible(true);
 
         add(namePanel);
-        backButton.addActionListener(e -> {
-            namePanel.setVisible(false);
-            nameButton.setVisible(false);
-            backButton.setVisible(false);
-            splashPanel();
-        });
         nameButton.addActionListener(e -> {
             if (nameField.getText().isEmpty()) {
                 setPlayerName("Rennie");
@@ -330,7 +336,7 @@ public class GamePanel extends JPanel {
         inventoryBlock.setBounds(840, 30, 400, 100);
 
         locationBlock = new JLabel();
-        locationBlock.setText("Location: " + Game.getViewLocation());
+        locationBlock.setText(" Location: " + Game.getViewLocation());
         locationBlock.setBounds(10, 5, 160, 20);
         locationBlock.setOpaque(true);
         locationBlock.setBackground(Color.lightGray);
