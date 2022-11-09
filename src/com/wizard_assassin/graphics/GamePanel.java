@@ -6,8 +6,7 @@ import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,7 +18,7 @@ public class GamePanel extends JPanel {
 
 
     // ATTRIBUTES
-   // private JPanel mainPanel;
+    // private JPanel mainPanel;
     private GamePanel gamePanel;
     private BufferedImage backgroundImage, myPicture;
     private KeyboardInputs keyboardInputs;
@@ -28,7 +27,7 @@ public class GamePanel extends JPanel {
 
 
     //  GRAPHIC OBJECTS
-    JPanel  splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
+    JPanel splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
     JLabel titleBlock, inventoryBlock, locationBlock, picLabel;
     JTextField nameField, gameTextField;
@@ -37,33 +36,33 @@ public class GamePanel extends JPanel {
 
     // CONSTRUCTOR
     public GamePanel() {
-       //setBackground(Color.blue);
-       setPanelSize();
-       setLayout(null);
-       //this.add(new SplashPanel());
-       splashPanel();
+        //setBackground(Color.blue);
+        setPanelSize();
+        setLayout(null);
+        //this.add(new SplashPanel());
+        splashPanel();
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280,800);
+        Dimension size = new Dimension(1280, 800);
         setPreferredSize(size);
     }
 
     //----------------------------------------------------------------------------------------------------------
     //     SPLASH SCREEN
-    public void splashPanel(){
+    public void splashPanel() {
         BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
         ImageIcon title = new ImageIcon(titlePic);
         splashPanel = new JPanel();
         startButton = new JButton("START");
         splashPanel.setLayout(null);
-        splashPanel.setBounds(600,400,200,50);
+        splashPanel.setBounds(600, 400, 200, 50);
         splashPanel.setVisible(true);
         startButton.setSize(200, 50);
         splashPanel.add(startButton);
         JLabel titleLabel = new JLabel(title);
         titleLabel.setVisible(true);
-        titleLabel.setBounds(100,30, 1200, 150);
+        titleLabel.setBounds(100, 30, 1200, 150);
         this.add(titleLabel);
         add(splashPanel);
         startButton.addActionListener(e -> {
@@ -115,9 +114,9 @@ public class GamePanel extends JPanel {
             splashPanel();
         });
         nameButton.addActionListener(e -> {
-            if(nameField.getText().isEmpty()){
+            if (nameField.getText().isEmpty()) {
                 setPlayerName("Rennie");
-            } else{
+            } else {
                 setPlayerName(nameField.getText());
             }
             this.add(introLabel1);
@@ -142,7 +141,7 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     // Preface Page
 
-    public void prefacePage(){
+    public void prefacePage() {
         JPanel prefacePanel = new JPanel();
         prefacePanel.setBounds(450, 200, 500, 500);
         prefacePanel.setOpaque(false);
@@ -153,14 +152,15 @@ public class GamePanel extends JPanel {
         prefacePanel.add(prefaceText);
         prefacePanel.add(nextButton, BorderLayout.SOUTH);
         prefaceText.setText(getPlayerName() + " is in the " + Game.getViewLocation());
-        prefaceText.append("\n"+getPlayerName()+ " spots the queen roaming about her garden. You decide to speak to her majesty. ");
+        prefaceText.append("\n" + getPlayerName() + " spots the queen roaming about her garden. You decide to speak to her majesty. ");
         prefacePanel.setVisible(true);
         add(prefacePanel);
         nextButton.addActionListener(e -> {
             prefaceText.setText("The Queen says to you,\"Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special.... As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target. What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard. My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard. We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard. It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps. Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition. When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South. Are you ready?\"");
             nextButton.addActionListener(e1 -> {
                 prefacePanel.setVisible(false);
-                wireFrame();});
+                wireFrame();
+            });
         });
     }
 
@@ -177,8 +177,8 @@ public class GamePanel extends JPanel {
 
     //UPDATES WIREFRAME
     private void updateGame() {
-        inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
-        locationBlock.setText("Location: "+ Game.getViewLocation());
+        inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
+        locationBlock.setText("Location: " + Game.getViewLocation());
         promptField.setText(Game.getReturnPrompt());
         promptField.append(Game.getResponse());
         picLabel.setVisible(false);
@@ -191,7 +191,7 @@ public class GamePanel extends JPanel {
         promptField = new JTextArea();
         scrollPane = new JScrollPane(promptField);
 
-        scrollPane.setBounds(0,0,800, 150);
+        scrollPane.setBounds(0, 0, 800, 150);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         gameTextField = new JTextField(60);
         gameTextField.setBounds(10, 755, 800, 20);
@@ -227,15 +227,15 @@ public class GamePanel extends JPanel {
         northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
         eastButton = new JButton("E");
-        eastButton.setBounds(1070,680, 50, 50);
+        eastButton.setBounds(1070, 680, 50, 50);
         southButton = new JButton("S");
         southButton.setBounds(1015, 730, 50, 50);
         westButton = new JButton("W");
-        westButton.setBounds(960, 680,  50, 50);
+        westButton.setBounds(960, 680, 50, 50);
         upButton = new JButton("UP");
         upButton.setBounds(850, 630, 80, 50);
         downButton = new JButton("DOWN");
-        downButton.setBounds(850,730, 80, 50);
+        downButton.setBounds(850, 730, 80, 50);
         selectButton = new JButton("FIGHT");
         selectButton.setBounds(1140, 730, 70, 50);
         directionBox.setBounds(840, 480, 400, 150);
@@ -327,8 +327,8 @@ public class GamePanel extends JPanel {
         locationBlock.setBounds(940, 20, 400, 100);
         showHUDBox.setBounds(840, 40, 400, 450);
         showHUDBox.setVisible(true);
-        inventoryBlock.setText("Inventory: "+ Game.getViewInventory().toString());
-        locationBlock.setText("Location: "+ Game.getViewLocation());
+        inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
+        locationBlock.setText("Location: " + Game.getViewLocation());
         this.add(locationBlock);
         this.add(inventoryBlock);
         add(showHUDBox);
@@ -422,20 +422,26 @@ public class GamePanel extends JPanel {
         item2.setBounds(440, 470, 80, 50);
         item3.setBounds(540, 470, 80, 50);
 
-        switch (viewRoomItems.size()){
+        switch (viewRoomItems.size()) {
             case (1):
                 item1.setText(viewRoomItems.get(0).toUpperCase());
                 picLabel.add(item1);
-                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
-                    updateGame(); });
+                item1.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(0));
+                    updateGame();
+                });
                 break;
             case (2):
                 item1.setText(viewRoomItems.get(0).toUpperCase());
                 item2.setText(viewRoomItems.get(1).toUpperCase());
-                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
-                    updateGame(); });
-                item2.addActionListener(e -> {controller.input("get " + viewRoomItems.get(1));
-                    updateGame(); });
+                item1.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(0));
+                    updateGame();
+                });
+                item2.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(1));
+                    updateGame();
+                });
                 picLabel.add(item1);
                 picLabel.add(item2);
                 break;
@@ -443,12 +449,18 @@ public class GamePanel extends JPanel {
                 item1.setText(viewRoomItems.get(0).toUpperCase());
                 item2.setText(viewRoomItems.get(1).toUpperCase());
                 item3.setText(viewRoomItems.get(2).toUpperCase());
-                item1.addActionListener(e -> {controller.input("get " + viewRoomItems.get(0));
-                    updateGame(); });
-                item2.addActionListener(e -> {controller.input("get " + viewRoomItems.get(1));
-                    updateGame(); });
-                item3.addActionListener(e -> {controller.input("get " + viewRoomItems.get(2));
-                    updateGame(); });
+                item1.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(0));
+                    updateGame();
+                });
+                item2.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(1));
+                    updateGame();
+                });
+                item3.addActionListener(e -> {
+                    controller.input("get " + viewRoomItems.get(2));
+                    updateGame();
+                });
                 picLabel.add(item1);
                 picLabel.add(item2);
                 picLabel.add(item3);
@@ -467,16 +479,19 @@ public class GamePanel extends JPanel {
         //add(showGameVisual);
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
-        JButton settingsButton = new JButton("SETTINGS");
-        settingsButton.setBounds(1050, 10, 100, 20);
+        JButton playMusicButton = new JButton("MUSIC-ON");
+        JButton stopMusicButton = new JButton("MUSIC-OFF");
+        playMusicButton.setBounds(840, 10, 80, 20);
+        stopMusicButton.setBounds(930, 10, 80, 20);
         this.add(quitButton);
-        this.add(settingsButton);
+        this.add(playMusicButton);
+        this.add(stopMusicButton);
         quitButton.addActionListener(e -> {
             System.exit(0);
         });
-        settingsButton.addActionListener(e -> {
+        playMusicButton.addActionListener(e -> {
             try {
-                Music music = new Music();
+                Music.playMusic();
             } catch (UnsupportedAudioFileException ex) {
                 ex.printStackTrace();
             } catch (IOException ex) {
@@ -484,6 +499,10 @@ public class GamePanel extends JPanel {
             } catch (LineUnavailableException ex) {
                 ex.printStackTrace();
             }
+        });
+
+        stopMusicButton.addActionListener(e -> {
+            Music.stopMusic();
         });
     }
 
