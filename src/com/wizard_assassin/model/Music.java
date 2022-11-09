@@ -22,7 +22,6 @@ public class Music {
     JLabel musicLabel = new JLabel();
 
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        initialize();
     }
 
     public void initialize() {
@@ -47,7 +46,7 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    musicOn=true;
+                    musicOn = true;
                     playMusic();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -86,60 +85,4 @@ public class Music {
         });
         thread.start();
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Music music = new Music();
-//                    music.initialize();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 }
-
-//package com.wizard_assassin;
-//
-//import java.io.BufferedInputStream;
-//import java.io.InputStream;
-//
-//import javax.sound.sampled.*;
-//
-//import java.io.IOException;
-//
-//public class Music {
-//    private static boolean musicOn = true;
-//
-//    public static void playMusic() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-//        //music on
-//        musicOn = true;
-//        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//        Clip clip = AudioSystem.getClip();
-//        clip.stop();
-//        clip.close();
-//        InputStream music = classLoader.getResourceAsStream("music.wav");
-//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
-//        clip.open(audioInputStream);
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (musicOn) {
-//                    clip.start();
-//                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-//                    if (!musicOn) {
-//                        clip.stop();
-//                    }
-//                }
-//            }
-//        });
-//        thread.start();
-//    }
-//
-//    public static void stopMusic() {
-//        musicOn = false;
-//    }
-//}
