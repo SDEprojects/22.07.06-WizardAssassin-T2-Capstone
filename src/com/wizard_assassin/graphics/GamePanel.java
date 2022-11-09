@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     // ATTRIBUTES
     // private JPanel mainPanel;
     private GamePanel gamePanel;
-    private BufferedImage backgroundImage, myPicture, invBackground, gameVisualBackground;
+    private BufferedImage backgroundImage, myPicture, invBackground, gameVisualBackground, prefaceBG;
     private KeyboardInputs keyboardInputs;
     private Controller controller = new Controller();
     private String playerName, locationImg;
@@ -29,7 +29,7 @@ public class GamePanel extends JPanel {
     //  GRAPHIC OBJECTS
     JPanel splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
-    JLabel titleBlock, inventoryBlock, locationBlock, picLabel;
+    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel;
     JTextField nameField, gameTextField;
     JTextArea promptField;
     JScrollPane scrollPane;
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel {
         splashPanel.setVisible(true);
         startButton.setBounds(600, 400, 200, 50);
         splashPanel.add(startButton);
-        JLabel titleLabel = new JLabel(title);
+        titleLabel = new JLabel(title);
         titleLabel.setVisible(true);
         titleLabel.setBounds(100, 30, 1200, 150);
         bg.add(titleLabel);
@@ -91,19 +91,24 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     // Enter name screen
     private void namePanel() {
-        JLabel introLabel1 = new JLabel("      Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
-        JLabel introLabel2 = new JLabel("      The player needs to explore different rooms in the castle as well as collect all items necessary to defeat the evil wizard.");
-        JLabel introLabel3 = new JLabel("      Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
-        JComponent cont[] = {introLabel1, introLabel2, introLabel3, continueButton};
-        introLabel1.setBounds(300, 150, 800, 50);
-        introLabel2.setBounds(300, 250, 800, 50);
-        introLabel3.setBounds(300, 350, 800, 50);
-        introLabel1.setOpaque(true);
-        introLabel2.setOpaque(true);
-        introLabel3.setOpaque(true);
-        introLabel1.setBackground(Color.lightGray);
-        introLabel2.setBackground(Color.lightGray);
-        introLabel3.setBackground(Color.lightGray);
+        JTextArea intro = new JTextArea();
+        intro.setLineWrap(true);
+        intro.append(" Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
+        intro.append(" \n \n Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
+        intro.append(" \n \n Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
+        intro.setBounds(225,145, 750, 550);
+        intro.setOpaque(false);
+        //        JLabel introLabel1 = new JLabel("      Wizard Assassin is a single-player game in which the objective is to \n defeat the evil wizard and save the king.");
+//        JLabel introLabel2 = new JLabel("      The player needs to explore different rooms in the castle as well as \n collect all items necessary to defeat the evil wizard.");
+//        JLabel introLabel3 = new JLabel("      Once the Wizard Assassin reaches the Laboratory and defeat the evil \n wizard the player wins!!!!.");
+//        introLabel1.setBounds(250, 150, 800, 150);
+//        introLabel2.setBounds(250, 350, 800, 150);
+//        introLabel3.setBounds(250, 550, 800, 50);
+        Font font = new Font("Verdana", Font.BOLD, 18);
+        intro.setFont(font);
+//        introLabel1.setFont(font);
+//        introLabel2.setFont(font);
+//        introLabel3.setFont(font);
         continueButton = new JButton("CONTINUE");
         continueButton.setBounds(600, 700, 100, 100);
         namePanel = new JPanel();
@@ -112,6 +117,11 @@ public class GamePanel extends JPanel {
         JLabel directions = new JLabel("Enter name below");
         nameButton = new JButton("ENTER");
         nameField = new JTextField(20);
+
+        prefaceBG = showPicture("TitleScreenResources/par.jpg");
+        ImageIcon preBG = new ImageIcon(prefaceBG);
+        JLabel preLabel = new JLabel(preBG);
+        preLabel.setBounds(220, 140, 840, 550);
 
         namePanel.add(directions);
         namePanel.add(nameField);
@@ -125,17 +135,21 @@ public class GamePanel extends JPanel {
             } else {
                 setPlayerName(nameField.getText());
             }
-            this.add(introLabel1);
-            this.add(introLabel2);
-            this.add(introLabel3);
+//            this.add(introLabel1);
+//            this.add(introLabel2);
+//            this.add(introLabel3);
+            this.add(intro);
+            this.add(preLabel);
             this.add(continueButton);
             repaint();
             //add(namePanel);
         });
         continueButton.addActionListener(e -> {
-            introLabel1.setVisible(false);
-            introLabel2.setVisible(false);
-            introLabel3.setVisible(false);
+            preLabel.setVisible(false);
+            intro.setVisible(false);
+//            introLabel1.setVisible(false);
+//            introLabel2.setVisible(false);
+//            introLabel3.setVisible(false);
             continueButton.setVisible(false);
             namePanel.setVisible(false);
             prefacePage();
@@ -149,21 +163,47 @@ public class GamePanel extends JPanel {
 
     public void prefacePage() {
         JPanel prefacePanel = new JPanel();
-        prefacePanel.setBounds(450, 200, 500, 500);
-        prefacePanel.setOpaque(false);
+
+        Font font = new Font("Verdana", Font.BOLD, 18);
+        prefaceBG = showPicture("TitleScreenResources/par.jpg");
+        ImageIcon preBG = new ImageIcon(prefaceBG);
+        JLabel preLabel = new JLabel(preBG);
+        preLabel.setBounds(220, 100, 810, 600);
+        preLabel.setBackground(Color.lightGray);
+
+        //prefacePanel.setBounds(450, 200, 500, 500);
+        // prefacePanel.setOpaque(false);
         JTextArea prefaceText = new JTextArea();
-        prefaceText.setBounds(450, 200, 500, 500);
+        prefaceText.setFont(font);
+        prefaceText.setOpaque(false);
+        prefaceText.setVisible(true);
+        prefaceText.setBounds(250,160, 750, 450);
         JButton nextButton = new JButton("NEXT");
+        nextButton.setBounds(600, 730, 100, 40);
+        nextButton.setVisible(true);
         prefaceText.setLineWrap(true);
-        prefacePanel.add(prefaceText);
-        prefacePanel.add(nextButton, BorderLayout.SOUTH);
-        prefaceText.setText(getPlayerName() + " is in the " + Game.getViewLocation());
+
+        titleLabel.setVisible(true);
+        titleLabel.setBounds(250,100, 800, 50);
+        this.add(titleLabel);
+        this.add(prefaceText);
+        this.add(nextButton);
+
+        //prefacePanel.add(nextButton);
+
+        prefaceText.setText("\n"+getPlayerName() + " is in the " + Game.getViewLocation());
+        prefaceText.append(" \n \n ");
         prefaceText.append("\n" + getPlayerName() + " spots the queen roaming about her garden. You decide to speak to her majesty. ");
         prefacePanel.setVisible(true);
-        add(prefacePanel);
+        this.add(preLabel);
+        //add(prefacePanel);
         nextButton.addActionListener(e -> {
             prefaceText.setText("The Queen says to you,\"Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special.... As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target. What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard. My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard. We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard. It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps. Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition. When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South. Are you ready?\"");
             nextButton.addActionListener(e1 -> {
+                titleLabel.setVisible(false);
+                prefaceText.setVisible(false);
+                nextButton.setVisible(false);
+                preLabel.setVisible(false);
                 prefacePanel.setVisible(false);
                 wireFrame();
             });
@@ -196,7 +236,6 @@ public class GamePanel extends JPanel {
         textBox = new JPanel();
         promptField = new JTextArea();
         scrollPane = new JScrollPane(promptField);
-
         scrollPane.setBounds(0, 0, 800, 150);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         gameTextField = new JTextField(60);
