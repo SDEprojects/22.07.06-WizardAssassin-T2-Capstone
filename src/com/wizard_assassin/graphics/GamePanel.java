@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     // ATTRIBUTES
     // private JPanel mainPanel;
     private GamePanel gamePanel;
-    private BufferedImage backgroundImage, myPicture;
+    private BufferedImage backgroundImage, myPicture, invBackground, gameVisualBackground;
     private KeyboardInputs keyboardInputs;
     private Controller controller = new Controller();
     private String playerName, locationImg;
@@ -319,28 +319,30 @@ public class GamePanel extends JPanel {
 
     // HUD BOX (TOP RIGHT)
     public void showHUDBox() {
-        showHUDBox = new JPanel();
+        invBackground = showPicture("PanelAssets/inv2.png");
+        ImageIcon invBG = new ImageIcon(invBackground);
+        JLabel invLabel = new JLabel(invBG);
+        invLabel.setBounds(840, 35, 400, 545);
+
+        //showHUDBox = new JPanel();
         inventoryBlock = new JLabel();
-        locationBlock = new JLabel();
-        showHUDBox.setBackground(Color.cyan);
-        inventoryBlock.setBounds(840, 30, 400, 100);
-        locationBlock.setBounds(940, 20, 400, 100);
-        showHUDBox.setBounds(840, 40, 400, 450);
-        showHUDBox.setVisible(true);
         inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
+        inventoryBlock.setBounds(840, 30, 400, 100);
+
+        locationBlock = new JLabel();
         locationBlock.setText("Location: " + Game.getViewLocation());
+        locationBlock.setBounds(10, 5, 160, 20);
+        locationBlock.setOpaque(true);
+        locationBlock.setBackground(Color.lightGray);
+        //showHUDBox.setBackground(Color.cyan);
+        //showHUDBox.setBounds(840, 40, 400, 450);
+        //showHUDBox.setVisible(true);
+        this.add(invLabel);
         this.add(locationBlock);
-        this.add(inventoryBlock);
-        add(showHUDBox);
+        invLabel.add(inventoryBlock);
+        //add(showHUDBox);
     }
 
-    // PICTURE FOR LOCATION
-//    public void displayImage(JPanel panel, String pic) {
-//        this.showGameVisual = panel;
-//        picLabel = new JLabel();
-//        showGameVisual.add(picLabel);
-//        picLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResourceAsStream(pic).toString()));
-//    }
 
     public BufferedImage showPicture(String file) {
         InputStream is = getClass().getClassLoader().getResourceAsStream(file);
@@ -363,7 +365,7 @@ public class GamePanel extends JPanel {
                 currentImg = showPicture("TitleScreenResources/church.jpg");
                 break;
             case ("Courtyard"):
-                currentImg = showPicture("TitleScreenResources/courtyard.jpg");
+                currentImg = showPicture("TitleScreenResources/courtyard1.png");
                 break;
             case ("Watchtower"):
                 currentImg = showPicture("TitleScreenResources/watchtower.jpg");
@@ -470,13 +472,11 @@ public class GamePanel extends JPanel {
         }
     }
 
+
     // GAME VISUAL (TOP LEFT)
     public void showGameVisual() {
         showGameVisual = new JPanel();
         showGameVisual.setBounds(10, 30, 800, 600);
-        //showGameVisual.setOpaque(false);
-        //showGameVisual.setVisible(true);
-        //add(showGameVisual);
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
         JButton playMusicButton = new JButton("MUSIC-ON");
