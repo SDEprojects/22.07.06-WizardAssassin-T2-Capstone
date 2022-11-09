@@ -1,6 +1,6 @@
 package com.wizard_assassin.graphics;
 
-import com.wizard_assassin.Music;
+import com.wizard_assassin.model.Music;
 import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class GamePanel extends JPanel {
-
+    Music music = new Music();
 
     // ATTRIBUTES
     // private JPanel mainPanel;
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel {
     JScrollPane scrollPane;
 
     // CONSTRUCTOR
-    public GamePanel() {
+    public GamePanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         //setBackground(Color.blue);
         setPanelSize();
         setLayout(null);
@@ -479,33 +479,18 @@ public class GamePanel extends JPanel {
         showGameVisual.setBounds(10, 30, 800, 600);
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
-        JButton playMusicButton = new JButton("MUSIC-ON");
-        JButton stopMusicButton = new JButton("MUSIC-OFF");
-        playMusicButton.setBounds(840, 10, 80, 20);
-        stopMusicButton.setBounds(930, 10, 80, 20);
+        JButton settingsButton = new JButton("SETTINGS");
+        settingsButton.setBounds(1000,10,80,20);
         this.add(quitButton);
-        this.add(playMusicButton);
-        this.add(stopMusicButton);
+        this.add(settingsButton);
         quitButton.addActionListener(e -> {
             System.exit(0);
         });
-        playMusicButton.addActionListener(e -> {
-            try {
-                Music.playMusic();
-            } catch (UnsupportedAudioFileException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (LineUnavailableException ex) {
-                ex.printStackTrace();
-            }
-        });
 
-        stopMusicButton.addActionListener(e -> {
-            Music.stopMusic();
+        settingsButton.addActionListener(e -> {
+            music.initialize();
         });
     }
-
 
     //----------------------------------------------------------------------------------------------------------
     private BufferedImage importImg(String file) {

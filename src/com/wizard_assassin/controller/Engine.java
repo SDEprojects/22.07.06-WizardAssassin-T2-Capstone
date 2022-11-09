@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.graphics.GamePanel;
 import com.wizard_assassin.graphics.GameWindow;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -27,7 +30,15 @@ public class Engine {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gamePanel = new GamePanel();
+                try {
+                    gamePanel = new GamePanel();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 gameWindow = new GameWindow(gamePanel);
             }
         });
