@@ -431,4 +431,8 @@ public class Game implements Verbs {
     public static void setViewRoomItems(List<String> viewRoomItems) {
         Game.viewRoomItems = viewRoomItems;
     }
+
+    public Location getLocationState() {
+        return locationState;
+    }
 }
