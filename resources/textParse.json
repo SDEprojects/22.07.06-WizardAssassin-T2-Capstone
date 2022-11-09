@@ -21,13 +21,17 @@
     "feed",
     "drop",
     "light",
-    "fight"
+    "fight",
+    "view",
+    "inventory"
   ],
   "noun": [
     "north",
     "east",
     "west",
     "south",
+    "up",
+    "down",
     "items",
     "amulet",
     "matches",
@@ -79,6 +83,9 @@
     "servant",
     "hand",
     "monster",
-    "evil"
+    "evil",
+    "tunic",
+    "password",
+    "diamond"
   ]
 }

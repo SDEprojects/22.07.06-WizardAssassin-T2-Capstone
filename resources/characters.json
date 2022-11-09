@@ -11,25 +11,16 @@
     },
     {
       "type": "NPC",
-      "name": "guard1",
+      "name": "guard",
       "room": "Courtyard",
       "quote": [
         "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?",
-        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?",
+        "What's the PASSWORD?",
         "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?"]
     },
     {
       "type": "NPC",
-      "name": "guard2",
-      "room": "Courtyard",
-      "quote": [
-        "What's the PASSWORD?",
-        "What's the PASSWORD?",
-        "What's the PASSWORD?"]
-    },
-    {
-      "type": "NPC",
-      "name": "guard",
+      "name": "soldier",
       "room": "Watchtower",
       "quote": [
         "Zzz",
@@ -47,39 +38,21 @@
     },
     {
       "type": "NPC",
-      "name": "cook",
-      "room": "Kitchen",
-      "quote": [
-        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr",
-        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr",
-        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr"]
-    },
-    {
-      "type": "NPC",
       "name": "servant",
       "room": "Kitchen",
       "quote": [
         "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it.",
-        "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it.",
+        "Now where did I put that nightshade? Where is that nightshade? \n We need that to POISON... err, Hey, there!...errrr",
         "Take the KNIFE. TAKE THE KNIFE, I SAID! \n You never know when you might need it."]
     },
     {
       "type": "NPC",
-      "name": "guard1",
+      "name": "knight",
       "room": "Great Hall",
       "quote": [
         "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
-        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
+        "\"This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\\n That must be this Kingdom's crest)",
         "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)"]
-    },
-    {
-      "type": "NPC",
-      "name": "guard2",
-      "room": "Great Hall",
-      "quote": [
-        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)",
-        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)",
-        "This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\n That must be this Kingdom's crest)"]
     },
     {
       "type": "NPC",
