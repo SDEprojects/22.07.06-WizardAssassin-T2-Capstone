@@ -16,11 +16,14 @@ import java.io.IOException;
 public class Music {
     private boolean musicOn = true;
     private JFrame jFrame = new JFrame();
+    JPanel musicPanel = new JPanel();
+    JButton playButton = new JButton("Play");
+    JButton stopButton = new JButton("Stop");
+    JLabel musicLabel = new JLabel();
 
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         initialize();
     }
-
 
     public void initialize() {
 
@@ -30,18 +33,13 @@ public class Music {
         jFrame.setLocationRelativeTo(null);
         jFrame.setBackground(Color.green);
         jFrame.setVisible(true);
-
-        JPanel musicPanel = new JPanel();
         jFrame.setLayout(new BorderLayout(10, 10));
         musicPanel.setBackground(Color.pink);
         jFrame.add(musicPanel);
-
-        JButton playButton = new JButton("Play");
-        JButton stopButton = new JButton("Stop");
         musicPanel.add(playButton);
         musicPanel.add(stopButton);
 
-        JLabel musicLabel = new JLabel();
+
         musicLabel.setText("Music play and stop");
         musicPanel.add(musicLabel);
 
@@ -49,7 +47,7 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-
+                    musicOn=true;
                     playMusic();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -71,7 +69,7 @@ public class Music {
         Clip clip = AudioSystem.getClip();
         clip.stop();
         clip.close();
-        InputStream music = classLoader.getResourceAsStream("scaryMusic.wav");
+        InputStream music = classLoader.getResourceAsStream("music.wav");
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
         clip.open(audioInputStream);
         Thread thread = new Thread(new Runnable() {
