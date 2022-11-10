@@ -594,7 +594,7 @@ public class GamePanel extends JPanel {
             case ("Great Hall"):
                 currentImg = showPicture("TitleScreenResources/great_hall.jpg");
                 break;
-            case ("kitchen"):
+            case ("Kitchen"):
                 currentImg = showPicture("TitleScreenResources/kitchen.jpg");
                 break;
             case ("Royal Lounge"):
