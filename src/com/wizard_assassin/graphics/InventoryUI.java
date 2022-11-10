@@ -13,7 +13,7 @@ public class InventoryUI {
         playerInventory.put("sword", "ObjectsAssets/Exposure_4.png");
         playerInventory.put("tunic", "ObjectsAssets/Layer_32.png");
         playerInventory.put("knife", "ObjectsAssets/Exposure_9.png");
-        playerInventory.put("Poison", "ObjectsAssets/Group_1.png");
+        playerInventory.put("poison", "ObjectsAssets/Group_1.png");
         playerInventory.put("diamond key", "ObjectsAssets/diamond_keys.jpg");
         playerInventory.put("wizard robes", "ObjectsAssets/07.png");
         playerInventory.put("mead", "ObjectsAssets/Layer_57.png");
