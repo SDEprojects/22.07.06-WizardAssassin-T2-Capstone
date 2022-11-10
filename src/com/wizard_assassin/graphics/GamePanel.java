@@ -638,9 +638,15 @@ public class GamePanel extends JPanel {
         item2.setBounds(440, 470, 80, 80);
         item3.setBounds(540, 470, 80, 80);
 
+        Icon icon1;
+        Icon icon2;
+        Icon icon3;
+
+        InventoryUI inventoryUI = new InventoryUI();
         switch (viewRoomItems.size()) {
             case (1):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
                 picLabel.add(item1);
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
@@ -648,8 +654,10 @@ public class GamePanel extends JPanel {
                 });
                 break;
             case (2):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
-                item2.setText(viewRoomItems.get(1).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
+                icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
+                item1.setIcon(icon2);
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
                     updateGame();
@@ -662,9 +670,13 @@ public class GamePanel extends JPanel {
                 picLabel.add(item2);
                 break;
             case (3):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
-                item2.setText(viewRoomItems.get(1).toUpperCase());
-                item3.setText(viewRoomItems.get(2).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
+                icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
+                item1.setIcon(icon2);
+                icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(2))));
+                item1.setIcon(icon3);
+
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
                     updateGame();
