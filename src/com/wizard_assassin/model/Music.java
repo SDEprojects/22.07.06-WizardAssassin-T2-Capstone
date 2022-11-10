@@ -10,52 +10,55 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.awt.image.BufferedImage;
 
 public class Music {
-    private boolean musicOn = true;
+
     private JFrame musicFrame = new JFrame();
-    //JPanel musicPanel = new JPanel();
-    JButton playButton = new JButton("Play");
-    JButton stopButton = new JButton("Stop");
-    JButton volumeUpButton = new JButton("VOL +");
-    JButton volumeDownButton = new JButton("VOL -");
+    private JPanel musicPanel = new JPanel();
+    private JButton playButton = new JButton("PLAY");
+    private JButton stopButton = new JButton("STOP");
+    private JButton volumeUpButton = new JButton("VOL +");
+    private JButton volumeDownButton = new JButton("VOL -");
 
-    JLabel musicLabel = new JLabel();
-    Clip clip= AudioSystem.getClip();
+    private JLabel musicLabel = new JLabel();
+    private BufferedImage myPicture;
+    private BufferedImage pic = showPicture("TitleScreenResources/musicBkgd.png");
+    private ImageIcon musicBkgdIcon = new ImageIcon(pic);
+    private JLabel musicBkgdLabel = new JLabel(musicBkgdIcon);
+
+    private boolean musicOn = true;
+    private Clip clip = AudioSystem.getClip();
     float volume = -9.0f;
-    FloatControl fc;
+    private FloatControl fc;
 
-    private BufferedImage backgroundImage;
-
-    public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public Music() throws LineUnavailableException {
     }
 
     public void initialize() {
         musicFrame.setTitle("Music");
         musicFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        musicFrame.setSize(500, 300);
+        musicFrame.setSize(500, 400);
+        musicFrame.setResizable(false);
+
         musicFrame.setLocationRelativeTo(null);
-        //musicFrame.setBackground(Color.green);
-        //jFrame.pack();
+        musicFrame.setBackground(Color.green);
+
         musicFrame.setVisible(true);
-        //musicFrame.setLayout(new GridLayout(1, 5));
 
-        //musicPanel.setBackground(Color.pink);
-        //jFrame.add(musicPanel);
-        //musicPanel.add(playButton);
-        //musicPanel.add(stopButton);
+        musicFrame.add(musicPanel);
 
-        musicFrame.add(playButton);
-        musicFrame.add(stopButton);
-        musicFrame.add(volumeUpButton);
-        musicFrame.add(volumeDownButton);
+        musicPanel.add(playButton);
+        musicPanel.add(stopButton);
+        musicPanel.add(volumeUpButton);
+        musicPanel.add(volumeDownButton);
         musicLabel.setText("Welcome to music control panel! ");
-        musicFrame.add(musicLabel);
-        //musicPanel.add(musicLabel);
-        importImg("TitleScreenResources/musicBkgd.png");
+        musicPanel.add(musicLabel);
 
+        musicBkgdLabel.setVisible(true);
+        musicBkgdLabel.setBounds(0, 80, 80, 30);
+        musicPanel.add(musicBkgdLabel);
 
+        musicPanel.setOpaque(false);
 
         playButton.addActionListener(new ActionListener() {
             @Override
@@ -64,7 +67,8 @@ public class Music {
                     clip.close();
                     setMusicOn(true);
                     playMusic();
-                    System.out.println(getVolume());
+                    musicLabel.setText("You are playing music........");
+                    //System.out.println(getVolume());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -75,6 +79,7 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setMusicOn(false);
+                musicLabel.setText("You stopped the music........");
             }
         });
 
@@ -82,7 +87,8 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 turnUpMusic();
-                System.out.println(getVolume());
+                //System.out.println(getVolume());
+                musicLabel.setText("You turned up the music volume: 3.0f.");
             }
         });
 
@@ -90,33 +96,22 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 turnDownMusic();
-                System.out.println(getVolume());
+                //System.out.println(getVolume());
+                musicLabel.setText("You turned down the music volume: 3.0f.");
             }
         });
     }
 
-    private BufferedImage importImg(String file) {
+    public BufferedImage showPicture(String file) {
         InputStream is = getClass().getClassLoader().getResourceAsStream(file);
-
         try {
-            backgroundImage = ImageIO.read(is);
+            myPicture = ImageIO.read(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
-        musicFrame.repaint();
-        return null;
+        return myPicture;
     }
 
-    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        Music music = new Music();
-        music.initialize();
-    }
 
     public void playMusic() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
