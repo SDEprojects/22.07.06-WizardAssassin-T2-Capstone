@@ -20,7 +20,7 @@ public class Music {
 
     JLabel musicLabel = new JLabel();
     Clip clip= AudioSystem.getClip();
-    float volume = 0.0f;
+    float volume = -9.0f;
     FloatControl fc;
 
     public Music() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -52,8 +52,9 @@ public class Music {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    clip.close();
                     setMusicOn(true);
-                    setVolume(0.0f);
+                   // setVolume(0.0f);
                     playMusic();
                     System.out.println(volume);
                 } catch (Exception ex) {
@@ -86,50 +87,26 @@ public class Music {
         });
     }
 
-//    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-//        Music music = new Music();
-//        music.initialize();
-//    }
+    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        Music music = new Music();
+        music.initialize();
+    }
 
     public void playMusic() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-//        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//        InputStream music = classLoader.getResourceAsStream("music.wav");
-//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
-//        clip = AudioSystem.getClip();
-//        clip.open(audioInputStream);
-//        fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-//        fc.setValue(3.0f);
-//        clip.setFramePosition(0);
-//
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (musicOn) {
-//                    clip.start();
-//                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-//                    if (!musicOn) {
-//                        clip.stop();
-//                    }
-//                }
-//            }
-//        });
-//        thread.start();
-
-
-
-        clip.close();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream music = classLoader.getResourceAsStream("music.wav");
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
+        clip = AudioSystem.getClip();
         clip.open(audioInputStream);
+        fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        fc.setValue(-9.0f);
+        clip.setFramePosition(0);
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (musicOn) {
                     clip.start();
-//                    FloatControl fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-//                    fc.setValue(volume); // set volume to 50% to start
                     clip.loop(Clip.LOOP_CONTINUOUSLY);
                     if (!musicOn) {
                         clip.stop();
@@ -138,10 +115,34 @@ public class Music {
             }
         });
         thread.start();
+
+
+//
+//        clip.close();
+//        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+//        InputStream music = classLoader.getResourceAsStream("music.wav");
+//        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
+//        clip.open(audioInputStream);
+//
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (musicOn) {
+//                    clip.start();
+////                    FloatControl fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+////                    fc.setValue(volume); // set volume to 50% to start
+//                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+//                    if (!musicOn) {
+//                        clip.stop();
+//                    }
+//                }
+//            }
+//        });
+//        thread.start();
     }
 
     public void turnUpMusic() {
-        volume += 2.0f;
+        volume += 3.0f;
         if (volume > 6.0f) {
             volume = 6.0f;
         }
@@ -151,7 +152,7 @@ public class Music {
     }
 
     public void turnDownMusic() {
-        volume -= 2.0f;
+        volume -= 3.0f;
         if (volume < -80.0f) {
             volume = -80.0f;
         }
