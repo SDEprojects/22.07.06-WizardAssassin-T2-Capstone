@@ -8,16 +8,17 @@ public class InventoryUI {
 
     public InventoryUI() {
         playerInventory.put("stick", "ObjectsAssets/Exposure_5.png");
-        playerInventory.put("brass Key", "ObjectsAssets/key.png");
+        playerInventory.put("brass key", "ObjectsAssets/brass_keys.jpg");
         playerInventory.put("note", "ObjectsAssets/Layer_9.png");
         playerInventory.put("sword", "ObjectsAssets/Exposure_4.png");
         playerInventory.put("tunic", "ObjectsAssets/Layer_32.png");
         playerInventory.put("knife", "ObjectsAssets/Exposure_9.png");
         playerInventory.put("Poison", "ObjectsAssets/Group_1.png");
-        playerInventory.put("diamond key", "ObjectsAssets/cross_key.png");
+        playerInventory.put("diamond key", "ObjectsAssets/diamond_keys.jpg");
         playerInventory.put("wizard robes", "ObjectsAssets/07.png");
         playerInventory.put("mead", "ObjectsAssets/Layer_57.png");
         playerInventory.put("jewels", "ObjectsAssets/Layer_30.png");
+        playerInventory.put("password", "ObjectsAssets/pass.jpg");
     }
 
     public String inventorySetter(String inventoryItem){

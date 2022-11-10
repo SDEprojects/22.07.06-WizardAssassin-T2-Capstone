@@ -442,7 +442,7 @@ public class GamePanel extends JPanel {
             });
         }
         if (inventory.size() >= 2) {
-            Icon icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            Icon icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(1))));
             item2.setIcon(icon2);
             item2.addActionListener(e -> {
                 String action = "";
@@ -461,7 +461,7 @@ public class GamePanel extends JPanel {
             });
         }
         if (inventory.size() >= 3) {
-            Icon icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            Icon icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(2))));
             item3.setIcon(icon3);
             item3.addActionListener(e -> {
                 String action = "";
@@ -481,7 +481,7 @@ public class GamePanel extends JPanel {
             });
         }
         if (inventory.size() >= 4) {
-            Icon icon4 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            Icon icon4 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(3))));
             item4.setIcon(icon4);
             item4.addActionListener(e -> {
                 String action = "";
@@ -501,7 +501,7 @@ public class GamePanel extends JPanel {
             });
         }
         if (inventory.size() >= 5) {
-            Icon icon5 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            Icon icon5 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(4))));
             item5.setIcon(icon5);
             item5.addActionListener(e -> {
                 String action = "";
@@ -521,7 +521,7 @@ public class GamePanel extends JPanel {
             });
         }
         if (inventory.size() >= 6) {
-            Icon icon6 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            Icon icon6 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(5))));
             item6.setIcon(icon6);
             item6.addActionListener(e -> {
                 String action = "";
@@ -657,7 +657,7 @@ public class GamePanel extends JPanel {
                 icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
                 item1.setIcon(icon1);
                 icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
-                item1.setIcon(icon2);
+                item2.setIcon(icon2);
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
                     updateGame();
@@ -673,9 +673,9 @@ public class GamePanel extends JPanel {
                 icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
                 item1.setIcon(icon1);
                 icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
-                item1.setIcon(icon2);
+                item2.setIcon(icon2);
                 icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(2))));
-                item1.setIcon(icon3);
+                item3.setIcon(icon3);
 
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
