@@ -28,6 +28,7 @@ public class Game implements Verbs {
     private static String viewLocation;
     private static List<String> viewInventory = new ArrayList<>();
     private static List<String> viewRoomItems = new ArrayList<>();
+    private static List<String> viewRoomNPCs = new ArrayList<>();
     private Characters object = null;
     private Map<String, List<String>> characterQuotes = new HashMap<>();
 
@@ -104,6 +105,9 @@ public class Game implements Verbs {
 
         //set new location text
         prompt(getLocation(), characterQuotes, object);
+
+        //
+        setViewRoomNPCs(getNpcNames());
     }
 
     private void examine(String verb) {
@@ -307,6 +311,7 @@ public class Game implements Verbs {
         if (npcNames.size() > 0) {
             localNPC = "\nYou see the following characters: " + npcNames;
         }
+        setViewRoomNPCs(getNpcNames());
 
         //TODO fix this death condition to work with GUI
         /*
@@ -452,5 +457,21 @@ public class Game implements Verbs {
 
     public Location getLocationState() {
         return locationState;
+    }
+
+    public static List<String> getViewRoomNPCs() {
+        return viewRoomNPCs;
+    }
+
+    public static void setViewRoomNPCs(List<String> viewRoomNPCs) {
+        Game.viewRoomNPCs = viewRoomNPCs;
+    }
+
+    public List<String> getNpcNames() {
+        return npcNames;
+    }
+
+    public void setNpcNames(List<String> npcNames) {
+        this.npcNames = npcNames;
     }
 }

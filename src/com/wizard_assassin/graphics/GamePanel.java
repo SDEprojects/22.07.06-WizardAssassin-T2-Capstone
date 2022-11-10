@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanel extends JPanel {
@@ -30,7 +31,7 @@ public class GamePanel extends JPanel {
     //  GRAPHIC OBJECTS
     JPanel splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
-    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel;;
+    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel;
     JTextField nameField, gameTextField;
     JTextArea promptField;
     JScrollPane scrollPane;
@@ -588,7 +589,7 @@ public class GamePanel extends JPanel {
                 currentImg = showPicture("TitleScreenResources/armory.jpg");
                 break;
             case ("Dungeon"):
-                currentImg = showPicture("TitleScreenResources/dungeon.jpg");
+                currentImg = showPicture("TitleScreenResources/dungeon.png");
                 break;
             case ("Great Hall"):
                 currentImg = showPicture("TitleScreenResources/great_hall.jpg");
@@ -622,14 +623,43 @@ public class GamePanel extends JPanel {
         picLabel = new JLabel(img);
         picLabel.setVisible(true);
         picLabel.setBounds(10, 30, 800, 550);
+       // roomNPCs();
         roomItems();
         this.add(picLabel);
     }
 
+    private void roomNPCs() {
+        List<String> viewRoomNPCs;
+        viewRoomNPCs = Game.getViewRoomNPCs();
+
+        JButton NPC1 = new JButton();
+        NPC1.setBounds(100, 100, 200, 200);
+
+        Icon npcIcon;
+
+        NPC_UI npcUi = new NPC_UI();
+        switch (viewRoomNPCs.size()) {
+            case (1):
+                System.out.println("im running");
+                npcIcon = new ImageIcon(showPicture(npcUi.npcSetter(viewRoomNPCs.get(0))));
+                NPC1.setIcon(npcIcon);
+                picLabel.add(NPC1);
+                NPC1.addActionListener(e -> {
+
+                });
+                break;
+            default:
+                break;
+
+        }
+    }
 
     private void roomItems() {
         List<String> viewRoomItems;
         viewRoomItems = Game.getViewRoomItems();
+        // NPC
+        List<String> viewRoomNPCs;
+        viewRoomNPCs = Game.getViewRoomNPCs();
 
         JButton item1 = new JButton();
         JButton item2 = new JButton();
@@ -637,10 +667,27 @@ public class GamePanel extends JPanel {
         item1.setBounds(340, 470, 80, 80);
         item2.setBounds(440, 470, 80, 80);
         item3.setBounds(540, 470, 80, 80);
+        //NPC
+        JButton NPC1 = new JButton();
+        NPC1.setBounds(100, 100, 200, 200);
+        NPC1.setOpaque(false);
+        NPC1.setContentAreaFilled(false);
 
         Icon icon1;
         Icon icon2;
         Icon icon3;
+        //
+        Icon npcIcon;
+        JLabel npcLabel = new JLabel();
+        npcLabel.setBounds(275, 200, 200, 200);
+
+        NPC_UI npcUi = new NPC_UI();
+        System.out.println(viewRoomNPCs.size());
+        if (viewRoomNPCs.size() == 1) {
+            npcIcon = new ImageIcon(showPicture(npcUi.npcSetter(viewRoomNPCs.get(0))));
+            npcLabel.setIcon(npcIcon);
+            picLabel.add(npcLabel);
+        }
 
         InventoryUI inventoryUI = new InventoryUI();
         switch (viewRoomItems.size()) {
