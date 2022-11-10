@@ -15,7 +15,7 @@ public class Controller {
     public void input(String action){
         //get
         ArrayList<String> strSplit = new ArrayList<>(Arrays.asList(action.split(" ")));
-        if (strSplit.get(0).equals("get") ||strSplit.get(0).equals("use")){
+        if (strSplit.get(0).equals("get") || strSplit.get(0).equals("use") || strSplit.get(0).equals("drop") || strSplit.get(0).equals("examine")){
             game.gameLoop(action);
         }
         //north
