@@ -1,12 +1,13 @@
 package com.wizard_assassin.graphics;
 
-import com.wizard_assassin.model.Music;
 import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
+import com.wizard_assassin.model.Music;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,7 +30,7 @@ public class GamePanel extends JPanel {
     //  GRAPHIC OBJECTS
     JPanel splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
     JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
-    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel;
+    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel;;
     JTextField nameField, gameTextField;
     JTextArea promptField;
     JScrollPane scrollPane;
@@ -228,7 +229,9 @@ public class GamePanel extends JPanel {
         promptField.setText(Game.getReturnPrompt());
         promptField.append(Game.getResponse());
         picLabel.setVisible(false);
+        invLabel.setVisible(false);
         showPic();
+        showHUDBox();
     }
 
     // TEXT BOX (BOTTOM LEFT)
@@ -364,9 +367,10 @@ public class GamePanel extends JPanel {
 
     // HUD BOX (TOP RIGHT)
     public void showHUDBox() {
-        invBackground = showPicture("PanelAssets/inv2.png");
+        BufferedImage invBackground = showPicture("PanelAssets/inv2.png");
         ImageIcon invBG = new ImageIcon(invBackground);
-        JLabel invLabel = new JLabel(invBG);
+        invLabel = new JLabel(invBG);
+        invLabel.setVisible(true);
         invLabel.setBounds(840, 35, 400, 545);
 
         //showHUDBox = new JPanel();
@@ -382,10 +386,175 @@ public class GamePanel extends JPanel {
         //showHUDBox.setBackground(Color.cyan);
         //showHUDBox.setBounds(840, 40, 400, 450);
         //showHUDBox.setVisible(true);
+        playerInventory();
         this.add(invLabel);
         this.add(locationBlock);
         invLabel.add(inventoryBlock);
+
         //add(showHUDBox);
+    }
+
+
+    public void playerInventory() {
+        InventoryUI inventoryUI = new InventoryUI();
+        ButtonGroup group = new ButtonGroup();
+        JRadioButton use = new JRadioButton("USE", true);
+        JRadioButton drop = new JRadioButton("DROP");
+        JRadioButton examine = new JRadioButton("EXAMINE");
+        use.setBounds(40, 250, 100, 40);
+        drop.setBounds(155, 250, 100, 40);
+        examine.setBounds(270, 250, 100, 40);
+
+        List<String> inventory = Game.getViewInventory();
+
+        Icon iconDefault = new ImageIcon(showPicture("ObjectsAssets/Layer_17.png"));
+
+        JButton item1 = new JButton(iconDefault);
+        JButton item2 = new JButton(iconDefault);
+        JButton item3 = new JButton(iconDefault);
+        JButton item4 = new JButton(iconDefault);
+        JButton item5 = new JButton(iconDefault);
+        JButton item6 = new JButton(iconDefault);
+        item1.setBounds(40, 300, 80, 80);
+        item2.setBounds(40, 400, 80, 80);
+        item3.setBounds(155, 300, 80, 80);
+        item4.setBounds(155, 400, 80, 80);
+        item5.setBounds(270, 300, 80, 80);
+        item6.setBounds(270, 400, 80, 80);
+
+        if (inventory.size() >= 1) {
+            Icon icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item1.setIcon(icon1);
+            item1.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+                controller.input(action + " " + inventory.get(0));
+                updateGame();
+            });
+        }
+        if (inventory.size() >= 2) {
+            Icon icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item2.setIcon(icon2);
+            item2.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+                controller.input(action + " " + inventory.get(1));
+                updateGame();
+            });
+        }
+        if (inventory.size() >= 3) {
+            Icon icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item3.setIcon(icon3);
+            item3.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+
+                controller.input(action + " " + inventory.get(2));
+                updateGame();
+            });
+        }
+        if (inventory.size() >= 4) {
+            Icon icon4 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item4.setIcon(icon4);
+            item4.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+
+                controller.input(action + " " + inventory.get(5));
+                updateGame();
+            });
+        }
+        if (inventory.size() >= 5) {
+            Icon icon5 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item5.setIcon(icon5);
+            item5.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+
+                controller.input(action + " " + inventory.get(4));
+                updateGame();
+            });
+        }
+        if (inventory.size() >= 6) {
+            Icon icon6 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
+            item6.setIcon(icon6);
+            item6.addActionListener(e -> {
+                String action = "";
+
+                if (use.isSelected()) {
+                    action = "use";
+
+                } else if (drop.isSelected()) {
+                    action = "drop";
+
+                } else {
+                    action = "examine";
+                }
+
+                controller.input(action + " " + inventory.get(5));
+                updateGame();
+            });
+        }
+        group.add(use);
+        group.add(drop);
+        group.add(examine);
+
+        invLabel.add(use);
+        invLabel.add(drop);
+        invLabel.add(examine);
+
+        invLabel.add(item1);
+        invLabel.add(item2);
+        invLabel.add(item3);
+        invLabel.add(item4);
+        invLabel.add(item5);
+        invLabel.add(item6);
+
     }
 
 
@@ -465,13 +634,19 @@ public class GamePanel extends JPanel {
         JButton item1 = new JButton();
         JButton item2 = new JButton();
         JButton item3 = new JButton();
-        item1.setBounds(340, 470, 80, 50);
-        item2.setBounds(440, 470, 80, 50);
-        item3.setBounds(540, 470, 80, 50);
+        item1.setBounds(340, 470, 80, 80);
+        item2.setBounds(440, 470, 80, 80);
+        item3.setBounds(540, 470, 80, 80);
 
+        Icon icon1;
+        Icon icon2;
+        Icon icon3;
+
+        InventoryUI inventoryUI = new InventoryUI();
         switch (viewRoomItems.size()) {
             case (1):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
                 picLabel.add(item1);
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
@@ -479,8 +654,10 @@ public class GamePanel extends JPanel {
                 });
                 break;
             case (2):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
-                item2.setText(viewRoomItems.get(1).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
+                icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
+                item1.setIcon(icon2);
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
                     updateGame();
@@ -493,9 +670,13 @@ public class GamePanel extends JPanel {
                 picLabel.add(item2);
                 break;
             case (3):
-                item1.setText(viewRoomItems.get(0).toUpperCase());
-                item2.setText(viewRoomItems.get(1).toUpperCase());
-                item3.setText(viewRoomItems.get(2).toUpperCase());
+                icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(0))));
+                item1.setIcon(icon1);
+                icon2 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(1))));
+                item1.setIcon(icon2);
+                icon3 = new ImageIcon(showPicture(inventoryUI.inventorySetter(viewRoomItems.get(2))));
+                item1.setIcon(icon3);
+
                 item1.addActionListener(e -> {
                     controller.input("get " + viewRoomItems.get(0));
                     updateGame();

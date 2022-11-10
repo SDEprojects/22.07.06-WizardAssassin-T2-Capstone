@@ -23,7 +23,8 @@
     "light",
     "fight",
     "view",
-    "inventory"
+    "inventory",
+    "drop"
   ],
   "noun": [
     "north",

@@ -1,16 +1,14 @@
 
 package com.wizard_assassin.model;
 
+import javax.sound.sampled.*;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
-import java.io.InputStream;
-
-import javax.sound.sampled.*;
-import javax.swing.*;
-
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Music {
