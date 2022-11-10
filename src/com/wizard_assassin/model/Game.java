@@ -88,7 +88,7 @@ public class Game implements Verbs {
                     setResponse("\nThere is no one here... You must be seeing ghosts.");
                 }
             } else if (Verbs.getAreaActions().contains(verb)) {
-                setResponse("\nThis VERB is for area interactions");
+                examine(verb);
             } else {
                 setResponse("\nI do not understand " + userInput.toUpperCase());
             }
@@ -104,6 +104,10 @@ public class Game implements Verbs {
 
         //set new location text
         prompt(getLocation(), characterQuotes, object);
+    }
+
+    private void examine(String verb) {
+
     }
 
     public Data makeObj() {
@@ -125,16 +129,22 @@ public class Game implements Verbs {
         List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
 
         if (verb.equals("get") && !inventoryItems.contains(itemInput)) {
-            roomItems.remove(itemInput);
-            inventoryItems.add(itemInput);
+            if(inventoryItems.size()<6) {
+                roomItems.remove(itemInput);
+                inventoryItems.add(itemInput);
 
-            setResponse("\nYou picked up a " + itemInput + " and added it to your inventory.\n");
+                setResponse("\nYou picked up a " + itemInput + " and added it to your inventory.\n");
+            }
+            else {
+                setResponse("Your inventory is full. Drop an Item to make room");
+            }
         } else if (verb.equals("get") && inventoryItems.contains(itemInput)) {
             setResponse("\nCan not " + verb.toUpperCase() + " " + itemInput.toUpperCase() +
                     ". It's already in your inventory. Choose again...");
         } else if (verb.equals("drop") && inventoryItems.contains(itemInput)) {
             inventoryItems.remove(itemInput);
             roomItems.add(itemInput);
+
             setResponse("You dropped the "+itemInput+" and removed it from your inventory.");
         } else if (verb.equals("drop") && !inventoryItems.contains(itemInput)) {
             setResponse("\nCan not " + verb.toUpperCase() + " " + itemInput.toUpperCase() +
@@ -170,11 +180,12 @@ public class Game implements Verbs {
             }
         }
         else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)) {
-            try {
-                getAnItem(noun, locationState, verb);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+                try {
+                    getAnItem(noun, locationState, verb);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
         else {
             setResponse("\nCan not " + verb.toUpperCase() + " " + noun.toUpperCase() + ". Choose again...");
