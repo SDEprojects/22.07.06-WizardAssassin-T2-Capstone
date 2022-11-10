@@ -18,7 +18,7 @@ public class ActionHandler {
     boolean actionChecker(String location, String inputAction) {
         boolean result = false;
         ObjectMapper mapper = new ObjectMapper();
-            ArrayList<String> actionsList = new ArrayList<>(List.of("help", "quit", "view", "inventory", "drop", "speak", "get", "fight", "up", "down"));
+            ArrayList<String> actionsList = new ArrayList<>(List.of("help", "quit", "view", "inventory", "drop", "speak", "get", "fight", "up", "down", "use", "drop", "examine"));
 
             try {
                 Actions actions = mapper.readValue(getClass().getClassLoader().getResource("actions.json"), Actions.class);

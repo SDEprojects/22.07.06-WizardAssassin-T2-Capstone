@@ -229,6 +229,7 @@ public class GamePanel extends JPanel {
         promptField.setText(Game.getReturnPrompt());
         promptField.append(Game.getResponse());
         picLabel.setVisible(false);
+        invLabel.setVisible(false);
         showPic();
         showHUDBox();
     }
@@ -406,7 +407,7 @@ public class GamePanel extends JPanel {
 
         List<String> inventory = Game.getViewInventory();
 
-        Icon iconDefault = new ImageIcon(showPicture("objects assets/Layer 17.png"));
+        Icon iconDefault = new ImageIcon(showPicture("ObjectsAssets/Layer_17.png"));
 
         JButton item1 = new JButton(iconDefault);
         JButton item2 = new JButton(iconDefault);
@@ -420,8 +421,6 @@ public class GamePanel extends JPanel {
         item4.setBounds(155, 400, 80, 80);
         item5.setBounds(270, 300, 80, 80);
         item6.setBounds(270, 400, 80, 80);
-
-
 
         if (inventory.size() >= 1) {
             Icon icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
@@ -438,9 +437,8 @@ public class GamePanel extends JPanel {
                 } else {
                     action = "examine";
                 }
-
-            controller.input(action + " " + inventory.get(0));
-            updateGame();
+                controller.input(action + " " + inventory.get(0));
+                updateGame();
             });
         }
         if (inventory.size() >= 2) {
@@ -458,7 +456,6 @@ public class GamePanel extends JPanel {
                 } else {
                     action = "examine";
                 }
-
                 controller.input(action + " " + inventory.get(1));
                 updateGame();
             });
@@ -543,7 +540,6 @@ public class GamePanel extends JPanel {
                 updateGame();
             });
         }
-
         group.add(use);
         group.add(drop);
         group.add(examine);
@@ -558,7 +554,6 @@ public class GamePanel extends JPanel {
         invLabel.add(item4);
         invLabel.add(item5);
         invLabel.add(item6);
-
 
     }
 

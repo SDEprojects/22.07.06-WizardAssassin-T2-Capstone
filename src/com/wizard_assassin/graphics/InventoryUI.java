@@ -7,17 +7,17 @@ public class InventoryUI {
     Map<String,String> playerInventory = new HashMap<String,String>();
 
     public InventoryUI() {
-        playerInventory.put("stick", "objects assets/Exposure 5.png");
-        playerInventory.put("brass Key", "objects assets/key.png");
-        playerInventory.put("note", "objects assets/Layer 9.png");
-        playerInventory.put("sword", "objects assets/Exposure 4.png");
-        playerInventory.put("tunic", "objects assets/Layer 32.png");
-        playerInventory.put("knife", "objects assets/Exposure 9.png");
-        playerInventory.put("Poison", "objects assets/Group 1.png");
-        playerInventory.put("diamond key", "objects assets/cross_key.png");
-        playerInventory.put("wizard robes", "objects assets/Exposure 8.png");
-        playerInventory.put("mead", "objects assets/Layer 57.png");
-        playerInventory.put("jewels", "objects assets/Layer 30.png");
+        playerInventory.put("stick", "ObjectsAssets/Exposure_5.png");
+        playerInventory.put("brass Key", "ObjectsAssets/key.png");
+        playerInventory.put("note", "ObjectsAssets/Layer_9.png");
+        playerInventory.put("sword", "ObjectsAssets/Exposure_4.png");
+        playerInventory.put("tunic", "ObjectsAssets/Layer_32.png");
+        playerInventory.put("knife", "ObjectsAssets/Exposure_9.png");
+        playerInventory.put("Poison", "ObjectsAssets/Group_1.png");
+        playerInventory.put("diamond key", "ObjectsAssets/cross_key.png");
+        playerInventory.put("wizard robes", "ObjectsAssets/07.png");
+        playerInventory.put("mead", "ObjectsAssets/Layer_57.png");
+        playerInventory.put("jewels", "ObjectsAssets/Layer_30.png");
     }
 
     public String inventorySetter(String inventoryItem){

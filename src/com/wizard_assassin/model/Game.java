@@ -154,13 +154,20 @@ public class Game implements Verbs {
     }
 
     private void useItem(String verb, String noun) {
+
         if ("diamond".equals(noun)){
             noun = "diamond key";
         }
-        if (verb.equals("use") && noun.equals("diamond key") && locationState.getName().equals("Great Hall")) {
-            setResponse("\nThat DIAMOND KEY did the trick. You're in...");
-            count++;
-            locationState = obj.getPickedLocation("Wizard's Foyer");
+        if (verb.equals("use")){
+
+            if (noun.equals("diamond key") && locationState.getName().equals("Great Hall")){
+                setResponse("\nThat DIAMOND KEY did the trick. You're in...");
+                count++;
+                locationState = obj.getPickedLocation("Wizard's Foyer");
+            }
+            else {
+                setResponse("\nCan not " + verb.toUpperCase() + " " + noun.toUpperCase() + ". Choose again...");
+            }
         }
         else if (Arrays.asList(locationState.getItem()).contains(noun) || inventoryItems.contains(noun)) {
             try {
