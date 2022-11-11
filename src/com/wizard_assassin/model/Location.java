@@ -13,6 +13,11 @@ public class Location {
     public Location() {
     }
 
+    public Location(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Location(String name, String description, Map<String, String> directions, String[] items) {
             this.name = name;
             this.description = description;
