@@ -29,8 +29,8 @@ public class Game implements Verbs {
     private static List<String> viewInventory = new ArrayList<>();
     private static List<String> viewRoomItems = new ArrayList<>();
     private static List<String> viewRoomNPCs = new ArrayList<>();
-    private Characters object = null;
-    private Items itemsObject = null;
+    private Character object = null;
+    private Item itemsObject = null;
     private Map<String, List<String>> characterQuotes = new HashMap<>();
     private Map<String, String> itemDescription = new HashMap<>();
 
@@ -43,7 +43,7 @@ public class Game implements Verbs {
         InputStream charactersRecFile = classLoader.getResourceAsStream("characters.json");
 
         try {
-            object = mapper.readValue(charactersRecFile, Characters.class);
+            object = mapper.readValue(charactersRecFile, Character.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,7 +126,7 @@ public class Game implements Verbs {
         InputStream charactersRecFile = classLoader.getResourceAsStream("Items.json");
 
         try {
-            itemsObject = mapper.readValue(charactersRecFile, Items.class);
+            itemsObject = mapper.readValue(charactersRecFile, Item.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -270,7 +270,7 @@ public class Game implements Verbs {
     }
 
     //fight method
-    void fight(String noun, Characters object) {
+    void fight(String noun, Character object) {
         List<String> inventoryItems = getInventoryItems();
         String npc = npcNames.get(0);
         System.out.println(inventoryItems);
@@ -325,7 +325,7 @@ public class Game implements Verbs {
         }
     }
 
-    void prompt(String currentLocation, Map<String, List<String>> quotes, Characters object) {
+    void prompt(String currentLocation, Map<String, List<String>> quotes, Character object) {
 
         //NPCs
         npcNames.clear();
