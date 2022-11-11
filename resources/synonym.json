@@ -3,7 +3,6 @@
     "run" :  "go",
     "move" : "go",
     "inspect" : "search",
-    "examine": "search",
     "talk": "speak",
     "take": "get",
     "attack" : "fight",

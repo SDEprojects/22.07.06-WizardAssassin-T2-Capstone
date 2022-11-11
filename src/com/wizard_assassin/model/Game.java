@@ -30,7 +30,9 @@ public class Game implements Verbs {
     private static List<String> viewRoomItems = new ArrayList<>();
     private static List<String> viewRoomNPCs = new ArrayList<>();
     private Characters object = null;
+    private Items itemsObject = null;
     private Map<String, List<String>> characterQuotes = new HashMap<>();
+    private Map<String, String> itemDescription = new HashMap<>();
 
 
     public Game() {
@@ -52,6 +54,7 @@ public class Game implements Verbs {
         setViewLocation(getLocation());
         setViewInventory(getInventoryItems());
         prompt(getLocation(), characterQuotes, object);
+
     }
 
     public void gameLoop(String controllerInput) {
@@ -85,18 +88,23 @@ public class Game implements Verbs {
                     setResponse("\n" + characterQuote);
                 } else if (verb.equals("fight")) {
                     fight(npcNames.get(0), object);
-                } else {
+                }
+            }
+            else {
                     setResponse("\nThere is no one here... You must be seeing ghosts.");
                 }
-            } else if (Verbs.getAreaActions().contains(verb)) {
-                examine(verb);
-            } else {
+        }
+
+        else if (verb.equals("examine")) {
+            examine(noun);
+
+            }
+        else {
                 setResponse("\nI do not understand " + userInput.toUpperCase());
             }
-            //reset location
-            setLocation(locationState.getName());
+        //reset location
+        setLocation(locationState.getName());
 
-        }
         //location for GUI
         setViewLocation(getLocation());
 
@@ -110,8 +118,22 @@ public class Game implements Verbs {
         setViewRoomNPCs(getNpcNames());
     }
 
-    private void examine(String verb) {
+    private void examine(String noun) {
+        //Map of game items
+        ObjectMapper mapper = new ObjectMapper();
 
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream charactersRecFile = classLoader.getResourceAsStream("Items.json");
+
+        try {
+            itemsObject = mapper.readValue(charactersRecFile, Items.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (ItemsObject gameItems : itemsObject.getItems())
+            itemDescription.put(gameItems.getName().toLowerCase(), gameItems.getDescription());
+        setResponse("\n" + itemDescription.get(noun));
     }
 
     public Data makeObj() {
