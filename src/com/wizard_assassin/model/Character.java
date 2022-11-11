@@ -2,10 +2,10 @@ package com.wizard_assassin.model;
 
 import java.util.List;
 
-class Characters {
+class Character {
     List<ExtraCharacters> characters;
 
-    public Characters(List<ExtraCharacters> characters) {
+    public Character(List<ExtraCharacters> characters) {
         this.characters = characters;
     }
 
@@ -13,7 +13,7 @@ class Characters {
         return characters;
     }
 
-    public Characters() {
+    public Character() {
     }
 
     //Character Methods

@@ -1,4 +1,4 @@
-package com.wizard_assassin.graphics;
+package com.wizard_assassin.view;
 
 import java.util.HashMap;
 import java.util.Map;

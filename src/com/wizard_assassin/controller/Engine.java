@@ -2,8 +2,8 @@ package com.wizard_assassin.controller;
 
 import com.apps.util.Console;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wizard_assassin.graphics.GamePanel;
-import com.wizard_assassin.graphics.GameWindow;
+import com.wizard_assassin.view.GamePanel;
+import com.wizard_assassin.view.GameWindow;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -30,6 +30,7 @@ public class Engine {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                //noinspection TryWithIdenticalCatches
                 try {
                     gamePanel = new GamePanel();
                 } catch (UnsupportedAudioFileException e) {

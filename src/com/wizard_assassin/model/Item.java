@@ -2,13 +2,13 @@ package com.wizard_assassin.model;
 
 import java.util.List;
 
-class Items {
+class Item {
 
     List<ItemsObject> items;
 
-    public Items() {
+    public Item() {
     }
-    public Items(List<ItemsObject> items) {
+    public Item(List<ItemsObject> items) {
         this.items = items;
     }
 

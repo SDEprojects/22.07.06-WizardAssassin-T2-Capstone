@@ -1,4 +1,4 @@
-package com.wizard_assassin.graphics;
+package com.wizard_assassin.view;
 
 import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.inputs.KeyboardInputs;
@@ -21,20 +21,27 @@ public class GamePanel extends JPanel {
     // ATTRIBUTES
     // private JPanel mainPanel;
     private GamePanel gamePanel;
-    private BufferedImage backgroundImage, myPicture, invBackground, gameVisualBackground, prefaceBG;
+    private BufferedImage backgroundImage;
+    private BufferedImage invBackground;
+    private BufferedImage gameVisualBackground;
+    private BufferedImage prefaceBG;
     private KeyboardInputs keyboardInputs;
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
     private String playerName, locationImg;
 
 
     //  GRAPHIC OBJECTS
-    JPanel splashPanel, titlePanel, namePanel, wireFrame, textBox, directionBox, showHUDBox, showGameVisual;
-    JButton backButton, nameButton, startButton, northButton, eastButton, southButton, westButton, selectButton, continueButton, getButton, upButton, downButton;
-    JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel;
-    JTextField nameField, gameTextField;
-    JTextArea promptField;
-    JScrollPane scrollPane;
-    GIFPlayer gifPlayer;
+    private JPanel splashPanel;
+    private JPanel titlePanel;
+    private JPanel namePanel;
+    private JPanel wireFrame;
+    private JPanel showHUDBox;
+    private JButton backButton;
+    private JButton continueButton;
+    private JButton getButton;
+    private JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel;
+    private JTextField nameField;
+    private JTextArea promptField;
 
     // CONSTRUCTOR
     public GamePanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -52,7 +59,7 @@ public class GamePanel extends JPanel {
 
     //     SPLASH SCREEN
     public void splashPanel() {
-        gifPlayer = new GIFPlayer();
+        GIFPlayer gifPlayer = new GIFPlayer();
         ImageIcon display = new ImageIcon(gifPlayer.gifGetter("TitleScreenResources/sbg.gif"));
         JLabel bg = new JLabel(display);
         bg.setSize(1280,800);
@@ -62,7 +69,7 @@ public class GamePanel extends JPanel {
         ImageIcon title = new ImageIcon(titlePic);
 
         splashPanel = new JPanel();
-        startButton = new JButton("START");
+        JButton startButton = new JButton("START");
         splashPanel.setLayout(null);
         splashPanel.setBounds(600, 400, 200, 50);
         splashPanel.setVisible(true);
@@ -105,7 +112,7 @@ public class GamePanel extends JPanel {
 
         namePanel.setBounds(500, 30, 300, 100);
         JLabel directions = new JLabel("Enter name below");
-        nameButton = new JButton("ENTER");
+        JButton nameButton = new JButton("ENTER");
         nameField = new JTextField(20);
 
         prefaceBG = showPicture("TitleScreenResources/par.jpg");
@@ -218,12 +225,12 @@ public class GamePanel extends JPanel {
 
     // TEXT BOX (BOTTOM LEFT)
     public void textBox() {
-        textBox = new JPanel();
+        JPanel textBox = new JPanel();
         promptField = new JTextArea();
-        scrollPane = new JScrollPane(promptField);
+        JScrollPane scrollPane = new JScrollPane(promptField);
         scrollPane.setBounds(0, 0, 800, 150);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        gameTextField = new JTextField(60);
+        JTextField gameTextField = new JTextField(60);
         gameTextField.setBounds(10, 755, 800, 20);
         gameTextField.setVisible(true);
         textBox.setBounds(10, 630, 800, 150);
@@ -241,23 +248,23 @@ public class GamePanel extends JPanel {
 
     // DIRECTION BOX (BOTTOM RIGHT)
     public void directionBox() {
-        directionBox = new JPanel();
+        JPanel directionBox = new JPanel();
         directionBox.setOpaque(false);
         JButton b5 = new JButton("TALK");
         b5.setBounds(1140, 630, 70, 50);
-        northButton = new JButton("N");
+        JButton northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
-        eastButton = new JButton("E");
+        JButton eastButton = new JButton("E");
         eastButton.setBounds(1070, 680, 50, 50);
-        southButton = new JButton("S");
+        JButton southButton = new JButton("S");
         southButton.setBounds(1015, 730, 50, 50);
-        westButton = new JButton("W");
+        JButton westButton = new JButton("W");
         westButton.setBounds(960, 680, 50, 50);
-        upButton = new JButton("UP");
+        JButton upButton = new JButton("UP");
         upButton.setBounds(850, 630, 80, 50);
-        downButton = new JButton("DOWN");
+        JButton downButton = new JButton("DOWN");
         downButton.setBounds(850, 730, 80, 50);
-        selectButton = new JButton("FIGHT");
+        JButton selectButton = new JButton("FIGHT");
         selectButton.setBounds(1140, 730, 70, 50);
         directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
@@ -502,6 +509,7 @@ public class GamePanel extends JPanel {
 
     public BufferedImage showPicture(String file) {
         InputStream is = getClass().getClassLoader().getResourceAsStream(file);
+        BufferedImage myPicture;
         try {
             myPicture = ImageIO.read(is);
         } catch (IOException e) {
@@ -512,6 +520,7 @@ public class GamePanel extends JPanel {
 
     public void showPic() {
         String imgFile = Game.getViewLocation();
+        System.out.println(imgFile);
         BufferedImage currentImg = null;
         switch (imgFile) {
             case ("Queen's Garden"):
@@ -544,13 +553,13 @@ public class GamePanel extends JPanel {
             case ("Royal Library"):
                 currentImg = showPicture("TitleScreenResources/library.jpg");
                 break;
-            case ("King's Chambers"):
+            case ("King’s Chambers"):
                 currentImg = showPicture("TitleScreenResources/king_chamber.jpg");
                 break;
             case ("Wizard's Foyer"):
                 currentImg = showPicture("TitleScreenResources/wizard_foyer.jpg");
                 break;
-            case ("Wizard's Chambers"):
+            case ("Wizard’s Chambers"):
                 currentImg = showPicture("TitleScreenResources/wizard_room.jpg");
                 break;
             case ("Laboratory"):
@@ -663,7 +672,7 @@ public class GamePanel extends JPanel {
 
     // GAME VISUAL (TOP LEFT)
     public void showGameVisual() {
-        showGameVisual = new JPanel();
+        JPanel showGameVisual = new JPanel();
         showGameVisual.setBounds(10, 30, 800, 600);
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
