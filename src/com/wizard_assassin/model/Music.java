@@ -22,7 +22,7 @@ public class Music {
 
     private JLabel musicLabel = new JLabel();
     private BufferedImage myPicture;
-    private BufferedImage pic = showPicture("TitleScreenResources/musicBkgd.png");
+    private BufferedImage pic = showPicture("map assets/capitala.png");
     private ImageIcon musicBkgdIcon = new ImageIcon(pic);
     private JLabel musicBkgdLabel = new JLabel(musicBkgdIcon);
 
@@ -55,7 +55,7 @@ public class Music {
         musicPanel.add(musicLabel);
 
         musicBkgdLabel.setVisible(true);
-        musicBkgdLabel.setBounds(0, 80, 80, 30);
+        musicBkgdLabel.setBounds(0, 50, 200, 150);
         musicPanel.add(musicBkgdLabel);
 
         musicPanel.setOpaque(false);
@@ -115,7 +115,7 @@ public class Music {
 
     public void playMusic() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream music = classLoader.getResourceAsStream("music.wav");
+        InputStream music = classLoader.getResourceAsStream("music1.wav");
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(music));
         clip = AudioSystem.getClip();
         clip.open(audioInputStream);
