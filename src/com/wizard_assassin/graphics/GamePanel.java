@@ -39,10 +39,8 @@ public class GamePanel extends JPanel {
 
     // CONSTRUCTOR
     public GamePanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        //setBackground(Color.blue);
         setPanelSize();
         setLayout(null);
-        //this.add(new SplashPanel());
         splashPanel();
     }
 
@@ -76,9 +74,7 @@ public class GamePanel extends JPanel {
         titleLabel.setBounds(100, 30, 1200, 150);
         bg.add(titleLabel);
         bg.add(startButton);
-//        while (titleCondition) {
-//            this.add(titleLabel);
-//        }
+
         add(splashPanel);
         startButton.addActionListener(e -> {
             bg.setVisible(false);
@@ -100,21 +96,14 @@ public class GamePanel extends JPanel {
         intro.append(" \n \n Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
         intro.setBounds(225,145, 750, 550);
         intro.setOpaque(false);
-        //        JLabel introLabel1 = new JLabel("      Wizard Assassin is a single-player game in which the objective is to \n defeat the evil wizard and save the king.");
-//        JLabel introLabel2 = new JLabel("      The player needs to explore different rooms in the castle as well as \n collect all items necessary to defeat the evil wizard.");
-//        JLabel introLabel3 = new JLabel("      Once the Wizard Assassin reaches the Laboratory and defeat the evil \n wizard the player wins!!!!.");
-//        introLabel1.setBounds(250, 150, 800, 150);
-//        introLabel2.setBounds(250, 350, 800, 150);
-//        introLabel3.setBounds(250, 550, 800, 50);
+
         Font font = new Font("Verdana", Font.BOLD, 18);
         intro.setFont(font);
-//        introLabel1.setFont(font);
-//        introLabel2.setFont(font);
-//        introLabel3.setFont(font);
+
         continueButton = new JButton("CONTINUE");
         continueButton.setBounds(600, 700, 100, 100);
         namePanel = new JPanel();
-        //namePanel.setLayout();
+
         namePanel.setBounds(500, 30, 300, 100);
         JLabel directions = new JLabel("Enter name below");
         nameButton = new JButton("ENTER");
@@ -137,25 +126,18 @@ public class GamePanel extends JPanel {
             } else {
                 setPlayerName(nameField.getText());
             }
-//            this.add(introLabel1);
-//            this.add(introLabel2);
-//            this.add(introLabel3);
+
             this.add(intro);
             this.add(preLabel);
             this.add(continueButton);
             repaint();
-            //add(namePanel);
         });
         continueButton.addActionListener(e -> {
             preLabel.setVisible(false);
             intro.setVisible(false);
-//            introLabel1.setVisible(false);
-//            introLabel2.setVisible(false);
-//            introLabel3.setVisible(false);
             continueButton.setVisible(false);
             namePanel.setVisible(false);
             prefacePage();
-            //wireFrame();
         });
         importImg("TitleScreenResources/StoneWall.jpeg");
     }
@@ -173,8 +155,7 @@ public class GamePanel extends JPanel {
         preLabel.setBounds(220, 100, 810, 600);
         preLabel.setBackground(Color.lightGray);
 
-        //prefacePanel.setBounds(450, 200, 500, 500);
-        // prefacePanel.setOpaque(false);
+
         JTextArea prefaceText = new JTextArea();
         prefaceText.setFont(font);
         prefaceText.setOpaque(false);
@@ -231,6 +212,7 @@ public class GamePanel extends JPanel {
         promptField.append(Game.getResponse());
         picLabel.setVisible(false);
         invLabel.setVisible(false);
+        locationBlock.setVisible(false);
         showPic();
         showHUDBox();
     }
@@ -255,7 +237,6 @@ public class GamePanel extends JPanel {
         promptField.setText(Game.getReturnPrompt());
 
         textBox.add(scrollPane);
-        //this.add(gameTextField);
         add(textBox);
     }
 
@@ -263,15 +244,7 @@ public class GamePanel extends JPanel {
     public void directionBox() {
         directionBox = new JPanel();
         directionBox.setOpaque(false);
-        JButton b1 = new JButton("1");
-        JButton b2 = new JButton("2");
-        JButton b3 = new JButton("3");
-        JButton b4 = new JButton("4");
         JButton b5 = new JButton("TALK");
-        b1.setBounds(915, 580, 50, 50);
-        b2.setBounds(965, 580, 50, 50);
-        b3.setBounds(1015, 580, 50, 50);
-        b4.setBounds(1065, 580, 50, 50);
         b5.setBounds(1140, 630, 70, 50);
         northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
@@ -290,12 +263,7 @@ public class GamePanel extends JPanel {
         directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
         eastButton.setVisible(true);
-        //getButton = new JButton("GET");
-        //getButton.setBounds(1140, 680, 70, 50);
-        this.add(b1);
-        this.add(b2);
-        this.add(b3);
-        this.add(b4);
+
         this.add(b5);
         this.add(eastButton);
         this.add(northButton);
@@ -304,7 +272,6 @@ public class GamePanel extends JPanel {
         this.add(upButton);
         this.add(downButton);
         this.add(selectButton);
-        //this.add(getButton);
         northButton.addActionListener(e -> {
             System.out.println("North");
             controller.input("n");
@@ -338,26 +305,6 @@ public class GamePanel extends JPanel {
             controller.input("f");
             updateGame();
         });
-        /*getButton.addActionListener(e -> {
-            System.out.println("Get");
-            controller.input("g");
-            updateGame();
-
-        });*/
-        b1.addActionListener(e -> {
-
-        });
-
-        b2.addActionListener(e -> {
-
-        });
-        b3.addActionListener(e -> {
-
-        });
-        b4.addActionListener(e -> {
-            controller.input("use diamond key");
-            updateGame();
-        });
         b5.addActionListener(e -> {
             System.out.println("Talk");
             controller.input("t");
@@ -370,11 +317,11 @@ public class GamePanel extends JPanel {
     public void showHUDBox() {
         BufferedImage invBackground = showPicture("PanelAssets/inv2.png");
         ImageIcon invBG = new ImageIcon(invBackground);
+
         invLabel = new JLabel(invBG);
         invLabel.setVisible(true);
         invLabel.setBounds(840, 35, 400, 545);
 
-        //showHUDBox = new JPanel();
         inventoryBlock = new JLabel();
         inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
         inventoryBlock.setBounds(840, 30, 400, 100);
@@ -384,15 +331,10 @@ public class GamePanel extends JPanel {
         locationBlock.setBounds(10, 5, 160, 20);
         locationBlock.setOpaque(true);
         locationBlock.setBackground(Color.lightGray);
-        //showHUDBox.setBackground(Color.cyan);
-        //showHUDBox.setBounds(840, 40, 400, 450);
-        //showHUDBox.setVisible(true);
         playerInventory();
         this.add(invLabel);
         this.add(locationBlock);
         invLabel.add(inventoryBlock);
-
-        //add(showHUDBox);
     }
 
 
@@ -623,36 +565,10 @@ public class GamePanel extends JPanel {
         picLabel = new JLabel(img);
         picLabel.setVisible(true);
         picLabel.setBounds(10, 30, 800, 550);
-       // roomNPCs();
         roomItems();
         this.add(picLabel);
     }
 
-    private void roomNPCs() {
-        List<String> viewRoomNPCs;
-        viewRoomNPCs = Game.getViewRoomNPCs();
-
-        JButton NPC1 = new JButton();
-        NPC1.setBounds(100, 100, 200, 200);
-
-        Icon npcIcon;
-
-        NPC_UI npcUi = new NPC_UI();
-        switch (viewRoomNPCs.size()) {
-            case (1):
-                System.out.println("im running");
-                npcIcon = new ImageIcon(showPicture(npcUi.npcSetter(viewRoomNPCs.get(0))));
-                NPC1.setIcon(npcIcon);
-                picLabel.add(NPC1);
-                NPC1.addActionListener(e -> {
-
-                });
-                break;
-            default:
-                break;
-
-        }
-    }
 
     private void roomItems() {
         List<String> viewRoomItems;
