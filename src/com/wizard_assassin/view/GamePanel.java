@@ -39,7 +39,7 @@ public class GamePanel extends JPanel {
     private JButton backButton;
     private JButton continueButton;
     private JButton getButton;
-    private JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel;
+    private JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel, mapLabel;
     private JTextField nameField;
     private JTextArea promptField;
 
@@ -217,6 +217,7 @@ public class GamePanel extends JPanel {
         promptField.setText(Game.getReturnPrompt());
         promptField.append(Game.getResponse());
         picLabel.setVisible(false);
+        mapLabel.setVisible(false);
         invLabel.setVisible(false);
         locationBlock.setVisible(false);
         showPic();
@@ -337,6 +338,7 @@ public class GamePanel extends JPanel {
         locationBlock.setBounds(10, 5, 160, 20);
         locationBlock.setOpaque(true);
         locationBlock.setBackground(Color.lightGray);
+        showMap();
         playerInventory();
         this.add(invLabel);
         this.add(locationBlock);
@@ -350,9 +352,9 @@ public class GamePanel extends JPanel {
         JRadioButton use = new JRadioButton("USE", true);
         JRadioButton drop = new JRadioButton("DROP");
         JRadioButton examine = new JRadioButton("EXAMINE");
-        use.setBounds(40, 250, 80, 40);
-        drop.setBounds(155, 250, 80, 40);
-        examine.setBounds(270, 250, 80, 40);
+        use.setBounds(40, 270, 80, 40);
+        drop.setBounds(155, 270, 80, 40);
+        examine.setBounds(270, 270, 110, 40);
 
         List<String> inventory = Game.getViewInventory();
 
@@ -364,12 +366,12 @@ public class GamePanel extends JPanel {
         JButton item4 = new JButton(iconDefault);
         JButton item5 = new JButton(iconDefault);
         JButton item6 = new JButton(iconDefault);
-        item1.setBounds(40, 300, 80, 80);
-        item2.setBounds(40, 400, 80, 80);
-        item3.setBounds(155, 300, 80, 80);
-        item4.setBounds(155, 400, 80, 80);
-        item5.setBounds(270, 300, 80, 80);
-        item6.setBounds(270, 400, 80, 80);
+        item1.setBounds(40, 320, 80, 80);
+        item2.setBounds(40, 420, 80, 80);
+        item3.setBounds(155, 320, 80, 80);
+        item4.setBounds(155, 420, 80, 80);
+        item5.setBounds(270, 320, 80, 80);
+        item6.setBounds(270, 420, 80, 80);
 
         if (inventory.size() >= 1) {
             Icon icon1 = new ImageIcon(showPicture(inventoryUI.inventorySetter(inventory.get(0))));
@@ -506,6 +508,58 @@ public class GamePanel extends JPanel {
 
     }
 
+    public void showMap() {
+        String mapImgFile = Game.getViewLocation();
+        BufferedImage mapPic = null;
+        switch (mapImgFile) {
+            case ("Queen's Garden"):
+                mapPic = showPicture("map assets/atGarden.png");
+                break;
+            case("Church"):
+                mapPic = showPicture("map assets/atChurch.png");
+                break;
+            case ("Courtyard"):
+                mapPic = showPicture("map assets/atCourtyard.png");
+                break;
+            case ("Watchtower"):
+            case ("Armory"):
+            case ("Dungeon"):
+                mapPic = showPicture("map assets/atWatchtower.png");
+                break;
+            case ("Laboratory"):
+                mapPic = showPicture("map assets/atLab.png");
+                break;
+            case("Wizard's Foyer"):
+                mapPic = showPicture("map assets/atWizardFoyer.png");
+                break;
+            case("Wizard’s Chambers"):
+                mapPic = showPicture("map assets/atWizardChamber.png");
+                break;
+            case("Great Hall"):
+                mapPic = showPicture("map assets/atGreatHall.png");
+                break;
+            case("Kitchen"):
+                mapPic = showPicture("map assets/atKitchen.png");
+                break;
+            case("Royal Lounge"):
+                mapPic = showPicture("map assets/atRoyalLounge.png");
+                break;
+            case("Royal Library"):
+                mapPic = showPicture("map assets/atRoyalLibrary.png");
+                break;
+            case("King’s Chambers"):
+                mapPic = showPicture("map assets/atKingSuite.png");
+                break;
+            default:
+                mapPic = showPicture("TitleScreenResources/placeholder.jpg");
+                break;
+        }
+        ImageIcon mapIc = new ImageIcon(mapPic);
+        mapLabel = new JLabel(mapIc);
+        mapLabel.setVisible(true);
+        mapLabel.setBounds(875, 70, 320, 235);
+        this.add(mapLabel);
+    }
 
     public BufferedImage showPicture(String file) {
         InputStream is = getClass().getClassLoader().getResourceAsStream(file);
@@ -520,7 +574,6 @@ public class GamePanel extends JPanel {
 
     public void showPic() {
         String imgFile = Game.getViewLocation();
-        System.out.println(imgFile);
         BufferedImage currentImg = null;
         switch (imgFile) {
             case ("Queen's Garden"):
