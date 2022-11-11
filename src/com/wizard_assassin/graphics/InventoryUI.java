@@ -15,10 +15,11 @@ public class InventoryUI {
         playerInventory.put("knife", "ObjectsAssets/Exposure_9.png");
         playerInventory.put("poison", "ObjectsAssets/Group_1.png");
         playerInventory.put("diamond key", "ObjectsAssets/diamond_keys.jpg");
-        playerInventory.put("wizard robes", "ObjectsAssets/07.png");
-        playerInventory.put("mead", "ObjectsAssets/Layer_57.png");
+        playerInventory.put("wizard robes", "ObjectsAssets/Layer_57.png");
+        playerInventory.put("mead", "ObjectsAssets/07.png");
         playerInventory.put("jewels", "ObjectsAssets/Layer_30.png");
         playerInventory.put("password", "ObjectsAssets/pass.jpg");
+        playerInventory.put("hunk of meat", "ObjectsAssets/Layer 6.png");
     }
 
     public String inventorySetter(String inventoryItem){

@@ -22,7 +22,7 @@ public class Music {
 
     private JLabel musicLabel = new JLabel();
     private BufferedImage myPicture;
-    private BufferedImage pic = showPicture("map assets/capitala.png");
+    private BufferedImage pic = showPicture("map assets/capital.png");
     private ImageIcon musicBkgdIcon = new ImageIcon(pic);
     private JLabel musicBkgdLabel = new JLabel(musicBkgdIcon);
 

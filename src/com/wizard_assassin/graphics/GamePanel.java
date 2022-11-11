@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GamePanel extends JPanel {
@@ -344,9 +343,9 @@ public class GamePanel extends JPanel {
         JRadioButton use = new JRadioButton("USE", true);
         JRadioButton drop = new JRadioButton("DROP");
         JRadioButton examine = new JRadioButton("EXAMINE");
-        use.setBounds(40, 250, 100, 40);
-        drop.setBounds(155, 250, 100, 40);
-        examine.setBounds(270, 250, 100, 40);
+        use.setBounds(40, 250, 80, 40);
+        drop.setBounds(155, 250, 80, 40);
+        examine.setBounds(270, 250, 80, 40);
 
         List<String> inventory = Game.getViewInventory();
 
@@ -439,7 +438,7 @@ public class GamePanel extends JPanel {
                     action = "examine";
                 }
 
-                controller.input(action + " " + inventory.get(5));
+                controller.input(action + " " + inventory.get(3));
                 updateGame();
             });
         }
@@ -669,7 +668,7 @@ public class GamePanel extends JPanel {
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
         JButton settingsButton = new JButton("SETTINGS");
-        settingsButton.setBounds(1000,10,80,20);
+        settingsButton.setBounds(1000,10,110,20);
         this.add(quitButton);
         this.add(settingsButton);
         quitButton.addActionListener(e -> {
