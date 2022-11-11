@@ -45,12 +45,6 @@ public class Engine {
         });
     }
 
-    void title() {
-        System.out.println();
-        FileReading fileReading = new FileReading();
-        System.out.println("\033[35m" + fileReading.dataReader("welcome.txt") + "\033[0m");
-        System.out.println();
-    }
 
     void gameObjective() {
 
