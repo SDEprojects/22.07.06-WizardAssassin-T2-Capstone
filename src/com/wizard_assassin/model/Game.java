@@ -272,8 +272,11 @@ public class Game implements Verbs {
     //fight method
     void fight(String noun, Characters object) {
         List<String> inventoryItems = getInventoryItems();
-        if(noun.equals("evil wizard")) {
-            if(inventoryItems.contains("knife")) {
+        String npc = npcNames.get(0);
+        System.out.println(inventoryItems);
+        System.out.println(npc);
+        if(npc.equals("evil wizard")) {
+            if(!inventoryItems.contains("knife")) {
                 setResponse("\nThe Wizard suddenly blasts your head off with a thunder bolt... and you die!");
                 setLoopCondition(false);
             }
@@ -285,17 +288,20 @@ public class Game implements Verbs {
             }
         }
         else if(inventoryItems.contains("sword")){
-            int characterIndex= npcNames.indexOf(noun);
-            object.getCharacters().remove(characterIndex);
-            npcNames.remove(noun);
+
             if(!npcNames.isEmpty() || noun.equals("rat")) {
                 setResponse("\nYou stab "+noun.toUpperCase()+" in the heart and they die."+
                         "\n Miraculously, no one notices.");
+                npcNames.clear();
             }
             else {
                 setResponse("You've been found out!"+
                         "\nShould've listened to the Queen and not gone on that killing spree... You lose");
                 setLoopCondition(false);
+                int characterIndex= npcNames.indexOf(noun);
+                object.getCharacters().remove(characterIndex);
+
+                npcNames.remove(noun);
 
             }
         }

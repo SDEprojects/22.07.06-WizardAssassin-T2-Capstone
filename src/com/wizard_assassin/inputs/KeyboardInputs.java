@@ -1,6 +1,6 @@
 package com.wizard_assassin.inputs;
 
-import com.wizard_assassin.graphics.GamePanel;
+import com.wizard_assassin.view.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

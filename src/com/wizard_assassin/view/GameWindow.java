@@ -1,7 +1,6 @@
-package com.wizard_assassin.graphics;
+package com.wizard_assassin.view;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GameWindow {
 
