@@ -1,6 +1,8 @@
 package com.wizard_assassin.view;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.controller.Controller;
+import com.wizard_assassin.controller.Introduction;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 import com.wizard_assassin.model.Music;
@@ -35,11 +37,21 @@ public class GamePanel extends JPanel {
     private JPanel titlePanel;
     private JPanel namePanel;
     private JPanel wireFrame;
+    private JPanel textBox;
     private JPanel showHUDBox;
+    private JPanel directionBox;
     private JButton backButton;
     private JButton continueButton;
     private JButton getButton;
-    private JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel, mapLabel;
+    private JButton eastButton;
+    private JButton talk;
+    private JButton fight;
+    private JButton northButton;
+    private JButton westButton;
+    private JButton southButton;
+    private JButton upButton;
+    private JButton downButton;
+    private JLabel inventoryBlock, locationBlock, picLabel, titleLabel,  invLabel,  mapLabel, hpLabel, winLabel;
     private JTextField nameField;
     private JTextArea promptField;
     private boolean endCondition = false;
@@ -92,15 +104,34 @@ public class GamePanel extends JPanel {
         importImg("TitleScreenResources/game_background_1.png");
     }
 
-
     //----------------------------------------------------------------------------------------------------------
     // Enter name screen
     private void namePanel() {
+        //load "introduction.json"
+        ObjectMapper mapper = new ObjectMapper();
+        String gameIntro = null;
+        String gameObj = null;
+        String gameWin = null;
+
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream introductionRecFile = classLoader.getResourceAsStream("introduction.json");
+            Introduction obj = mapper.readValue(introductionRecFile, Introduction.class);
+            gameIntro = obj.getIntroduction();
+            gameObj = obj.getObjective();
+            gameWin = obj.getWin();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JTextArea intro = new JTextArea();
         intro.setLineWrap(true);
-        intro.append(" Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
-        intro.append(" \n \n Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
-        intro.append(" \n \n Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
+        intro.append("\n\n\n" + gameIntro + "\n");
+        intro.append("\n\n\n" + gameObj + "\n");
+        intro.append("\n\n\n" + gameWin);
+        intro.setLineWrap(true);
+        intro.setWrapStyleWord(true);
+        
         intro.setBounds(225,145, 750, 550);
         intro.setOpaque(false);
 
@@ -172,6 +203,7 @@ public class GamePanel extends JPanel {
         nextButton.setBounds(600, 730, 100, 40);
         nextButton.setVisible(true);
         prefaceText.setLineWrap(true);
+        prefaceText.setWrapStyleWord(true); //will wrap the too long word
 
         titleLabel.setVisible(true);
         titleLabel.setBounds(250,100, 800, 50);
@@ -233,11 +265,83 @@ public class GamePanel extends JPanel {
     }
 
     private void endScreen() {
+
+    }
+
+    private void winScreen() {
+        GIFPlayer gifPlayer = new GIFPlayer();
+        ImageIcon display = new ImageIcon(gifPlayer.gifGetter("TitleScreenResources/win_screen.gif"));
+        JLabel bg = new JLabel(display);
+        bg.setSize(1280, 800);
+        this.add(bg);
+        JButton playAgain = new JButton("PLAY AGAIN");
+        playAgain.setBounds(590, 600, 160, 30);
+        bg.add(playAgain);
+        BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
+        ImageIcon title = new ImageIcon(titlePic);
+        titleLabel = new JLabel(title);
+        titleLabel.setVisible(true);
+        titleLabel.setBounds(100, 30, 1200, 150);
+        bg.add(titleLabel);
+
+        BufferedImage winText = showPicture("TitleScreenResources/winText.png");
+        ImageIcon winTextIcon = new ImageIcon(winText);
+        winLabel = new JLabel(winTextIcon);
+        winLabel.setVisible(true);
+        winLabel.setBounds(90, 220, 1200, 150);
+        bg.add(winLabel);
+
+        invLabel.setVisible(false);
+        mapLabel.setVisible(false);
+        picLabel.setVisible(false);
+        promptField.setVisible(false);
+        locationBlock.setVisible(false);
+        directionBox.setVisible(false);
+        textBox.setVisible(false);
+        eastButton.setVisible(false);
+        southButton.setVisible(false);
+        westButton.setVisible(false);
+        northButton.setVisible(false);
+        upButton.setVisible(false);
+        downButton.setVisible(false);
+        talk.setVisible(false);
+        fight.setVisible(false);
+        playAgain.addActionListener(e -> {
+            bg.setVisible(false);
+            playAgain.setVisible(false);
+            splashPanel();
+        });
+    }
+
+    private void loseScreen() {
+        JButton playAgain = new JButton("TRY AGAIN");
+        playAgain.setBounds(590, 600, 160, 30);
+        this.add(playAgain);
+        invLabel.setVisible(false);
+        mapLabel.setVisible(false);
+        picLabel.setVisible(false);
+        promptField.setVisible(false);
+        locationBlock.setVisible(false);
+        directionBox.setVisible(false);
+        textBox.setVisible(false);
+        eastButton.setVisible(false);
+        southButton.setVisible(false);
+        westButton.setVisible(false);
+        northButton.setVisible(false);
+        upButton.setVisible(false);
+        downButton.setVisible(false);
+        talk.setVisible(false);
+        fight.setVisible(false);
+        playAgain.addActionListener(e -> {
+            playAgain.setVisible(false);
+            wireFrame();
+        });
+        importImg("TitleScreenResources/m_lose_screen.jpeg");
     }
 
     // TEXT BOX (BOTTOM LEFT)
     public void textBox() {
-        JPanel textBox = new JPanel();
+        textBox = new JPanel();
         promptField = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(promptField);
         scrollPane.setBounds(0, 0, 800, 150);
@@ -260,36 +364,36 @@ public class GamePanel extends JPanel {
 
     // DIRECTION BOX (BOTTOM RIGHT)
     public void directionBox() {
-        JPanel directionBox = new JPanel();
+        directionBox = new JPanel();
         directionBox.setOpaque(false);
-        JButton b5 = new JButton("TALK");
-        b5.setBounds(1140, 630, 70, 50);
-        JButton northButton = new JButton("N");
+        talk = new JButton("TALK");
+        talk.setBounds(1140, 630, 70, 50);
+        northButton = new JButton("N");
         northButton.setBounds(1015, 630, 50, 50);
-        JButton eastButton = new JButton("E");
+        eastButton = new JButton("E");
         eastButton.setBounds(1070, 680, 50, 50);
-        JButton southButton = new JButton("S");
+        southButton = new JButton("S");
         southButton.setBounds(1015, 730, 50, 50);
-        JButton westButton = new JButton("W");
+        westButton = new JButton("W");
         westButton.setBounds(960, 680, 50, 50);
-        JButton upButton = new JButton("UP");
+        upButton = new JButton("UP");
         upButton.setBounds(850, 630, 80, 50);
-        JButton downButton = new JButton("DOWN");
+        downButton = new JButton("DOWN");
         downButton.setBounds(850, 730, 80, 50);
-        JButton selectButton = new JButton("FIGHT");
-        selectButton.setBounds(1140, 730, 70, 50);
+        fight = new JButton("FIGHT");
+        fight.setBounds(1140, 730, 70, 50);
         directionBox.setBounds(840, 480, 400, 150);
         directionBox.setVisible(true);
-        eastButton.setVisible(true);
 
-        this.add(b5);
+
+        this.add(talk);
         this.add(eastButton);
         this.add(northButton);
         this.add(southButton);
         this.add(westButton);
         this.add(upButton);
         this.add(downButton);
-        this.add(selectButton);
+        this.add(fight);
         northButton.addActionListener(e -> {
             controller.input("n");
             updateGame();
@@ -314,11 +418,11 @@ public class GamePanel extends JPanel {
             controller.input("d");
             updateGame();
         });
-        selectButton.addActionListener(e -> {
+        fight.addActionListener(e -> {
             controller.input("f");
             updateGame();
         });
-        b5.addActionListener(e -> {
+        talk.addActionListener(e -> {
             controller.input("t");
             updateGame();
         });
@@ -340,7 +444,7 @@ public class GamePanel extends JPanel {
 
         locationBlock = new JLabel();
         locationBlock.setText(" Location: " + Game.getViewLocation());
-        locationBlock.setBounds(10, 5, 160, 20);
+        locationBlock.setBounds(10, 5, 250, 20);
         locationBlock.setOpaque(true);
         locationBlock.setBackground(Color.lightGray);
         showMap();
@@ -350,6 +454,12 @@ public class GamePanel extends JPanel {
         invLabel.add(inventoryBlock);
     }
 
+    public void showHP() {
+        ImageIcon hp = new ImageIcon(showPicture("ObjectAssets/hp.png"));
+        hpLabel = new JLabel(hp);
+        hpLabel.setBounds(270, 5, 250, 32);
+        //hpLabel.setBounds();
+    }
 
     public void playerInventory() {
         InventoryUI inventoryUI = new InventoryUI();
