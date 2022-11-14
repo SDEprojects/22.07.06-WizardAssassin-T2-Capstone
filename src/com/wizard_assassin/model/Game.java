@@ -35,6 +35,8 @@ public class Game implements Verbs {
     private Map<String, String> itemDescription = new HashMap<>();
     private Map<String, List<String>> npcMap = new HashMap<>();
     List<String> empty = new ArrayList<>(0);
+    private static boolean endGame = false;
+    private static boolean loseCondition = false;
 
 
     public Game() {
@@ -115,8 +117,10 @@ public class Game implements Verbs {
         //location for GUI
         setViewLocation(getLocation());
 
-        //check win condition
-        winConditionCheck();
+        //check alternative win condition
+        alternativeWinCondition();
+        //check end conditions
+        setEndGame(!isLoopCondition());
 
         //set new location text
         prompt(getLocation());
@@ -297,7 +301,7 @@ public class Game implements Verbs {
         }
         else if(inventoryItems.contains("sword")){
 
-            if(!npcNames.isEmpty() || noun.equals("rat")) {
+            if(!npcNames.isEmpty() & !npc.equals("guard")) {
                 setResponse("\nYou stab "+noun.toUpperCase()+" in the heart and they die."+
                         "\n Miraculously, no one notices.");
 
@@ -308,6 +312,7 @@ public class Game implements Verbs {
                 setResponse("You've been found out!"+
                         "\nShould've listened to the Queen and not gone on that killing spree... You lose");
                 setLoopCondition(false);
+                setLoseCondition(true);
                 npcMap.replace(getLocation(),empty);
                 setNpcNames(npcMap.get(getLocation()));
 
@@ -326,7 +331,7 @@ public class Game implements Verbs {
     }
 
     //win condition
-    void winConditionCheck() {
+    void alternativeWinCondition() {
         if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison"))) {
             setResponse("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
             setLoopCondition(false);
@@ -504,4 +509,19 @@ public class Game implements Verbs {
         this.npcNames = npcNames;
     }
 
+    public static boolean isEndGame() {
+        return endGame;
+    }
+
+    public static void setEndGame(boolean endGame) {
+        Game.endGame = endGame;
+    }
+
+    public static boolean isLoseCondition() {
+        return loseCondition;
+    }
+
+    public static void setLoseCondition(boolean loseCondition) {
+        Game.loseCondition = loseCondition;
+    }
 }
