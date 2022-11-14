@@ -14,7 +14,6 @@ public class Game implements Verbs {
     private Data obj = makeObj();
     private Location inventory = obj.getLocations().get(13);
     private List<String> inventoryItems = new ArrayList<>(Arrays.asList(inventory.getItem()));
-    private int count = 0;
     private Location locationState = obj.getLocations().get(0);
     private List<String> npcNames = new ArrayList<>();
     private String location = locationState.getName();
@@ -34,7 +33,8 @@ public class Game implements Verbs {
     private Map<String, List<String>> characterQuotes = new HashMap<>();
     private Map<String, String> itemDescription = new HashMap<>();
     private Map<String, List<String>> npcMap = new HashMap<>();
-    List<String> empty = new ArrayList<>(0);
+    private List<String> empty = new ArrayList<>(0);
+    private boolean poisoned = false;
     private static boolean endGame = false;
     private static boolean loseCondition = false;
 
@@ -117,8 +117,6 @@ public class Game implements Verbs {
         //location for GUI
         setViewLocation(getLocation());
 
-        //check alternative win condition
-        alternativeWinCondition();
         //check end conditions
         setEndGame(!isLoopCondition());
 
@@ -163,7 +161,7 @@ public class Game implements Verbs {
 
     public void getAnItem(String itemInput, Location currentLocation, String verb) throws IOException {
 
-        List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
+        List<String> roomItems = new ArrayList<>(Arrays.asList(currentLocation.getItem()));
 
         if (verb.equals("get") && !inventoryItems.contains(itemInput)) {
             if(inventoryItems.size()<6) {
@@ -205,12 +203,33 @@ public class Game implements Verbs {
         if ("diamond".equals(noun)){
             noun = "diamond key";
         }
+        if ("brass".equals(noun)){
+            noun = "brass key";
+        }
+        if ("meat".equals(noun)){
+            noun = "hunk of meat";
+        }
         if (verb.equals("use")){
 
             if (noun.equals("diamond key") && locationState.getName().equals("Great Hall")){
                 setResponse("\nThat DIAMOND KEY did the trick. You're in...");
-                count++;
                 locationState = obj.getPickedLocation("Wizard's Foyer");
+            }
+            else if (noun.equals("brass key") && locationState.getName().equals("Dungeon")){
+                setResponse("\nThank you! Here's the password");
+                npcMap.replace(getLocation(),empty);
+                setNpcNames(npcMap.get(getLocation()));
+                inventoryItems.add("password");
+            }
+            else if (noun.equals("poison") && locationState.getName().equals("Laboratory") && inventoryItems.contains("hunk of meat")) {
+                setResponse("\nYou've poisoned the meat. I bet the wizard would like this!");
+                inventoryItems.remove("poison");
+                setPoisoned(true);
+
+            }
+            else if (noun.equals("hunk of meat") && locationState.getName().equals("Wizard’s Chambers") && isPoisoned()) {
+                setResponse("\nThe wizard couldn't resist your mutton. \nHuzzah! The poison killed the wizard!!!");
+                setLoopCondition(false);
             }
             else {
                 setResponse("\nCan not " + verb.toUpperCase() + " " + noun.toUpperCase() + ". Choose again...");
@@ -241,7 +260,7 @@ public class Game implements Verbs {
                     setResponse("\nThe " + npcNames.get(0).toUpperCase() + " blocks your path. You must fight it. Use the stick");
                 }
             }
-            else if (locationInput.equals("Great Hall") && getLocation().equals("Courtyard") && count == 0) {
+            else if (locationInput.equals("Great Hall") && getLocation().equals("Courtyard")) {
                 if (inventoryItems.contains("password")) {
                     setResponse("\nGuard: That's the right PASSWORD Go ahead and pass.");
                     locationState = obj.getPickedLocation(locationInput);
@@ -250,23 +269,40 @@ public class Game implements Verbs {
                     setResponse("\nGuard: Wrong PASSWORD! Get outta here, ya scum!");
                 }
             }
-            else if (locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall") && count == 1) {
+            else if (locationInput.equals("Royal Lounge") && getLocation().equals("Great Hall")) {
                 if (inventoryItems.contains("tunic") && inventoryItems.contains("sword")) {
                     setResponse("\nGuard: I don't know you... but you have the Kingdom's TUNIC... "+
                             "\nand that SWORD... You must be new... go ahead and pass.");
-                    count++;
                     locationState = obj.getPickedLocation(locationInput);
                     setLocation(locationState.getName());
                 } else {
-                    setResponse("\nGuard: Where do you think you're going? Only knights can pass through here."+
-                            "\nAnd not just any bloak with a Kingdom's TUNIC. You need a SWORD too.");
+                    if(inventoryItems.contains("tunic")) {
+                        setResponse("\nGuard: Where do you think you're going? Only knights can pass through here." +
+                                "\nAnd not just any bloak with a Kingdom's TUNIC. You need a SWORD too.");
+                    }
+                    else{
+                        setResponse("\nGuard: Where do you think you're going? Only knights can pass through here." +
+                                "\nAnd not just any bloak with a Kingdom's SWORD. You need a TUNIC too.");
+                    }
                 }
             }
-            else if (locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall") && count <= 2) {
+            else if (locationInput.equals("Wizard's Foyer") && locationState.getName().equals("Great Hall")) {
                 if (inventoryItems.contains("diamond key")) {
                     setResponse("\nMaybe I can USE that DIAMOND KEY on this door.");
                 } else {
                     setResponse("\nHmm, it's locked. There's an emblem in the shape of a DIAMOND on the door");
+                }
+            }
+            else if (locationInput.equals("Wizard’s Chambers") && locationState.getName().equals("Wizard's Foyer")){
+                if (!inventoryItems.contains("wizard robes")) {
+                    setResponse("The monster bites your head off and you die!");
+                    setLoopCondition(false);
+                    setLoseCondition(true);
+                }
+                else{
+                    setResponse("You look just like a wizard");
+                    locationState = obj.getPickedLocation(locationInput);
+                    setLocation(locationState.getName());
                 }
             }
             else {
@@ -291,22 +327,26 @@ public class Game implements Verbs {
             if(!inventoryItems.contains("knife")) {
                 setResponse("\nThe Wizard suddenly blasts your head off with a thunder bolt... and you die!");
                 setLoopCondition(false);
+                setLoseCondition(true);
             }
             else if(inventoryItems.contains("knife")){
                 setResponse("\nThe Wizard suddenly attacks you with a thunder bolt but you matrix dodge it."+
-                        "\n You shank him with the KNIFE and he dies!"+
-                        "\n\nYou have shanked the wizard to death. You return home as a hero who saved your kingdom!");
+                        "\nYou have shanked the wizard to death. You return home as a hero who saved your kingdom!");
                 setLoopCondition(false);
             }
         }
         else if(inventoryItems.contains("sword")){
 
             if(!npcNames.isEmpty() & !npc.equals("guard")) {
-                setResponse("\nYou stab "+noun.toUpperCase()+" in the heart and they die."+
-                        "\n Miraculously, no one notices.");
+                if (!npc.equals("prisoner")) {
+                    setResponse("\nYou stab " + noun.toUpperCase() + " in the heart and they die." +
+                            "\n Miraculously, no one notices.");
 
-                npcMap.replace(getLocation(),empty);
-                setNpcNames(npcMap.get(getLocation()));
+                    npcMap.replace(getLocation(), empty);
+                    setNpcNames(npcMap.get(getLocation()));
+                } else {
+                    setResponse("\nI'm going to advise against that.");
+                }
             }
             else {
                 setResponse("You've been found out!"+
@@ -330,14 +370,6 @@ public class Game implements Verbs {
         }
     }
 
-    //win condition
-    void alternativeWinCondition() {
-        if (locationState.getName().equals("Laboratory") && (inventoryItems.contains("poison"))) {
-            setResponse("You have poisoned the wizard. You return home as a hero who saved your kingdom.");
-            setLoopCondition(false);
-        }
-    }
-
     void prompt(String currentLocation) {
 
         //NPCs
@@ -347,13 +379,6 @@ public class Game implements Verbs {
             localNPC = "\nYou see the following characters: " + npcMap.get(getLocation());
         }
         setViewRoomNPCs(getNpcNames());
-
-        //TODO fix this death condition to work with GUI
-        /*
-        if (location.equals("Wizard's Foyer") && !inventoryItems.contains("wizard robes")) {
-            setResponse("The monster bites your head off and you die!");
-            setLoopCondition(false);
-        }*/
 
         //Items
         String localItems = "";
@@ -523,5 +548,13 @@ public class Game implements Verbs {
 
     public static void setLoseCondition(boolean loseCondition) {
         Game.loseCondition = loseCondition;
+    }
+
+    public boolean isPoisoned() {
+        return poisoned;
+    }
+
+    public void setPoisoned(boolean poisoned) {
+        this.poisoned = poisoned;
     }
 }
