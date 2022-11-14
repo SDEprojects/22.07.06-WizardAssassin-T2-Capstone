@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
     private BufferedImage gameVisualBackground;
     private BufferedImage prefaceBG;
     private KeyboardInputs keyboardInputs;
-    private final Controller controller = new Controller();
+    private Controller controller;
     private String playerName, locationImg;
 
 
@@ -235,6 +235,7 @@ public class GamePanel extends JPanel {
     //----------------------------------------------------------------------------------------------------------
     // WIRE FRAME WINDOW
     public void wireFrame() {
+        controller = new Controller();
         importImg("TitleScreenResources/StoneWall.jpeg");
         textBox();
         directionBox();
@@ -245,7 +246,7 @@ public class GamePanel extends JPanel {
 
     //UPDATES WIREFRAME
     private void updateGame() {
-
+        endCondition = Game.isEndGame();
         if (!endCondition) {
             inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
             locationBlock.setText("Location: " + Game.getViewLocation());
@@ -259,13 +260,18 @@ public class GamePanel extends JPanel {
             showHUDBox();
         }
         else {
-            wireFrame.setVisible(false);
+            //wireFrame.setVisible(false);
             endScreen();
         }
     }
 
     private void endScreen() {
-
+        if (!Game.isLoseCondition()){
+            winScreen();
+        }
+        else {
+            loseScreen();
+        }
     }
 
     private void winScreen() {

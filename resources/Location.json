@@ -84,7 +84,7 @@
       },
       "description": "The Great Hall ceiling is 20 feet high.\nLight pours in from big windows on each side of the room.\n\nTo the north is a door leading to the wizard’s tower.\nHowever, explore the other rooms since you need important items to defeat the evil wizard.",
       "items": [
-        "note"
+        "message"
       ],
       "characters": [
         "knight"
@@ -99,7 +99,8 @@
       "description": "The Kitchen has a few servants scrub pots, dishes, and the floor.\nThe light from the large open hearth partially illuminates the room.\n\nOn a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
       "items": [
         "knife",
-        "poison"
+        "poison",
+        "hunk of meat"
       ],
       "characters": [
         "servant"
@@ -115,7 +116,8 @@
       },
       "description": "The Royal Lounge has a few couches, a table surrounded with chairs.\nThis room is usually used for important meetings with the king.\n\nIn this room you will find a KEY that open the door to the Wizard’s Tower.",
       "items": [
-        "diamond key"
+        "diamond key",
+        "mead"
       ],
       "characters": [
         "king's hand"
@@ -187,8 +189,6 @@
       },
       "description": "The Laboratory is full of tables crammed with beakers and vials filled with colorful, bubbling and smoking liquids.\n\nYou see a jug of MEAD on one of the tables.\nThere is a NOTE next to the MEAD.",
       "items": [
-        "mead",
-        "hunk of meat",
         "jewels"
       ],
       "characters": [
