@@ -15,7 +15,7 @@
     },
     {
       "name": "Note",
-      "description": "A small piece of paper with writing on it.",
+      "description": "The wizard loves his mead.",
       "attribute": "clue",
       "location": "Watchtower"
     },
@@ -27,8 +27,8 @@
     },
     {
       "name": "password",
-      "description": "Shiny, sharp, ",
-      "attribute": "allows you to identify the good wizard",
+      "description": "wizard for life",
+      "attribute": "allows you to identify as a wizard guard",
       "location": "Armory"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "name": "Diamond Key",
-      "description": "A long-shanked silver key.",
+      "description": "A longshanked silver key. Unlocks wizard tower.",
       "attribute": "unlocks wizard tower",
       "location": "Royal Lounge"
     },

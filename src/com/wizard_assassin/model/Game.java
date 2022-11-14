@@ -33,6 +33,8 @@ public class Game implements Verbs {
     private Item itemsObject = null;
     private Map<String, List<String>> characterQuotes = new HashMap<>();
     private Map<String, String> itemDescription = new HashMap<>();
+    private Map<String, List<String>> npcMap = new HashMap<>();
+    List<String> empty = new ArrayList<>(0);
 
 
     public Game() {
@@ -48,12 +50,16 @@ public class Game implements Verbs {
             e.printStackTrace();
         }
 
-        for (ExtraCharacters extraCharacters : object.getCharacters())
+        for (ExtraCharacters extraCharacters : object.getCharacters()) {
             characterQuotes.put(extraCharacters.getName().toLowerCase(), extraCharacters.getQuote());
+            List<String> list = new ArrayList<>(List.of(extraCharacters.getName()));
+            npcMap.put(extraCharacters.getRoom(), list);
+        }
 
+        setNpcNames(npcMap.get(getLocation()));
         setViewLocation(getLocation());
         setViewInventory(getInventoryItems());
-        prompt(getLocation(), characterQuotes, object);
+        prompt(getLocation());
 
     }
 
@@ -79,15 +85,16 @@ public class Game implements Verbs {
         }
         //character actions
         else if (Verbs.getCharacterActions().contains(verb)) {
+            noun = npcMap.get(getLocation()).get(0);
             // talk
-            if (npcNames.size()>0) {
+            if (npcMap.get(getLocation())!=null && !npcMap.get(getLocation()).isEmpty()) {
                 if (verb.equals("speak")) {
                     //Generate random int value from 0 to 2 for random sayings
                     int num = (int) (Math.random() * (3));
                     String characterQuote = characterQuotes.get(npcNames.get(0)).get(num);
                     setResponse("\n" + characterQuote);
                 } else if (verb.equals("fight")) {
-                    fight(npcNames.get(0), object);
+                    fight(noun);
                 }
             }
             else {
@@ -112,10 +119,10 @@ public class Game implements Verbs {
         winConditionCheck();
 
         //set new location text
-        prompt(getLocation(), characterQuotes, object);
+        prompt(getLocation());
 
         //
-        setViewRoomNPCs(getNpcNames());
+        setViewRoomNPCs(npcMap.get(getLocation()));
     }
 
     private void examine(String noun) {
@@ -270,11 +277,12 @@ public class Game implements Verbs {
     }
 
     //fight method
-    void fight(String noun, Character object) {
+    void fight(String noun) {
         List<String> inventoryItems = getInventoryItems();
-        String npc = npcNames.get(0);
-        System.out.println(inventoryItems);
-        System.out.println(npc);
+
+        setNpcNames(npcMap.get(getLocation()));
+
+        String npc = getNpcNames().get(0);
         if(npc.equals("evil wizard")) {
             if(!inventoryItems.contains("knife")) {
                 setResponse("\nThe Wizard suddenly blasts your head off with a thunder bolt... and you die!");
@@ -292,25 +300,25 @@ public class Game implements Verbs {
             if(!npcNames.isEmpty() || noun.equals("rat")) {
                 setResponse("\nYou stab "+noun.toUpperCase()+" in the heart and they die."+
                         "\n Miraculously, no one notices.");
-                npcNames.clear();
+
+                npcMap.replace(getLocation(),empty);
+                setNpcNames(npcMap.get(getLocation()));
             }
             else {
                 setResponse("You've been found out!"+
                         "\nShould've listened to the Queen and not gone on that killing spree... You lose");
                 setLoopCondition(false);
-                int characterIndex= npcNames.indexOf(noun);
-                object.getCharacters().remove(characterIndex);
-
-                npcNames.remove(noun);
+                npcMap.replace(getLocation(),empty);
+                setNpcNames(npcMap.get(getLocation()));
 
             }
         }
         else if(inventoryItems.contains("stick") && noun.equals("rat")) {
             setResponse("\nYou beat the " + noun.toUpperCase() + " to death with the STICK");
-            int characterIndex= npcNames.indexOf(noun);
-            object.getCharacters().remove(characterIndex);
 
-            npcNames.remove(noun);
+            npcMap.replace(getLocation(),empty);
+            setNpcNames(npcMap.get(getLocation()));
+
         }
         else {
             setResponse("\nI'm going to advise against that.");
@@ -325,19 +333,13 @@ public class Game implements Verbs {
         }
     }
 
-    void prompt(String currentLocation, Map<String, List<String>> quotes, Character object) {
+    void prompt(String currentLocation) {
 
         //NPCs
-        npcNames.clear();
-        for (ExtraCharacters extraCharacters : object.getCharacters()) {
-            if ((currentLocation.equals(extraCharacters.getRoom()))) {
-                npcNames.add(extraCharacters.getName().toLowerCase());
-                quotes.put(extraCharacters.getName(), extraCharacters.getQuote());
-            }
-        }
         String localNPC = "";
-        if (npcNames.size() > 0) {
-            localNPC = "\nYou see the following characters: " + npcNames;
+
+        if (npcMap.get(getLocation())!=null && !npcMap.get(getLocation()).isEmpty()) {
+            localNPC = "\nYou see the following characters: " + npcMap.get(getLocation());
         }
         setViewRoomNPCs(getNpcNames());
 
@@ -359,7 +361,6 @@ public class Game implements Verbs {
         //Directions
         ArrayList<String> directionList = new ArrayList<>();
         if (!locationState.getDirections().isEmpty()) {
-            //System.out.println("From the " + locationState.getName() + " you can go to the:");
             Map<String,String> direction = locationState.getDirections();
             direction.forEach((k,v) -> directionList.add(k));
         }
@@ -502,4 +503,5 @@ public class Game implements Verbs {
     public void setNpcNames(List<String> npcNames) {
         this.npcNames = npcNames;
     }
+
 }
