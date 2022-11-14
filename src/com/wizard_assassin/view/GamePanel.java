@@ -42,6 +42,7 @@ public class GamePanel extends JPanel {
     private JLabel titleBlock, inventoryBlock, locationBlock, picLabel, titleLabel, preLabel, invLabel, npcLabel, mapLabel;
     private JTextField nameField;
     private JTextArea promptField;
+    private boolean endCondition = false;
 
     // CONSTRUCTOR
     public GamePanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -212,16 +213,25 @@ public class GamePanel extends JPanel {
 
     //UPDATES WIREFRAME
     private void updateGame() {
-        inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
-        locationBlock.setText("Location: " + Game.getViewLocation());
-        promptField.setText(Game.getReturnPrompt());
-        promptField.append(Game.getResponse());
-        picLabel.setVisible(false);
-        mapLabel.setVisible(false);
-        invLabel.setVisible(false);
-        locationBlock.setVisible(false);
-        showPic();
-        showHUDBox();
+        if (!endCondition) {
+            inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
+            locationBlock.setText("Location: " + Game.getViewLocation());
+            promptField.setText(Game.getReturnPrompt());
+            promptField.append(Game.getResponse());
+            picLabel.setVisible(false);
+            mapLabel.setVisible(false);
+            invLabel.setVisible(false);
+            locationBlock.setVisible(false);
+            showPic();
+            showHUDBox();
+        }
+        else {
+            wireFrame.setVisible(false);
+            endScreen();
+        }
+    }
+
+    private void endScreen() {
     }
 
     // TEXT BOX (BOTTOM LEFT)
