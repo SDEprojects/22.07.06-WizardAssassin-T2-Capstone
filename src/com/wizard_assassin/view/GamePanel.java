@@ -6,6 +6,7 @@ import com.wizard_assassin.controller.Introduction;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 import com.wizard_assassin.model.Music;
+import com.wizard_assassin.model.PrefaceText;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -219,8 +220,24 @@ public class GamePanel extends JPanel {
         prefacePanel.setVisible(true);
         this.add(preLabel);
         //add(prefacePanel);
+
+        //Load prefaceText.json
+        ObjectMapper mapper = new ObjectMapper();
+        String text = null;
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream prefaceRecFile = classLoader.getResourceAsStream("prefaceText.json");
+            PrefaceText obj = mapper.readValue(prefaceRecFile, PrefaceText.class);
+            text = obj.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String finalText = text;
         nextButton.addActionListener(e -> {
-            prefaceText.setText("The Queen says to you,\"Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special.... As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target. What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard. My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard. We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard. It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps. Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition. When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South. Are you ready?\"");
+            Font font1 = new Font("Verdana", Font.BOLD, 15); //Had to set smaller Font size to fit the textArea.
+            prefaceText.setText(finalText);
+            prefaceText.setFont(font1);
             nextButton.addActionListener(e1 -> {
                 titleLabel.setVisible(false);
                 prefaceText.setVisible(false);
