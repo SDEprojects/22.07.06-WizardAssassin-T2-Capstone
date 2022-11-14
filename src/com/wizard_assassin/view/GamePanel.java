@@ -214,7 +214,7 @@ public class GamePanel extends JPanel {
 
         //prefacePanel.add(nextButton);
 
-        prefaceText.setText("\n"+getPlayerName() + " is in the " + Game.getViewLocation());
+        prefaceText.setText("\n"+getPlayerName() + " is in the garden");
         prefaceText.append(" \n \n ");
         prefaceText.append("\n" + getPlayerName() + " spots the queen roaming about her garden. You decide to speak to her majesty. ");
         prefacePanel.setVisible(true);
