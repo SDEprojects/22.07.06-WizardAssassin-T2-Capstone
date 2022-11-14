@@ -20,6 +20,7 @@ public class InventoryUI {
         playerInventory.put("jewels", "ObjectsAssets/Layer_30.png");
         playerInventory.put("password", "ObjectsAssets/pass.jpg");
         playerInventory.put("hunk of meat", "ObjectsAssets/Layer 6.png");
+        playerInventory.put("message", "ObjectsAssets/Layer_message.png");
     }
 
     public String inventorySetter(String inventoryItem){

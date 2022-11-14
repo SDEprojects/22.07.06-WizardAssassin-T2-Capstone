@@ -20,6 +20,12 @@
       "location": "Watchtower"
     },
     {
+      "name": "message",
+      "description": "Beware of the beast. He's trained to kill none wizards",
+      "attribute": "clue",
+      "location": "Watchtower"
+    },
+    {
       "name": "Sword",
       "description": "Shiny, sharp, sleek, set to separate souls from bodies.",
       "attribute": "fight monsters",
@@ -64,6 +70,12 @@
     {
       "name": "Jewels",
       "description": "These belonged to someone's family.",
+      "attribute": "treasure",
+      "location": "Laboratory"
+    },
+    {
+      "name": "hunk of meat",
+      "description": "boiled mutton.",
       "attribute": "treasure",
       "location": "Laboratory"
     }
