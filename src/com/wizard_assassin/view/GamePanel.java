@@ -213,6 +213,7 @@ public class GamePanel extends JPanel {
 
     //UPDATES WIREFRAME
     private void updateGame() {
+
         if (!endCondition) {
             inventoryBlock.setText("Inventory: " + Game.getViewInventory().toString());
             locationBlock.setText("Location: " + Game.getViewLocation());
