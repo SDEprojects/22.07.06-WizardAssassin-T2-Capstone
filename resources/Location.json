@@ -48,8 +48,7 @@
     {
       "name": "Armory",
       "directions": {
-        "down": "Watchtower",
-        "north": "Courtyard"
+        "down": "Watchtower"
       },
       "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard.\n\nThere is also a spare TUNIC that the guards wear.\nIt has the INSIGNIA of the king.",
       "items": [
@@ -98,8 +97,7 @@
       "description": "The Kitchen has a few servants scrub pots, dishes, and the floor.\nThe light from the large open hearth partially illuminates the room.\n\nOn a table there is a KNIFE and in the corner there is a bottle labeled POISON that is usually used to kill rats. ",
       "items": [
         "knife",
-        "poison",
-        "hunk of meat"
+        "poison"
       ],
       "characters": [
         "servant"
@@ -116,7 +114,8 @@
       "description": "The Royal Lounge has a few couches, a table surrounded with chairs.\nThis room is usually used for important meetings with the king.\n\nIn this room you will find a KEY that open the door to the Wizard’s Tower.",
       "items": [
         "diamond key",
-        "mead"
+        "mead",
+        "hunk of meat"
       ],
       "characters": [
         "king's hand"

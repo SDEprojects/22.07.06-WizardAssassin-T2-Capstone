@@ -15,7 +15,7 @@
     },
     {
       "name": "Note",
-      "description": "The wizard loves his mead.",
+      "description": "The wizard loves his mutton.",
       "attribute": "clue",
       "location": "Watchtower"
     },
@@ -33,7 +33,7 @@
     },
     {
       "name": "password",
-      "description": "wizard for life",
+      "description": "wizards for life",
       "attribute": "allows you to identify as a wizard guard",
       "location": "Armory"
     },
