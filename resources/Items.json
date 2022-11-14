@@ -28,7 +28,7 @@
     {
       "name": "password",
       "description": "wizard for life",
-      "attribute": "allows you to identify the good wizard",
+      "attribute": "allows you to identify as a wizard guard",
       "location": "Armory"
     },
     {
