@@ -266,11 +266,17 @@ public class GamePanel extends JPanel {
     }
 
     private void endScreen() {
+        String resp = "You've been found out!"+
+                "\nShould've listened to the Queen and not gone on that killing spree... You lose";
         if (!Game.isLoseCondition()){
             winScreen();
         }
         else {
-            loseScreen();
+            if (Game.getResponse().equals(resp)){
+                jailScreen();
+            } else {
+                loseScreen();
+            }
         }
     }
 
@@ -296,6 +302,17 @@ public class GamePanel extends JPanel {
         winLabel.setVisible(true);
         winLabel.setBounds(90, 220, 1200, 150);
         bg.add(winLabel);
+
+        JTextArea expText = new JTextArea();
+        expText.setBounds(440, 400, 400, 120);
+        expText.setLineWrap(true);
+        expText.setWrapStyleWord(true);
+        Font font = new Font("Verdana", Font.BOLD, 20);
+        expText.setFont(font);
+        expText.setOpaque(false);
+        expText.setForeground(Color.white);
+        expText.setText(Game.getResponse());
+        bg.add(expText);
 
         invLabel.setVisible(false);
         mapLabel.setVisible(false);
@@ -323,6 +340,16 @@ public class GamePanel extends JPanel {
         JButton playAgain = new JButton("TRY AGAIN");
         playAgain.setBounds(590, 600, 160, 30);
         this.add(playAgain);
+        JTextArea expText = new JTextArea();
+        expText.setBounds(440, 200, 400, 120);
+        expText.setLineWrap(true);
+        expText.setWrapStyleWord(true);
+        Font font = new Font("Verdana", Font.BOLD, 20);
+        expText.setFont(font);
+        expText.setOpaque(false);
+        expText.setForeground(Color.white);
+        expText.setText(Game.getResponse());
+        this.add(expText);
         invLabel.setVisible(false);
         mapLabel.setVisible(false);
         picLabel.setVisible(false);
@@ -339,10 +366,55 @@ public class GamePanel extends JPanel {
         talk.setVisible(false);
         fight.setVisible(false);
         playAgain.addActionListener(e -> {
+            expText.setVisible(false);
             playAgain.setVisible(false);
             wireFrame();
         });
         importImg("TitleScreenResources/m_lose_screen.jpeg");
+    }
+
+    private void jailScreen() {
+        JButton playAgain = new JButton("TRY AGAIN");
+        playAgain.setBounds(570, 650, 160, 30);
+        this.add(playAgain);
+        JPanel jnBlock = new JPanel();
+        Font font = new Font("Verdana", Font.BOLD, 20);
+        JTextArea pn = new JTextArea();
+        pn.setFont(font);
+        pn.setText(getPlayerName());
+        jnBlock.add(pn);
+        jnBlock.setBounds(480, 120, 270, 30);
+        jnBlock.setVisible(true);
+        JTextArea expText = new JTextArea();
+        expText.setBounds(400, 400, 400, 120);
+        expText.setLineWrap(true);
+        expText.setWrapStyleWord(true);
+        expText.setFont(font);
+        expText.setText(Game.getResponse());
+        this.add(expText);
+        this.add(jnBlock);
+        invLabel.setVisible(false);
+        mapLabel.setVisible(false);
+        picLabel.setVisible(false);
+        promptField.setVisible(false);
+        locationBlock.setVisible(false);
+        directionBox.setVisible(false);
+        textBox.setVisible(false);
+        eastButton.setVisible(false);
+        southButton.setVisible(false);
+        westButton.setVisible(false);
+        northButton.setVisible(false);
+        upButton.setVisible(false);
+        downButton.setVisible(false);
+        talk.setVisible(false);
+        fight.setVisible(false);
+        playAgain.addActionListener(e -> {
+            jnBlock.setVisible(false);
+            expText.setVisible(false);
+            playAgain.setVisible(false);
+            wireFrame();
+        });
+        importImg("TitleScreenResources/m_evilPath.jpeg");
     }
 
     // TEXT BOX (BOTTOM LEFT)
