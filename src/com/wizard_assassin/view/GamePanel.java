@@ -3,6 +3,7 @@ package com.wizard_assassin.view;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.controller.Introduction;
+import com.wizard_assassin.controller.PrefaceText;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 import com.wizard_assassin.model.Music;
@@ -51,7 +52,7 @@ public class GamePanel extends JPanel {
     private JButton southButton;
     private JButton upButton;
     private JButton downButton;
-    private JLabel inventoryBlock, locationBlock, picLabel, titleLabel,  invLabel,  mapLabel, hpLabel, winLabel;
+    private JLabel inventoryBlock, locationBlock, picLabel, titleLabel, invLabel, mapLabel, hpLabel, winLabel;
     private JTextField nameField;
     private JTextArea promptField;
     private boolean endCondition = false;
@@ -75,7 +76,7 @@ public class GamePanel extends JPanel {
         GIFPlayer gifPlayer = new GIFPlayer();
         ImageIcon display = new ImageIcon(gifPlayer.gifGetter("TitleScreenResources/sbg.gif"));
         JLabel bg = new JLabel(display);
-        bg.setSize(1280,800);
+        bg.setSize(1280, 800);
         this.add(bg);
 
         BufferedImage titlePic = showPicture("TitleScreenResources/title.png");
@@ -131,8 +132,8 @@ public class GamePanel extends JPanel {
         intro.append("\n\n\n" + gameWin);
         intro.setLineWrap(true);
         intro.setWrapStyleWord(true);
-        
-        intro.setBounds(225,145, 750, 550);
+
+        intro.setBounds(225, 145, 750, 550);
         intro.setOpaque(false);
 
         Font font = new Font("Verdana", Font.BOLD, 18);
@@ -198,7 +199,7 @@ public class GamePanel extends JPanel {
         prefaceText.setFont(font);
         prefaceText.setOpaque(false);
         prefaceText.setVisible(true);
-        prefaceText.setBounds(250,160, 750, 450);
+        prefaceText.setBounds(250, 160, 750, 450);
         JButton nextButton = new JButton("NEXT");
         nextButton.setBounds(600, 730, 100, 40);
         nextButton.setVisible(true);
@@ -206,21 +207,37 @@ public class GamePanel extends JPanel {
         prefaceText.setWrapStyleWord(true); //will wrap the too long word
 
         titleLabel.setVisible(true);
-        titleLabel.setBounds(250,100, 800, 50);
+        titleLabel.setBounds(250, 100, 800, 50);
         this.add(titleLabel);
         this.add(prefaceText);
         this.add(nextButton);
 
         //prefacePanel.add(nextButton);
 
-        prefaceText.setText("\n"+getPlayerName() + " is in the " + Game.getViewLocation());
+        prefaceText.setText("\n" + getPlayerName() + " is in the " + Game.getViewLocation());
         prefaceText.append(" \n \n ");
         prefaceText.append("\n" + getPlayerName() + " spots the queen roaming about her garden. You decide to speak to her majesty. ");
         prefacePanel.setVisible(true);
         this.add(preLabel);
         //add(prefacePanel);
+
+        //Load prefaceText.json
+        ObjectMapper mapper = new ObjectMapper();
+        String text = null;
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream prefaceRecFile = classLoader.getResourceAsStream("prefaceText.json");
+            PrefaceText obj = mapper.readValue(prefaceRecFile, PrefaceText.class);
+            text = obj.getText();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String finalText = text;
         nextButton.addActionListener(e -> {
-            prefaceText.setText("The Queen says to you,\"Hello warrior, I've called you here because I have a special mission for you. This mission is sooooo special.... As you are well aware the Kingdom to the South has been mercilessly invading neighboring Kingdom's, slaughtering countless innocents, and it appears that we may be their next target. What you may not know is that we have gathered intel from a spy that this ruthless bloodshed is only occurring due to the influence of a powerful spell being placed on the entire Kingdom by an Evil Wizard. My plea for you and that of our people is for you to infiltrate the Kingdom to the South and ASSASSINATE this Evil Wizard. We know that this Wizard is guarded by a vicious monster but our inside source tells us that this beast is loyal only to the Evil Wizard. It relies mostly on scent, so you should be able to find something of the WIZARD's to trick the monster, ROBES, perhaps. Please spare as many lives as you can, since we don't believe any folk in the Kingdom to be acting of their own volition. When you're ready to go, I'll use this scroll to transport you to the Kingdom to the South. Are you ready?\"");
+            Font font1 = new Font("Verdana", Font.BOLD, 16); //Had to set smaller Font size to fit the textArea.
+            prefaceText.setText(finalText);
+            prefaceText.setFont(font1);
             nextButton.addActionListener(e1 -> {
                 titleLabel.setVisible(false);
                 prefaceText.setVisible(false);
@@ -257,8 +274,7 @@ public class GamePanel extends JPanel {
             locationBlock.setVisible(false);
             showPic();
             showHUDBox();
-        }
-        else {
+        } else {
             wireFrame.setVisible(false);
             endScreen();
         }
@@ -630,7 +646,7 @@ public class GamePanel extends JPanel {
             case ("Queen's Garden"):
                 mapPic = showPicture("map assets/atGarden.png");
                 break;
-            case("Church"):
+            case ("Church"):
                 mapPic = showPicture("map assets/atChurch.png");
                 break;
             case ("Courtyard"):
@@ -644,25 +660,25 @@ public class GamePanel extends JPanel {
             case ("Laboratory"):
                 mapPic = showPicture("map assets/atLab.png");
                 break;
-            case("Wizard's Foyer"):
+            case ("Wizard's Foyer"):
                 mapPic = showPicture("map assets/atWizardFoyer.png");
                 break;
-            case("Wizard’s Chambers"):
+            case ("Wizard’s Chambers"):
                 mapPic = showPicture("map assets/atWizardChamber.png");
                 break;
-            case("Great Hall"):
+            case ("Great Hall"):
                 mapPic = showPicture("map assets/atGreatHall.png");
                 break;
-            case("Kitchen"):
+            case ("Kitchen"):
                 mapPic = showPicture("map assets/atKitchen.png");
                 break;
-            case("Royal Lounge"):
+            case ("Royal Lounge"):
                 mapPic = showPicture("map assets/atRoyalLounge.png");
                 break;
-            case("Royal Library"):
+            case ("Royal Library"):
                 mapPic = showPicture("map assets/atRoyalLibrary.png");
                 break;
-            case("King’s Chambers"):
+            case ("King’s Chambers"):
                 mapPic = showPicture("map assets/atKingSuite.png");
                 break;
             default:
@@ -775,7 +791,7 @@ public class GamePanel extends JPanel {
 
         NPC_UI npcUi = new NPC_UI();
 
-        if (viewRoomNPCs !=null && !viewRoomNPCs.isEmpty()) {
+        if (viewRoomNPCs != null && !viewRoomNPCs.isEmpty()) {
             npcIcon = new ImageIcon(showPicture(npcUi.npcSetter(viewRoomNPCs.get(0))));
             npcLabel.setIcon(npcIcon);
             picLabel.add(npcLabel);
@@ -846,7 +862,7 @@ public class GamePanel extends JPanel {
         JButton quitButton = new JButton("QUIT");
         quitButton.setBounds(1180, 10, 70, 20);
         JButton settingsButton = new JButton("SETTINGS");
-        settingsButton.setBounds(1000,10,110,20);
+        settingsButton.setBounds(1000, 10, 110, 20);
         this.add(quitButton);
         this.add(settingsButton);
         quitButton.addActionListener(e -> {
