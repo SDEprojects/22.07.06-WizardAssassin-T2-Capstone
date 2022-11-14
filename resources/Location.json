@@ -67,7 +67,6 @@
       },
       "description": "The Dungeon is gloomy, cold and dripping water.\nShackles dangle from the walls.\n\nIn one of the cells huddles a bloodied PRISONER.",
       "items": [
-        "password"
       ],
       "characters": [
         "prisoner"

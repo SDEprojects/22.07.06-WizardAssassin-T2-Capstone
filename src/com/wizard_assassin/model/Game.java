@@ -163,7 +163,7 @@ public class Game implements Verbs {
 
     public void getAnItem(String itemInput, Location currentLocation, String verb) throws IOException {
 
-        List<String> roomItems = new ArrayList<String>(Arrays.asList(currentLocation.getItem()));
+        List<String> roomItems = new ArrayList<>(Arrays.asList(currentLocation.getItem()));
 
         if (verb.equals("get") && !inventoryItems.contains(itemInput)) {
             if(inventoryItems.size()<6) {
@@ -205,12 +205,23 @@ public class Game implements Verbs {
         if ("diamond".equals(noun)){
             noun = "diamond key";
         }
+        if ("brass".equals(noun)){
+            noun = "brass key";
+        }
         if (verb.equals("use")){
 
             if (noun.equals("diamond key") && locationState.getName().equals("Great Hall")){
                 setResponse("\nThat DIAMOND KEY did the trick. You're in...");
                 count++;
                 locationState = obj.getPickedLocation("Wizard's Foyer");
+            }
+            else if (noun.equals("brass key") && locationState.getName().equals("Dungeon")){
+                setResponse("\nThank you! Here's the password");
+                npcMap.replace(getLocation(),empty);
+                setNpcNames(npcMap.get(getLocation()));
+                inventoryItems.add("password");
+
+
             }
             else {
                 setResponse("\nCan not " + verb.toUpperCase() + " " + noun.toUpperCase() + ". Choose again...");
