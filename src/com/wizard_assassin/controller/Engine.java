@@ -2,10 +2,13 @@ package com.wizard_assassin.controller;
 
 import com.apps.util.Console;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wizard_assassin.graphics.GamePanel;
-import com.wizard_assassin.graphics.GameWindow;
+import com.wizard_assassin.view.GamePanel;
+import com.wizard_assassin.view.GameWindow;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -27,36 +30,19 @@ public class Engine {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gamePanel = new GamePanel();
+                //noinspection TryWithIdenticalCatches
+                try {
+                    gamePanel = new GamePanel();
+                } catch (UnsupportedAudioFileException e) {
+                    e.printStackTrace();
+                } catch (LineUnavailableException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 gameWindow = new GameWindow(gamePanel);
             }
         });
-    }
-
-    void title() {
-        System.out.println();
-        FileReading fileReading = new FileReading();
-        System.out.println("\033[35m" + fileReading.dataReader("welcome.txt") + "\033[0m");
-        System.out.println();
-    }
-
-    void gameObjective() {
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream introductionRecFile = classLoader.getResourceAsStream("introduction.json");
-            Introduction obj = mapper.readValue(introductionRecFile, Introduction.class);
-            String gameIntro = obj.getIntroduction();
-            String gameObj = obj.getObjective();
-            String gameWin = obj.getWin();
-            System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
-            System.out.println();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
     }
 
     void beginGame() {

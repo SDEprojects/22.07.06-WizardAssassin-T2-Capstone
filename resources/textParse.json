@@ -23,7 +23,8 @@
     "light",
     "fight",
     "view",
-    "inventory"
+    "inventory",
+    "drop"
   ],
   "noun": [
     "north",
@@ -86,6 +87,8 @@
     "evil",
     "tunic",
     "password",
-    "diamond"
+    "diamond",
+    "message",
+    "meat"
   ]
 }

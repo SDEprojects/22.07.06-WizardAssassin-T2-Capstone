@@ -48,8 +48,7 @@
     {
       "name": "Armory",
       "directions": {
-        "down": "Watchtower",
-        "north": "Courtyard"
+        "down": "Watchtower"
       },
       "description": "The Armory is a small room contains many weapons: SWORDS, MACES, HALBERDS, the tools of the king’s guard.\n\nThere is also a spare TUNIC that the guards wear.\nIt has the INSIGNIA of the king.",
       "items": [
@@ -67,7 +66,6 @@
       },
       "description": "The Dungeon is gloomy, cold and dripping water.\nShackles dangle from the walls.\n\nIn one of the cells huddles a bloodied PRISONER.",
       "items": [
-        "password"
       ],
       "characters": [
         "prisoner"
@@ -84,7 +82,7 @@
       },
       "description": "The Great Hall ceiling is 20 feet high.\nLight pours in from big windows on each side of the room.\n\nTo the north is a door leading to the wizard’s tower.\nHowever, explore the other rooms since you need important items to defeat the evil wizard.",
       "items": [
-        "note"
+        "message"
       ],
       "characters": [
         "knight"
@@ -115,7 +113,9 @@
       },
       "description": "The Royal Lounge has a few couches, a table surrounded with chairs.\nThis room is usually used for important meetings with the king.\n\nIn this room you will find a KEY that open the door to the Wizard’s Tower.",
       "items": [
-        "diamond key"
+        "diamond key",
+        "mead",
+        "hunk of meat"
       ],
       "characters": [
         "king's hand"
@@ -187,8 +187,6 @@
       },
       "description": "The Laboratory is full of tables crammed with beakers and vials filled with colorful, bubbling and smoking liquids.\n\nYou see a jug of MEAD on one of the tables.\nThere is a NOTE next to the MEAD.",
       "items": [
-        "mead",
-        "hunk of meat",
         "jewels"
       ],
       "characters": [

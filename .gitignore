@@ -22,7 +22,9 @@
 hs_err_pid*
 
 #intelliJ meta data
-.idea/
+.idea/*
+!.idea/artifacts/
+!.idea/libraries/
 *.iml
 out/
 

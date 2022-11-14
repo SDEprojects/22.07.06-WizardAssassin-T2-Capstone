@@ -15,7 +15,13 @@
     },
     {
       "name": "Note",
-      "description": "A small piece of paper with writing on it.",
+      "description": "The wizard loves his mutton.",
+      "attribute": "clue",
+      "location": "Watchtower"
+    },
+    {
+      "name": "message",
+      "description": "Beware of the beast. He's trained to kill none wizards",
       "attribute": "clue",
       "location": "Watchtower"
     },
@@ -26,9 +32,9 @@
       "location": "Armory"
     },
     {
-      "name": "password or item",
-      "description": "Shiny, sharp, ",
-      "attribute": "allows you to identify the good wizard",
+      "name": "password",
+      "description": "wizards for life",
+      "attribute": "allows you to identify as a wizard guard",
       "location": "Armory"
     },
     {
@@ -45,7 +51,7 @@
     },
     {
       "name": "Diamond Key",
-      "description": "A long-shanked silver key.",
+      "description": "A longshanked silver key. Unlocks wizard tower.",
       "attribute": "unlocks wizard tower",
       "location": "Royal Lounge"
     },
@@ -64,6 +70,12 @@
     {
       "name": "Jewels",
       "description": "These belonged to someone's family.",
+      "attribute": "treasure",
+      "location": "Laboratory"
+    },
+    {
+      "name": "hunk of meat",
+      "description": "boiled mutton.",
       "attribute": "treasure",
       "location": "Laboratory"
     }
