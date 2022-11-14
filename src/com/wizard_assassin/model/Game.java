@@ -91,7 +91,7 @@ public class Game implements Verbs {
                 if (verb.equals("speak")) {
                     //Generate random int value from 0 to 2 for random sayings
                     int num = (int) (Math.random() * (3));
-                    String characterQuote = characterQuotes.get(npcNames.get(0)).get(num);
+                    String characterQuote = characterQuotes.get(noun).get(num);
                     setResponse("\n" + characterQuote);
                 } else if (verb.equals("fight")) {
                     fight(noun);

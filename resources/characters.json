@@ -6,7 +6,7 @@
       "room": "Church",
       "quote": [
         "squeak",
-        "squeak",
+        "hiss!!!",
         "squeak"]
     },
     {
@@ -14,9 +14,9 @@
       "name": "guard",
       "room": "Courtyard",
       "quote": [
-        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?",
+        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course.",
         "What's the PASSWORD?",
-        "The food today tasted great. You should go to the Kitchen and have some... If you have the PASSWORD, of course. Do you have the password?"]
+        "Do you have the password?"]
     },
     {
       "type": "NPC",
@@ -32,9 +32,9 @@
       "name": "prisoner",
       "room": "Dungeon",
       "quote": [
-        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go",
-        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go",
-        "Please set me free!!! If you do, I'll give you the PASSWORD to get into the Great Hall. \n Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go"]
+        "Please set me free!!! ",
+        "I'll give you the PASSWORD to get into the Great Hall, if set me free.",
+        "Please let me go, I beg of you. I promise I will give you the PASSWORD if you just let me go."]
     },
     {
       "type": "NPC",
@@ -50,9 +50,9 @@
       "name": "knight",
       "room": "Great Hall",
       "quote": [
-        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
-        "\"This shift feels like it's never going to end.(You see that both guards' TUNIC's have the same crest.\\n That must be this Kingdom's crest)",
-        "Only Knights and Royalty are allowed through here.\n (Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)"]
+        "Only Knights and Royalty are allowed through here.\n(Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)",
+        "This shift feels like it's never going to end. \n(You see that both guards' TUNIC's have the same crest. That must be this Kingdom's crest)",
+        "Only Knights and Royalty are allowed through here.\n(Both guards have a silver SWORD with an emblem on the hilt that matches the crest on their TUNIC's)"]
     },
     {
       "type": "NPC",
