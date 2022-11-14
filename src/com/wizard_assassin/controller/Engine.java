@@ -45,26 +45,6 @@ public class Engine {
         });
     }
 
-
-    void gameObjective() {
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream introductionRecFile = classLoader.getResourceAsStream("introduction.json");
-            Introduction obj = mapper.readValue(introductionRecFile, Introduction.class);
-            String gameIntro = obj.getIntroduction();
-            String gameObj = obj.getObjective();
-            String gameWin = obj.getWin();
-            System.out.println("\033[35m" + gameIntro + "\n" + gameObj + "\n" + gameWin + "\033[0m");
-            System.out.println();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
     void beginGame() {
         String start;
 

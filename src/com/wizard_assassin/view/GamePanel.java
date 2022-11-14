@@ -1,6 +1,8 @@
 package com.wizard_assassin.view;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wizard_assassin.controller.Controller;
+import com.wizard_assassin.controller.Introduction;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
 import com.wizard_assassin.model.Music;
@@ -92,15 +94,34 @@ public class GamePanel extends JPanel {
         importImg("TitleScreenResources/game_background_1.png");
     }
 
-
     //----------------------------------------------------------------------------------------------------------
     // Enter name screen
     private void namePanel() {
+        //load "introduction.json"
+        ObjectMapper mapper = new ObjectMapper();
+        String gameIntro = null;
+        String gameObj = null;
+        String gameWin = null;
+
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream introductionRecFile = classLoader.getResourceAsStream("introduction.json");
+            Introduction obj = mapper.readValue(introductionRecFile, Introduction.class);
+            gameIntro = obj.getIntroduction();
+            gameObj = obj.getObjective();
+            gameWin = obj.getWin();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JTextArea intro = new JTextArea();
         intro.setLineWrap(true);
-        intro.append(" Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
-        intro.append(" \n \n Wizard Assassin is a single-player game in which the objective is to defeat the evil wizard and save the king.");
-        intro.append(" \n \n Once the Wizard Assassin reaches the Laboratory and defeat the evil wizard the player wins!!!!.");
+        intro.append("\n\n\n" + gameIntro + "\n");
+        intro.append("\n\n\n" + gameObj + "\n");
+        intro.append("\n\n\n" + gameWin);
+        intro.setLineWrap(true);
+        intro.setWrapStyleWord(true);
+        
         intro.setBounds(225,145, 750, 550);
         intro.setOpaque(false);
 
@@ -172,6 +193,7 @@ public class GamePanel extends JPanel {
         nextButton.setBounds(600, 730, 100, 40);
         nextButton.setVisible(true);
         prefaceText.setLineWrap(true);
+        prefaceText.setWrapStyleWord(true); //will wrap the too long word
 
         titleLabel.setVisible(true);
         titleLabel.setBounds(250,100, 800, 50);
