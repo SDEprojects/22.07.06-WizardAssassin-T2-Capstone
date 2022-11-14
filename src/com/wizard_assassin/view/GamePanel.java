@@ -280,22 +280,18 @@ public class GamePanel extends JPanel {
         this.add(downButton);
         this.add(selectButton);
         northButton.addActionListener(e -> {
-            System.out.println("North");
             controller.input("n");
             updateGame();
         });
         eastButton.addActionListener(e -> {
-            System.out.println("East");
             controller.input("e");
             updateGame();
         });
         southButton.addActionListener(e -> {
-            System.out.println("South");
             controller.input("s");
             updateGame();
         });
         westButton.addActionListener(e -> {
-            System.out.println("West");
             controller.input("w");
             updateGame();
         });
@@ -308,12 +304,10 @@ public class GamePanel extends JPanel {
             updateGame();
         });
         selectButton.addActionListener(e -> {
-            System.out.println("Select");
             controller.input("f");
             updateGame();
         });
         b5.addActionListener(e -> {
-            System.out.println("Talk");
             controller.input("t");
             updateGame();
         });
@@ -659,8 +653,8 @@ public class GamePanel extends JPanel {
         npcLabel.setBounds(275, 200, 200, 200);
 
         NPC_UI npcUi = new NPC_UI();
-        System.out.println(viewRoomNPCs.size());
-        if (viewRoomNPCs.size() == 1) {
+
+        if (viewRoomNPCs !=null && !viewRoomNPCs.isEmpty()) {
             npcIcon = new ImageIcon(showPicture(npcUi.npcSetter(viewRoomNPCs.get(0))));
             npcLabel.setIcon(npcIcon);
             picLabel.add(npcLabel);
@@ -720,6 +714,7 @@ public class GamePanel extends JPanel {
             default:
                 break;
         }
+
     }
 
 
