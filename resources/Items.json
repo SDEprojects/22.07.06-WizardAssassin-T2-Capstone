@@ -21,7 +21,7 @@
     },
     {
       "name": "message",
-      "description": "Beware of the beast. He's trained to kill none wizards",
+      "description": "Beware of the beast. He's trained to kill those not wearing wizard cloaks",
       "attribute": "clue",
       "location": "Watchtower"
     },
