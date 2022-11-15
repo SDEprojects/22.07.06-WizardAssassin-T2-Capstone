@@ -5,6 +5,7 @@ import com.wizard_assassin.controller.Controller;
 import com.wizard_assassin.controller.Introduction;
 import com.wizard_assassin.inputs.KeyboardInputs;
 import com.wizard_assassin.model.Game;
+import com.wizard_assassin.model.Help;
 import com.wizard_assassin.model.Music;
 import com.wizard_assassin.model.PrefaceText;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class GamePanel extends JPanel {
     Music music = new Music();
+    Help help = new Help();
 
     // ATTRIBUTES
     // private JPanel mainPanel;
@@ -942,8 +944,14 @@ public class GamePanel extends JPanel {
         quitButton.setBounds(1180, 10, 70, 20);
         JButton settingsButton = new JButton("SETTINGS");
         settingsButton.setBounds(1000,10,110,20);
+        JButton helpButton = new JButton("HELP");
+        helpButton.setBounds(870, 10, 70, 20);
         this.add(quitButton);
         this.add(settingsButton);
+        this.add(helpButton);
+        helpButton.addActionListener(e -> {
+            help.initialize();
+        });
         quitButton.addActionListener(e -> {
             System.exit(0);
         });
