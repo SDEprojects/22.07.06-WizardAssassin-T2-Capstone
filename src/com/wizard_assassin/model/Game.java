@@ -295,7 +295,7 @@ public class Game implements Verbs {
             }
             else if (locationInput.equals("Wizard’s Chambers") && locationState.getName().equals("Wizard's Foyer")){
                 if (!inventoryItems.contains("wizard robes")) {
-                    setResponse("The monster bites your head off and you die!");
+                    setResponse("The monster bites your head off and you die! \nYou should have used the wizard's cloak.");
                     setLoopCondition(false);
                     setLoseCondition(true);
                 }
@@ -338,7 +338,7 @@ public class Game implements Verbs {
         else if(inventoryItems.contains("sword")){
 
             if(!npcNames.isEmpty() & !npc.equals("guard")) {
-                if (!npc.equals("prisoner")) {
+                if (!npc.equals("prisoner") && !npc.equals("monster")) {
                     setResponse("\nYou stab " + noun.toUpperCase() + " in the heart and they die." +
                             "\n Miraculously, no one notices.");
 
